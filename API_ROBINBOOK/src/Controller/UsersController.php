@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-/* use App\Repository\UsersRepository; */
+use App\Repository\UsersRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,12 +14,12 @@ class UsersController extends AbstractController
 {   
 
       
-    /* private $UsersRepository; 
+    private $UsersRepository; 
 
-    public function __construct)
+    public function __construct(UsersRepository  $UsersRepository)
     {
-        /* $this->UsersRepository = $UsersRepository; 
-    }*/
+        $this->UsersRepository = $UsersRepository; 
+    }
         /**
      * @Route("/users", name="add_users",methods={"POST"})
      */
@@ -50,11 +50,11 @@ class UsersController extends AbstractController
     {
         $users = $this->usersRepository->findOneBy(['id'=>$id]);
             $data[] = [
-                'date_of_birth'=> $users->getDate_of_birth(),
+                'date_of_birth'=> $users->getDateOfBirth(),
                 'dni'=>$users->getDni(),
                 'email'=>$users->getEmail(),
                 'name'=>$users->getName(),
-                'release_date'=>$users->getRelease_date(),
+                'release_date'=>$users->getReleaseDate(),
                 'rol'=>$users->getRol(),
                 'surname'=>$users->getSurname(),
                 'surname2'=>$users->getSurname2(),
@@ -74,11 +74,11 @@ class UsersController extends AbstractController
 
         foreach ($userss as $users) {
             $data[] = [
-                'date_of_birth'=> $users->getDate_of_birth(),
+                'date_of_birth'=> $users->getDateOBirth(),
                 'dni'=>$users->getDni(),
                 'email'=>$users->getEmail(),
                 'name'=>$users->getName(),
-                'release_date'=>$users->getRelease_date(),
+                'release_date'=>$users->getReleaseDate(),
                 'rol'=>$users->getRol(),
                 'surname'=>$users->getSurname(),
                 'surname2'=>$users->getSurname2(),
@@ -95,11 +95,11 @@ class UsersController extends AbstractController
         $users = $this->usersRepository->findOneBy(['id' => $id]);
         $data = json_decode($request->getContent(), true);
 
-        empty($data['date_of_birth']) ? true : $users->getDate_of_birth($data['date_of_birth']);
+        empty($data['date_of_birth']) ? true : $users->getDateOfBirth($data['date_of_birth']);
         empty($data['dni']) ? true : $users->setDni($data['dni']);
         empty($data['email']) ? true : $users->setEmail($data['email']);
         empty($data['name']) ? true : $users->setName ($data['name']);
-        empty($data['release_date']) ? true : $users->setRelease_date($data['release_date']);
+        empty($data['release_date']) ? true : $users->setReleaseDate($data['release_date']);
         empty($data['rol']) ? true : $users->setRol($data['rol']);
         empty($data['surname']) ? true : $users->setSurname($data['surname']);
         empty($data['surname2']) ? true : $users->setSurname2($data['surname2']);
