@@ -124,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "RobinBook"
+  "defaultProject": "RobinBook",
+  "cli": {
+    "analytics": "5cddfc32-255c-420a-a33a-067380895e92"
+  }
 }
