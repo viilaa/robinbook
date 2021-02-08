@@ -9,6 +9,7 @@ import { NewandpopularViewComponent } from './newandpopular-view/newandpopular-v
 import { MybookshelfViewComponent } from './mybookshelf-view/mybookshelf-view.component';
 import { LoginViewComponent } from './login-view/login-view.component';
 import { RegisterViewComponent } from './register-view/register-view.component';
+import { PublishViewComponent } from './publish-view/publish-view.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { RegisterViewComponent } from './register-view/register-view.component';
     NewandpopularViewComponent,
     MybookshelfViewComponent,
     LoginViewComponent,
-    RegisterViewComponent
+    RegisterViewComponent,
+    PublishViewComponent
   ],
   imports: [
     BrowserModule,
