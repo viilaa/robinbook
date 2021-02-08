@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { HomeViewComponent } from './home-view/home-view.component';
 import { GenresViewComponent } from './genres-view/genres-view.component';
 import { NewandpopularViewComponent } from './newandpopular-view/newandpopular-view.component';
+import { MybookshelfViewComponent } from './mybookshelf-view/mybookshelf-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeViewComponent,
     GenresViewComponent,
-    NewandpopularViewComponent
+    NewandpopularViewComponent,
+    MybookshelfViewComponent
   ],
   imports: [
     BrowserModule,
