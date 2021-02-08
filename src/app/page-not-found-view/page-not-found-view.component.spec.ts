@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PublishViewComponent } from './publish-view.component';
+import { PageNotFoundViewComponent } from './page-not-found-view.component';
 
-describe('PublishViewComponent', () => {
-  let component: PublishViewComponent;
-  let fixture: ComponentFixture<PublishViewComponent>;
+describe('PageNotFoundViewComponent', () => {
+  let component: PageNotFoundViewComponent;
+  let fixture: ComponentFixture<PageNotFoundViewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PublishViewComponent ]
+      declarations: [ PageNotFoundViewComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PublishViewComponent);
+    fixture = TestBed.createComponent(PageNotFoundViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
