@@ -7,6 +7,7 @@ import { HomeViewComponent } from './home-view/home-view.component';
 import { GenresViewComponent } from './genres-view/genres-view.component';
 import { NewandpopularViewComponent } from './newandpopular-view/newandpopular-view.component';
 import { MybookshelfViewComponent } from './mybookshelf-view/mybookshelf-view.component';
+import { LoginViewComponent } from './login-view/login-view.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { MybookshelfViewComponent } from './mybookshelf-view/mybookshelf-view.co
     HomeViewComponent,
     GenresViewComponent,
     NewandpopularViewComponent,
-    MybookshelfViewComponent
+    MybookshelfViewComponent,
+    LoginViewComponent
   ],
   imports: [
     BrowserModule,
