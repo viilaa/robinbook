@@ -10,6 +10,7 @@ import { MybookshelfViewComponent } from './mybookshelf-view/mybookshelf-view.co
 import { LoginViewComponent } from './login-view/login-view.component';
 import { RegisterViewComponent } from './register-view/register-view.component';
 import { PublishViewComponent } from './publish-view/publish-view.component';
+import { AdminViewComponent } from './admin-view/admin-view.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { PublishViewComponent } from './publish-view/publish-view.component';
     MybookshelfViewComponent,
     LoginViewComponent,
     RegisterViewComponent,
-    PublishViewComponent
+    PublishViewComponent,
+    AdminViewComponent
   ],
   imports: [
     BrowserModule,
