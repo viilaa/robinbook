@@ -2,22 +2,22 @@
 
 namespace App\Controller;
 
-
+use App\Repository\GenreRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Routing\Annotation\Route;;
+use Symfony\Component\Routing\Annotation\Route;
 
 class GenreController extends AbstractController
 {   
-    /* private $GenreRepository; 
+    private $GenreRepository; 
 
-    public function __construct)
+    public function __construct(GenreRepository $GenreRepository)
     {
-        /* $this->GenreRepository = $GenreRepository; 
-    }*/
+        $this->GenreRepository = $GenreRepository; 
+    }
     /**
      * @Route("/Genre", name="add_Genre",methods={"POST"})
      */
@@ -27,8 +27,8 @@ class GenreController extends AbstractController
     {
         $data=json_decode($request->getContent(), true);
 
-        $genre = $data['genre'];
-        $book = $data['book'];
+        $type_genre = $data['type_genre'];
+        
 
         
         $this ->GenreRepository->saveGenre($data);
@@ -44,8 +44,7 @@ class GenreController extends AbstractController
         $genre = $this->GenreRepository->findOneBy(['id'=>$id]);
             $data[] = [
                 'id'=> $genre->getId(),
-                'genre'=>$genre->getGenre(),
-                'book'=>$genre->getBook(),
+                'type_genre'=>$genre->getTypegenre(),
             ];
 
             return new JsonResponse($data, Response::HTTP_OK);
@@ -62,8 +61,7 @@ class GenreController extends AbstractController
         foreach ($genres as $genre) {
             $data[] = [
                 'id'=> $genre->getId(),
-                'genre'=>$genre->getgenre(),
-                'book'=>$genre->getBook(),
+                'type_genre'=>$genre->getTypegenre(),
             ];
         }
 
@@ -77,8 +75,7 @@ class GenreController extends AbstractController
         $genre = $this->GenreRepository->findOneBy(['id' => $id]);
         $data = json_decode($request->getContent(), true);
 
-        empty($data['genre']) ? true : $genre->setgenre($data['genre']);
-        empty($data['book']) ? true : $genre->setbook($data['book']);
+        empty($data['type_genre']) ? true : $genre->setTypegenre($data['type_genre']);
 
         $updatedgenre = $this->GenreRepository->updategenre($genre);
 
@@ -98,28 +95,14 @@ class GenreController extends AbstractController
         return new JsonResponse(['status'=> 'genre delete'], Response::HTTP_OK);
     }
 
-     /**
-     * @Route("/genre/categoria/{categoria}", name="filter_Genre", methods={"GET"})
-     * 
-     */
-
-    public function getFilter($categoria):JsonResponse
-
-    {
-        $categoria = $this->GenreRepository-> findGenre($categoria);
-
-        echo json_encode(($categoria));
-
-        return new JsonResponse(['status'=> 'Categoria'], Response::HTTP_OK);
-    }
-    /**
+   /**
      * @Route("/genre", name="genre")
      */
-    public function index(): Response
+   /* public function index(): Response
     {
         return $this->json([
             'message' => 'Welcome to your new controller!',
             'path' => 'src/Controller/GenreController.php',
         ]);
-    }
+    } */
 }

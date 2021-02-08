@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+/* use App\Repository\BookRepository; */
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -51,7 +52,7 @@ class BookController extends AbstractController
                 'age_classification'=> $book->getAge_classification(),
                 'book_id'=>$book->getBook_id(),
                 'Cover_page'=>$book->getCover_page(),
-                'illustrations'=>$book->getBIllustrations(),
+                'illustrations'=>$book->getIllustrations(),
                 'pdf'=>$book->getPdf(),
                 'release_date'=>$book->getRelease_date(),
                 'synopsis'=>$book->getSynopsis(),
@@ -76,7 +77,7 @@ class BookController extends AbstractController
                 'age_classification'=> $book->getAge_classification(),
                 'book_id'=>$book->getBook_id(),
                 'Cover_page'=>$book->getCover_page(),
-                'illustrations'=>$book->getBIllustrations(),
+                'illustrations'=>$book->getIllustrations(),
                 'pdf'=>$book->getPdf(),
                 'release_date'=>$book->getRelease_date(),
                 'synopsis'=>$book->getSynopsis(),
@@ -123,20 +124,6 @@ class BookController extends AbstractController
     }
 
      /**
-     * @Route("/book/categoria/{categoria}", name="filter_book", methods={"GET"})
-     * 
-     */
-
-    public function getFilter($categoria):JsonResponse
-
-    {
-        $categoria = $this->BookRepository-> findbook($categoria);
-
-        echo json_encode(($categoria));
-
-        return new JsonResponse(['status'=> 'Categoria'], Response::HTTP_OK);
-    }
-    /**
      * @Route("/book", name="book")
      */
     public function index(): Response
