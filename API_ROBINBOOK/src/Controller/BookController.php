@@ -64,7 +64,7 @@ class BookController extends AbstractController
             return new JsonResponse($data, Response::HTTP_OK);
     }
     /**
-     * @Route("/book/", name="get_all_book", methods={"GET"})
+     * @Route("/book", name="get_all_book", methods={"GET"})
      */
     public function getAll(): JsonResponse
 
@@ -123,14 +123,4 @@ class BookController extends AbstractController
         return new JsonResponse(['status'=> 'book delete'], Response::HTTP_OK);
     }
 
-     /**
-     * @Route("/book", name="book")
-     */
-    public function index(): Response
-    {
-        return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/BookController.php',
-        ]);
-    }
 }

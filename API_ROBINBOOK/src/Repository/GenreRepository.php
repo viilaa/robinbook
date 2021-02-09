@@ -15,7 +15,7 @@ use Doctrine\ORM\EntityManagerInterface;
  */
 class GenreRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry,EntityManagerInterface $manager)
     {
         parent::__construct($registry, Genre::class);
         $this->manager= $manager;

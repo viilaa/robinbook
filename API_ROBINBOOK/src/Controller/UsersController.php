@@ -38,7 +38,7 @@ class UsersController extends AbstractController
         $surname2 = $data['surname2'];
 
         
-        $this ->usersRepository->saveusers($data);
+        $this ->UsersRepository->saveusers($data);
         return new JsonResponse(['status'=>'users created'], Response::HTTP_CREATED);
 
     }
@@ -48,7 +48,7 @@ class UsersController extends AbstractController
     public function get($id): JsonResponse
 
     {
-        $users = $this->usersRepository->findOneBy(['id'=>$id]);
+        $users = $this->UsersRepository->findOneBy(['id'=>$id]);
             $data[] = [
                 'date_of_birth'=> $users->getDateOfBirth(),
                 'dni'=>$users->getDni(),
@@ -69,7 +69,7 @@ class UsersController extends AbstractController
     public function getAll(): JsonResponse
 
     {
-        $userss = $this->usersRepository->findAll();
+        $userss = $this->UsersRepository->findAll();
         $data =[];
 
         foreach ($userss as $users) {
@@ -92,7 +92,7 @@ class UsersController extends AbstractController
      */
     public function update($id, Request $request): JsonResponse
     {
-        $users = $this->usersRepository->findOneBy(['id' => $id]);
+        $users = $this->UsersRepository->findOneBy(['id' => $id]);
         $data = json_decode($request->getContent(), true);
 
         empty($data['date_of_birth']) ? true : $users->getDateOfBirth($data['date_of_birth']);
@@ -104,7 +104,7 @@ class UsersController extends AbstractController
         empty($data['surname']) ? true : $users->setSurname($data['surname']);
         empty($data['surname2']) ? true : $users->setSurname2($data['surname2']);
 
-        $updatedusers = $this->usersRepository->updateusers($users);
+        $updatedusers = $this->UsersRepository->updateusers($users);
 
         return new JsonRespponse(['status' => 'users updated!'], Response::HTTP_OK);
     }
@@ -115,9 +115,9 @@ class UsersController extends AbstractController
     public function delete($id): JsonResponse
     
     {
-        $users = $this->usersRepository->findOneBy(['id' => $id]);
+        $users = $this->UsersRepository->findOneBy(['id' => $id]);
 
-        $this->usersRepository->removeusers($users);
+        $this->UsersRepository->removeusers($users);
 
         return new JsonResponse(['status'=> 'users delete'], Response::HTTP_OK);
     }

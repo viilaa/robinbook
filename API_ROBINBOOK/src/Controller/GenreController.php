@@ -50,7 +50,7 @@ class GenreController extends AbstractController
             return new JsonResponse($data, Response::HTTP_OK);
     }
     /**
-     * @Route("/genre/", name="get_all_genre", methods={"GET"})
+     * @Route("/genre", name="get_all_genre", methods={"GET"})
      */
     public function getAll(): JsonResponse
 

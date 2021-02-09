@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\BookRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -53,14 +55,25 @@ class Book
     private $title;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToMany(targetEntity=Users::class, mappedBy="book")
      */
-    private $book_id;
+    private $users;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToMany(targetEntity=Genre::class, inversedBy="books")
      */
-    private $user_id;
+    private $Genre;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $public_date;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+        $this->Genre = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -151,27 +164,67 @@ class Book
         return $this;
     }
 
-    public function getBookId(): ?int
+    /**
+     * @return Collection|Users[]
+     */
+    public function getUsers(): Collection
     {
-        return $this->book_id;
+        return $this->users;
     }
 
-    public function setBookId(int $book_id): self
+    public function addUser(Users $user): self
     {
-        $this->book_id = $book_id;
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addBook($this);
+        }
 
         return $this;
     }
 
-    public function getUserId(): ?int
+    public function removeUser(Users $user): self
     {
-        return $this->user_id;
-    }
-
-    public function setUserId(int $user_id): self
-    {
-        $this->user_id = $user_id;
+        if ($this->users->removeElement($user)) {
+            $user->removeBook($this);
+        }
 
         return $this;
     }
+
+    /**
+     * @return Collection|Genre[]
+     */
+    public function getGenre(): Collection
+    {
+        return $this->Genre;
+    }
+
+    public function addGenre(Genre $genre): self
+    {
+        if (!$this->Genre->contains($genre)) {
+            $this->Genre[] = $genre;
+        }
+
+        return $this;
+    }
+
+    public function removeGenre(Genre $genre): self
+    {
+        $this->Genre->removeElement($genre);
+
+        return $this;
+    }
+
+    public function getPublicDate(): ?string
+    {
+        return $this->public_date;
+    }
+
+    public function setPublicDate(?string $public_date): self
+    {
+        $this->public_date = $public_date;
+
+        return $this;
+    }
+
 }

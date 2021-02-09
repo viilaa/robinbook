@@ -15,7 +15,7 @@ use Doctrine\ORM\EntityManagerInterface;
  */
 class UsersRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry,EntityManagerInterface $manager)
     {
         parent::__construct($registry, Users::class);
         $this->manager= $manager;
