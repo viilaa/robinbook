@@ -123,4 +123,28 @@ class BookController extends AbstractController
         return new JsonResponse(['status'=> 'book delete'], Response::HTTP_OK);
     }
 
+    /**
+     * @Route("/book/new", name="add_new_pdf")
+     */
+    public function newAction(Request $request)
+    {
+        $newBook = new Book();
+        $form = $this->createForm(BookType::class, $newBook);
+        $form->handleRequest($request);
+
+        if($form->isValid())
+        {
+            // La variable $file guardará el PDF subido
+            /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
+            $file = $newBook->getCurriculum();
+
+            // Generar un nombre único para el archivo antes de guardarlo
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+
+            // Mover el archivo al directorio donde se guardan los pdfs
+            $pdfDir = $this->container->getparameter('kernel.root_dir');/* .'/../web/uploads/cv'; 
+            $file->move($cvDir, $fileName);*/
+        }
+    } 
+
 }

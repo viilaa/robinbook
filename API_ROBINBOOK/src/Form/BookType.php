@@ -15,19 +15,19 @@ class BookType extends AbstractType
             ->add('age_classification')
             ->add('cover_page')
             ->add('illustrations')
+            ->add('pdf', FileType::class, array('label' => 'Libro (PDF file)'))
             ->add('release_date')
             ->add('synopsis')
             ->add('title')
             ->add('public_date')
             ->add('users')
-            ->add('Genre')
-            ->add('pdf', FileType::class, array('label' => 'Libro (PDF file)'));
+            ->add('Genre');
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\User',
+            'data_class' => 'AppBundle\Entity\Book'
         ));
     }
 }
