@@ -36,8 +36,6 @@ class Book
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Por favor inserta tu pdf")
-     * @Assert\File(mimeTypes={"aplication/pdf"})
      */
     private $pdf;
 
