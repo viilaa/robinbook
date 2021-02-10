@@ -6,6 +6,7 @@ use App\Repository\BookRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=BookRepository::class)
@@ -34,8 +35,11 @@ class Book
      */
     private $illustrations;
 
-    /**
-     * @ORM\Column(type="string", length=255)
+     /**
+     * @ORM\Column(type="string")
+     *
+     * @Assert\NotBlank(message="Por favor inserta tu pdf")
+     * @Assert\File(mimeTypes={"aplication/pdf"})
      */
     private $pdf;
 
@@ -115,13 +119,14 @@ class Book
 
         return $this;
     }
-
-    public function getPdf(): ?string
+    private $pdf;
+    
+    public function getPdf()
     {
         return $this->pdf;
     }
 
-    public function setPdf(string $pdf): self
+    public function setPdf($pdf)
     {
         $this->pdf = $pdf;
 
