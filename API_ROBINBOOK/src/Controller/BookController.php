@@ -52,7 +52,7 @@ class BookController extends AbstractController
                 'Cover_page'=>$book->getCoverPage(),
                 'illustrations'=>$book->getIllustrations(),
                 'pdf'=>$book->getPdf(),
-                'release_date'=>$book->getReleaseDate(),
+                'release_date'=>$book->getReleaseDate()->format('d-m-Y'),
                 'synopsis'=>$book->getSynopsis(),
                 'title'=>$book->getTitle(),
                 
@@ -75,7 +75,7 @@ class BookController extends AbstractController
                 'cover_page'=>$book->getCoverPage(),
                 'illustrations'=>$book->getIllustrations(),
                 'pdf'=>$book->getPdf(),
-                'release_date'=>$book->getReleaseDate(),
+                'release_date'=>$book->getReleaseDate()->format('d-m-Y'),
                 'synopsis'=>$book->getSynopsis(),
                 'title'=>$book->getTitle(),
             ];
@@ -121,16 +121,16 @@ class BookController extends AbstractController
      */
     public function newAction(Request $request)
     {
-        $newBook = new Book();
-        $form = $this->createForm(BookType::class, $newBook);
+        $newFile = new File();
+        $form = $this->createForm(BookType::class, $newFile);
         $form->handleRequest($request);
 
         if($form->isValid())
         {
             // La variable $file guardará el PDF subido
             /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
-            $Pdf = $newBook->getPdf();
-            $CoverPage = $newBook->getCoverPage();
+            $Pdf = $newFile->getPdf();
+            $CoverPage = $newFile->getCoverPage();
 
             // Generar un nombre único para el archivo antes de guardarlo
             $PdfName = md5(uniqid()).'.'.$Pdf->guessExtension();
@@ -144,8 +144,8 @@ class BookController extends AbstractController
 
              // Actualizar la propiedad pdf para guardar el nombre de archivo PDF
             // en lugar de sus contenidos
-            $newBook->setPdf($PdfName);
-            $newBook->setCoverPage($CoverPageName);
+            $newFile->setPdf($PdfName);
+            $newFile->setCoverPage($CoverPageName);
 
             // ... persist la variable $usuario o cualquier otra tarea
 
