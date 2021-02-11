@@ -140,12 +140,12 @@ class Users
         return $this;
     }
 
-    public function getRealeseDate(): ?\DateTimeInterface
+    public function getReleaseDate(): ?\DateTimeInterface
     {
         return $this->realese_date;
     }
 
-    public function setRealeseDate(\DateTimeInterface $realese_date): self
+    public function setReleaseDate(\DateTimeInterface $realese_date): self
     {
         $this->realese_date = $realese_date;
 

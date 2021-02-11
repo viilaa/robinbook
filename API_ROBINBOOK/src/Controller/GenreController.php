@@ -95,6 +95,25 @@ class GenreController extends AbstractController
         return new JsonResponse(['status'=> 'genre delete'], Response::HTTP_OK);
     }
 
+     /**
+     * @Route("/findGenre/", name="get_all_findProductos", methods={"GET"})
+     */
+
+    public function findGenre(): JsonResponse
+
+    {
+        $genres = $this->GenreRepository->findGenre();
+        $data =[];
+
+        foreach ($genres as $genre) {
+            $data[] = [
+                'id'=> $genre->getId(),
+                'type_genre'=>$genre->getTypegenre(),
+            ];
+        }
+
+        return new JsonResponse($data, Response::HTTP_OK);
+    }
    /**
      * @Route("/genre", name="genre")
      */
