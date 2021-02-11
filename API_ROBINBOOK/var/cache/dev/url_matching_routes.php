@@ -10,9 +10,9 @@ return [
     [ // $staticRoutes
         '/book' => [[['_route' => 'add_book', '_controller' => 'App\\Controller\\BookController::add'], null, ['POST' => 0], null, false, false, null]],
         '/books' => [[['_route' => 'get_all_book', '_controller' => 'App\\Controller\\BookController::getAll'], null, ['GET' => 0], null, false, false, null]],
+        '/findBook' => [[['_route' => 'get_all_findBook', '_controller' => 'App\\Controller\\BookController::findBook'], null, ['GET' => 0], null, true, false, null]],
         '/Genre' => [[['_route' => 'add_Genre', '_controller' => 'App\\Controller\\GenreController::add'], null, ['POST' => 0], null, false, false, null]],
         '/genre' => [[['_route' => 'get_all_genre', '_controller' => 'App\\Controller\\GenreController::getAll'], null, ['GET' => 0], null, false, false, null]],
-        '/findGenre' => [[['_route' => 'get_all_findProductos', '_controller' => 'App\\Controller\\GenreController::findGenre'], null, ['GET' => 0], null, true, false, null]],
         '/root/dir' => [[['_route' => 'root_dir', '_controller' => 'App\\Controller\\RootDirController::index'], null, null, null, false, false, null]],
         '/users' => [
             [['_route' => 'add_users', '_controller' => 'App\\Controller\\UsersController::add'], null, ['POST' => 0], null, false, false, null],

@@ -6,10 +6,11 @@ return [
     '_preview_error' => [['code', '_format'], ['_controller' => 'error_controller::preview', '_format' => 'html'], ['code' => '\\d+'], [['variable', '.', '[^/]++', '_format', true], ['variable', '/', '\\d+', 'code', true], ['text', '/_error']], [], []],
     'add_book' => [[], ['_controller' => 'App\\Controller\\BookController::add'], [], [['text', '/book']], [], []],
     'get_one_book' => [['id'], ['_controller' => 'App\\Controller\\BookController::get'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/book']], [], []],
-    'get_all_book' => [[], ['_controller' => 'App\\Controller\\BookController::getAll'], [], [['text', '/book']], [], []],
+    'get_all_book' => [[], ['_controller' => 'App\\Controller\\BookController::getAll'], [], [['text', '/books']], [], []],
     'update_book' => [['id'], ['_controller' => 'App\\Controller\\BookController::update'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/book']], [], []],
     'delete_book' => [['id'], ['_controller' => 'App\\Controller\\BookController::delete'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/book']], [], []],
     'add_new_pdf' => [[], ['_controller' => 'App\\Controller\\BookController::newAction'], [], [['text', '/book/new']], [], []],
+    'get_all_findBook' => [[], ['_controller' => 'App\\Controller\\BookController::findBook'], [], [['text', '/findBook/']], [], []],
     'add_Genre' => [[], ['_controller' => 'App\\Controller\\GenreController::add'], [], [['text', '/Genre']], [], []],
     'get_one_genre' => [['id'], ['_controller' => 'App\\Controller\\GenreController::get'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/genre']], [], []],
     'get_all_genre' => [[], ['_controller' => 'App\\Controller\\GenreController::getAll'], [], [['text', '/genre']], [], []],
@@ -21,5 +22,4 @@ return [
     'get_all_users' => [[], ['_controller' => 'App\\Controller\\UsersController::getAll'], [], [['text', '/users/']], [], []],
     'update_users' => [['id'], ['_controller' => 'App\\Controller\\UsersController::update'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/users']], [], []],
     'delete_users' => [['id'], ['_controller' => 'App\\Controller\\UsersController::delete'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/users']], [], []],
-    'users' => [[], ['_controller' => 'App\\Controller\\UsersController::index'], [], [['text', '/users']], [], []],
 ];

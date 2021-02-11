@@ -152,5 +152,22 @@ class BookController extends AbstractController
             return $this->redirect($this->generateUrl('app_product_list'));
         }
     } 
+      /**
+     * @Route("/findBook/", name="get_all_findBook", methods={"GET"})
+     */
+        public function findBook(): JsonResponse
+
+        {
+            $genres = $this->BookRepository->findBook();
+            $data =[];
+
+            foreach ($genres as $genre) {
+                $data[] = [
+                    'title'=>$book->getTitle()
+                ];
+            }
+
+            return new JsonResponse($data, Response::HTTP_OK);
+        }
 
 }
