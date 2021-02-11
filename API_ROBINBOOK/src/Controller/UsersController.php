@@ -50,11 +50,11 @@ class UsersController extends AbstractController
     {
         $users = $this->UsersRepository->findOneBy(['id'=>$id]);
             $data[] = [
-                'date_of_birth'=> $users->getDateOfBirth(),
+                'date_of_birth'=> $users->getDateOfBirth()->format('d-m-Y'),
                 'dni'=>$users->getDni(),
                 'email'=>$users->getEmail(),
                 'name'=>$users->getName(),
-                'release_date'=>$users->getReleaseDate(),
+                'release_date'=>$users->getReleaseDate()->format('d-m-Y'),
                 'rol'=>$users->getRol(),
                 'surname'=>$users->getSurname(),
                 'surname2'=>$users->getSurname2(),
@@ -74,11 +74,11 @@ class UsersController extends AbstractController
 
         foreach ($userss as $users) {
             $data[] = [
-                'date_of_birth'=> $users->getDateOBirth(),
+                'date_of_birth'=> $users->getDateOBirth()->format('d-m-Y'),
                 'dni'=>$users->getDni(),
                 'email'=>$users->getEmail(),
                 'name'=>$users->getName(),
-                'release_date'=>$users->getReleaseDate(),
+                'release_date'=>$users->getReleaseDate()->format('d-m-Y'),
                 'rol'=>$users->getRol(),
                 'surname'=>$users->getSurname(),
                 'surname2'=>$users->getSurname2(),

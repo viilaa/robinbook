@@ -70,6 +70,10 @@ class ComposerStaticInita1e825f055347e57ae2f4fadc848643e
             'PhpParser\\' => 10,
             'PackageVersions\\' => 16,
         ),
+        'N' => 
+        array (
+            'Nelmio\\CorsBundle\\' => 18,
+        ),
         'L' => 
         array (
             'Laminas\\ZendFrameworkBridge\\' => 28,
@@ -277,6 +281,10 @@ class ComposerStaticInita1e825f055347e57ae2f4fadc848643e
         array (
             0 => __DIR__ . '/..' . '/composer/package-versions-deprecated/src/PackageVersions',
         ),
+        'Nelmio\\CorsBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/nelmio/cors-bundle',
+        ),
         'Laminas\\ZendFrameworkBridge\\' => 
         array (
             0 => __DIR__ . '/..' . '/laminas/laminas-zendframework-bridge/src',
@@ -360,10 +368,12 @@ class ComposerStaticInita1e825f055347e57ae2f4fadc848643e
     public static $classMap = array (
         'App\\Controller\\BookController' => __DIR__ . '/../..' . '/src/Controller/BookController.php',
         'App\\Controller\\GenreController' => __DIR__ . '/../..' . '/src/Controller/GenreController.php',
+        'App\\Controller\\RootDirController' => __DIR__ . '/../..' . '/src/Controller/RootDirController.php',
         'App\\Controller\\UsersController' => __DIR__ . '/../..' . '/src/Controller/UsersController.php',
         'App\\Entity\\Book' => __DIR__ . '/../..' . '/src/Entity/Book.php',
         'App\\Entity\\Genre' => __DIR__ . '/../..' . '/src/Entity/Genre.php',
         'App\\Entity\\Users' => __DIR__ . '/../..' . '/src/Entity/Users.php',
+        'App\\Form\\BookType' => __DIR__ . '/../..' . '/src/Form/BookType.php',
         'App\\Kernel' => __DIR__ . '/../..' . '/src/Kernel.php',
         'App\\Repository\\BookRepository' => __DIR__ . '/../..' . '/src/Repository/BookRepository.php',
         'App\\Repository\\GenreRepository' => __DIR__ . '/../..' . '/src/Repository/GenreRepository.php',
@@ -1536,6 +1546,16 @@ class ComposerStaticInita1e825f055347e57ae2f4fadc848643e
         'Laminas\\ZendFrameworkBridge\\Replacements' => __DIR__ . '/..' . '/laminas/laminas-zendframework-bridge/src/Replacements.php',
         'Laminas\\ZendFrameworkBridge\\RewriteRules' => __DIR__ . '/..' . '/laminas/laminas-zendframework-bridge/src/RewriteRules.php',
         'Locale' => __DIR__ . '/..' . '/symfony/intl/Resources/stubs/Locale.php',
+        'Nelmio\\CorsBundle\\DependencyInjection\\Compiler\\CorsConfigurationProviderPass' => __DIR__ . '/..' . '/nelmio/cors-bundle/DependencyInjection/Compiler/CorsConfigurationProviderPass.php',
+        'Nelmio\\CorsBundle\\DependencyInjection\\Configuration' => __DIR__ . '/..' . '/nelmio/cors-bundle/DependencyInjection/Configuration.php',
+        'Nelmio\\CorsBundle\\DependencyInjection\\NelmioCorsExtension' => __DIR__ . '/..' . '/nelmio/cors-bundle/DependencyInjection/NelmioCorsExtension.php',
+        'Nelmio\\CorsBundle\\EventListener\\CacheableResponseVaryListener' => __DIR__ . '/..' . '/nelmio/cors-bundle/EventListener/CacheableResponseVaryListener.php',
+        'Nelmio\\CorsBundle\\EventListener\\CorsListener' => __DIR__ . '/..' . '/nelmio/cors-bundle/EventListener/CorsListener.php',
+        'Nelmio\\CorsBundle\\NelmioCorsBundle' => __DIR__ . '/..' . '/nelmio/cors-bundle/NelmioCorsBundle.php',
+        'Nelmio\\CorsBundle\\Options\\ConfigProvider' => __DIR__ . '/..' . '/nelmio/cors-bundle/Options/ConfigProvider.php',
+        'Nelmio\\CorsBundle\\Options\\ProviderInterface' => __DIR__ . '/..' . '/nelmio/cors-bundle/Options/ProviderInterface.php',
+        'Nelmio\\CorsBundle\\Options\\Resolver' => __DIR__ . '/..' . '/nelmio/cors-bundle/Options/Resolver.php',
+        'Nelmio\\CorsBundle\\Options\\ResolverInterface' => __DIR__ . '/..' . '/nelmio/cors-bundle/Options/ResolverInterface.php',
         'Normalizer' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
         'NumberFormatter' => __DIR__ . '/..' . '/symfony/intl/Resources/stubs/NumberFormatter.php',
         'PackageVersions\\FallbackVersions' => __DIR__ . '/..' . '/composer/package-versions-deprecated/src/PackageVersions/FallbackVersions.php',
