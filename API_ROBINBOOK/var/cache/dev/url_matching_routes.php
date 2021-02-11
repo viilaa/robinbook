@@ -16,7 +16,6 @@ return [
         '/users' => [
             [['_route' => 'add_users', '_controller' => 'App\\Controller\\UsersController::add'], null, ['POST' => 0], null, false, false, null],
             [['_route' => 'get_all_users', '_controller' => 'App\\Controller\\UsersController::getAll'], null, ['GET' => 0], null, true, false, null],
-            [['_route' => 'users', '_controller' => 'App\\Controller\\UsersController::index'], null, null, null, false, false, null],
         ],
     ],
     [ // $regexpList

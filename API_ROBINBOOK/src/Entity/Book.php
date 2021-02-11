@@ -40,7 +40,7 @@ class Book
     private $pdf;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="date")
      */
     private $release_date;
 
@@ -68,6 +68,7 @@ class Book
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $public_date;
+  
 
     public function __construct()
     {
@@ -223,6 +224,18 @@ class Book
     public function setPublicDate(?string $public_date): self
     {
         $this->public_date = $public_date;
+
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
 
         return $this;
     }

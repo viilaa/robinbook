@@ -20,11 +20,6 @@ class Users
     private $id;
 
     /**
-     * @ORM\Column(type="date")
-     */
-    private $date_of_birth;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $dni;
@@ -64,6 +59,16 @@ class Users
      */
     private $book;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $password;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $date_of_birth;
+
     public function __construct()
     {
         $this->book = new ArrayCollection();
@@ -74,18 +79,7 @@ class Users
         return $this->id;
     }
 
-    public function getDateOfBirth(): ?\DateTimeInterface
-    {
-        return $this->date_of_birth;
-    }
-
-    public function setDateOfBirth(\DateTimeInterface $date_of_birth): self
-    {
-        $this->date_of_birth = $date_of_birth;
-
-        return $this;
-    }
-
+   
     public function getDni(): ?string
     {
         return $this->dni;
@@ -190,6 +184,30 @@ class Users
     public function removeBook(Book $book): self
     {
         $this->book->removeElement($book);
+
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    public function getDateOfBirth(): ?\DateTimeInterface
+    {
+        return $this->date_of_birth;
+    }
+
+    public function setDateOfBirth(\DateTimeInterface $date_of_birth): self
+    {
+        $this->date_of_birth = $date_of_birth;
 
         return $this;
     }

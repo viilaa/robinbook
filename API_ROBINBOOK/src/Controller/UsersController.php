@@ -36,6 +36,7 @@ class UsersController extends AbstractController
         $rol = $data['rol'];
         $surname = $data['surname'];
         $surname2 = $data['surname2'];
+        $password = $data['password'];
 
         
         $this ->UsersRepository->saveusers($data);
@@ -58,6 +59,7 @@ class UsersController extends AbstractController
                 'rol'=>$users->getRol(),
                 'surname'=>$users->getSurname(),
                 'surname2'=>$users->getSurname2(),
+                'password'=>$users->getSPassword(),
                 
             ];
 
@@ -82,6 +84,7 @@ class UsersController extends AbstractController
                 'rol'=>$users->getRol(),
                 'surname'=>$users->getSurname(),
                 'surname2'=>$users->getSurname2(),
+                'password'=>$users->getSPassword(),
             ];
         }
 
@@ -95,7 +98,7 @@ class UsersController extends AbstractController
         $users = $this->UsersRepository->findOneBy(['id' => $id]);
         $data = json_decode($request->getContent(), true);
 
-        empty($data['date_of_birth']) ? true : $users->getDateOfBirth($data['date_of_birth']);
+        empty($data['date_of_birth']) ? true : $users->setDateOfBirth($data['date_of_birth']);
         empty($data['dni']) ? true : $users->setDni($data['dni']);
         empty($data['email']) ? true : $users->setEmail($data['email']);
         empty($data['name']) ? true : $users->setName ($data['name']);
@@ -103,6 +106,7 @@ class UsersController extends AbstractController
         empty($data['rol']) ? true : $users->setRol($data['rol']);
         empty($data['surname']) ? true : $users->setSurname($data['surname']);
         empty($data['surname2']) ? true : $users->setSurname2($data['surname2']);
+        empty($data['password']) ? true : $pet->setPassword($data['password']);
 
         $updatedusers = $this->UsersRepository->updateusers($users);
 
@@ -122,14 +126,4 @@ class UsersController extends AbstractController
         return new JsonResponse(['status'=> 'users delete'], Response::HTTP_OK);
     }
 
-     /**
-     * @Route("/users", name="users")
-     */
-    public function index(): Response
-    {
-        return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/UsersController.php',
-        ]);
-    }
 }
