@@ -61,7 +61,7 @@ class BookController extends AbstractController
             return new JsonResponse($data, Response::HTTP_OK);
     }
     /**
-     * @Route("/book", name="get_all_book", methods={"GET"})
+     * @Route("/books", name="get_all_book", methods={"GET"})
      */
     public function getAll(): JsonResponse
 
