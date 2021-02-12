@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { BooksService } from '../books.service';
+import { Book } from '../book';
 
 @Component({
   selector: 'app-home-view',
@@ -8,15 +9,10 @@ import { HttpClient } from '@angular/common/http';
 })
 export class HomeViewComponent implements OnInit {
 
-  books= <any>[];
-  responsiveOptions = <any>[];
+  books: Book[] = [];
+  responsiveOptions: any;
 
-  constructor(private httpClient: HttpClient) {
-    this.httpClient.get("https://localhost:8000/books/").subscribe(book => {
-      this.books = [book];
-      console.log(this.books);
-    });
-    
+  constructor(private Books: BooksService) {
     this.responsiveOptions = [
       {
         breakpoint: '1024px',
@@ -37,7 +33,10 @@ export class HomeViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    /* EJEMPLO DE LA PAGINA WEB DE PRIMENG, LLAMAR A UNA FUNCION DEL SERVICE Y TRABAJAR CON LO QUE NOS DEVUELVE */
+    // this.BooksService.nameFunctionHere().then(books => {
+    //   this.books/*(Variable declarada)*/= books /*(Argumento dentro del "then")*/;
+    // });
   }
 
 }
