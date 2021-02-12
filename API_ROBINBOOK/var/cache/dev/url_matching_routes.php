@@ -10,7 +10,6 @@ return [
     [ // $staticRoutes
         '/book' => [[['_route' => 'add_book', '_controller' => 'App\\Controller\\BookController::add'], null, ['POST' => 0], null, false, false, null]],
         '/books' => [[['_route' => 'get_all_book', '_controller' => 'App\\Controller\\BookController::getAll'], null, ['GET' => 0], null, false, false, null]],
-        '/findBook' => [[['_route' => 'get_all_findBook', '_controller' => 'App\\Controller\\BookController::findBook'], null, ['GET' => 0], null, true, false, null]],
         '/Genre' => [[['_route' => 'add_Genre', '_controller' => 'App\\Controller\\GenreController::add'], null, ['POST' => 0], null, false, false, null]],
         '/genre' => [[['_route' => 'get_all_genre', '_controller' => 'App\\Controller\\GenreController::getAll'], null, ['GET' => 0], null, false, false, null]],
         '/root/dir' => [[['_route' => 'root_dir', '_controller' => 'App\\Controller\\RootDirController::index'], null, null, null, false, false, null]],
@@ -28,11 +27,12 @@ return [
                     .')'
                     .'|new(*:73)'
                 .')'
+                .'|/findBooks/([^/]++)(*:100)'
                 .'|/genre/([^/]++)(?'
-                    .'|(*:99)'
+                    .'|(*:126)'
                 .')'
                 .'|/users/([^/]++)(?'
-                    .'|(*:125)'
+                    .'|(*:153)'
                 .')'
             .')/?$}sDu',
     ],
@@ -44,12 +44,13 @@ return [
             [['_route' => 'delete_book', '_controller' => 'App\\Controller\\BookController::delete'], ['id'], ['DELETE' => 0], null, false, true, null],
         ],
         73 => [[['_route' => 'add_new_pdf', '_controller' => 'App\\Controller\\BookController::newAction'], [], null, null, false, false, null]],
-        99 => [
+        100 => [[['_route' => 'get_all_findBooks', '_controller' => 'App\\Controller\\BookController::findBySearch'], ['word'], ['GET' => 0], null, false, true, null]],
+        126 => [
             [['_route' => 'get_one_genre', '_controller' => 'App\\Controller\\GenreController::get'], ['id'], ['GET' => 0], null, false, true, null],
             [['_route' => 'update_genre', '_controller' => 'App\\Controller\\GenreController::update'], ['id'], ['PUT' => 0], null, false, true, null],
             [['_route' => 'delete_genre', '_controller' => 'App\\Controller\\GenreController::delete'], ['id'], ['DELETE' => 0], null, false, true, null],
         ],
-        125 => [
+        153 => [
             [['_route' => 'get_one_users', '_controller' => 'App\\Controller\\UsersController::get'], ['id'], ['GET' => 0], null, false, true, null],
             [['_route' => 'update_users', '_controller' => 'App\\Controller\\UsersController::update'], ['id'], ['PUT' => 0], null, false, true, null],
             [['_route' => 'delete_users', '_controller' => 'App\\Controller\\UsersController::delete'], ['id'], ['DELETE' => 0], null, false, true, null],
