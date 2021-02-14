@@ -9,28 +9,28 @@ import { Book } from '../book';
 })
 export class HomeViewComponent implements OnInit {
 
-  books: Book[] = [];
-  responsiveOptions: any;
+  // books: Book[] = [];
+  // responsiveOptions: any;
 
-  constructor(private Books: BooksService) {
-    this.responsiveOptions = [
-      {
-        breakpoint: '1024px',
-        numVisible: 3,
-        numScroll: 3
-      },
-      {
-        breakpoint: '768px',
-        numVisible: 2,
-        numScroll: 2
-      },
-      {
-        breakpoint: '560px',
-        numVisible: 1,
-        numScroll: 1
-      }
-    ];
-  }
+  // constructor(private Books: BooksService) {
+  //   this.responsiveOptions = [
+  //     {
+  //       breakpoint: '1024px',
+  //       numVisible: 3,
+  //       numScroll: 3
+  //     },
+  //     {
+  //       breakpoint: '768px',
+  //       numVisible: 2,
+  //       numScroll: 2
+  //     },
+  //     {
+  //       breakpoint: '560px',
+  //       numVisible: 1,
+  //       numScroll: 1
+  //     }
+  //   ];
+  // }
 
   ngOnInit(): void {
     /* EJEMPLO DE LA PAGINA WEB DE PRIMENG, LLAMAR A UNA FUNCION DEL SERVICE Y TRABAJAR CON LO QUE NOS DEVUELVE */

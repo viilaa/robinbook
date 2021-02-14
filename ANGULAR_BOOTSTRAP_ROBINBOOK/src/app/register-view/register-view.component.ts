@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterViewComponent implements OnInit {
 
+  selectedRole: string[] = ['reader', 'writer'];
+
   constructor() { }
 
   ngOnInit(): void {

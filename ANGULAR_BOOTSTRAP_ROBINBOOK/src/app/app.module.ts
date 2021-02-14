@@ -1,6 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CarouselModule } from 'primeng/carousel';
+import { ButtonModule } from 'primeng/button';
+import { FieldsetModule } from 'primeng/fieldset';
+import { InputTextModule } from 'primeng/inputtext';
+import { PasswordModule } from 'primeng/password';
+import { CheckboxModule } from 'primeng/checkbox';
+import { InputMaskModule } from 'primeng/inputmask';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +19,8 @@ import { RegisterViewComponent } from './register-view/register-view.component';
 import { PublishViewComponent } from './publish-view/publish-view.component';
 import { AdminViewComponent } from './admin-view/admin-view.component';
 import { PageNotFoundViewComponent } from './page-not-found-view/page-not-found-view.component';
+import { ContactViewComponent } from './contact-view/contact-view.component';
+import { LayoutViewComponent } from './layout-view/layout-view.component';
 
 @NgModule({
   declarations: [
@@ -26,11 +34,19 @@ import { PageNotFoundViewComponent } from './page-not-found-view/page-not-found-
     PublishViewComponent,
     AdminViewComponent,
     PageNotFoundViewComponent,
+    ContactViewComponent,
+    LayoutViewComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    CarouselModule
+    CarouselModule,
+    ButtonModule,
+    FieldsetModule,
+    InputTextModule,
+    PasswordModule,
+    CheckboxModule,
+    InputMaskModule
   ],
   providers: [],
   bootstrap: [AppComponent]
