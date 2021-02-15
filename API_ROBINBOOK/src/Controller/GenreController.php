@@ -100,7 +100,7 @@ class GenreController extends AbstractController
     public function findByGenre($TypeGenre): JsonResponse
 
     {
-        $book = $this->getDoctrine()->getRepository(Book::class)->find($TypeGenre);
+        $book = $this->getDoctrine()->getRepository(Genre::class)->find($TypeGenre);
         $data =[];
 
         $relations = $book->getBooks();

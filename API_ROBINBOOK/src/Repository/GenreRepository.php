@@ -57,7 +57,8 @@ class GenreRepository extends ServiceEntityRepository
             ->createQuery(
                 'SELECT b 
                 FROM App\Entity\book b 
-                INNER JOIN App\Entity\genre g'
+                INNER JOIN App\Entity\genre g
+                ON b.id=g.id'
             );
        
         }
