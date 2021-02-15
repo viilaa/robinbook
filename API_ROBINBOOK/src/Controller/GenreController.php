@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controller;
-
+use App\Entity\Genre;
 use App\Repository\GenreRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -100,10 +100,10 @@ class GenreController extends AbstractController
     public function findByGenre($TypeGenre): JsonResponse
 
     {
-        $book = $this->getDoctrine()->getRepository(Genre::class)->find($TypeGenre);
+        $genre = $this->getDoctrine()->getRepository(Genre::class)->find($TypeGenre);
         $data =[];
 
-        $relations = $book->getBooks();
+        $relations = $genre->getBooks();
         $relation=[];
         foreach ($relations as $rel) {
             array_push($relation,[ 
@@ -117,7 +117,7 @@ class GenreController extends AbstractController
             'books'=>$relation
         ]);
 
-        return new JsonResponse($data, Response::HTTP_OK);
+        return new JsonResponse($relation, Response::HTTP_OK);
     }
    
   
