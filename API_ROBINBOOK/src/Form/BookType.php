@@ -13,9 +13,9 @@ class BookType extends AbstractType
     {
         $builder
             ->add('age_classification')
-            ->add('cover_page',FileType::class, array('label' => 'Libro (PDF file)'))
+            ->add('cover_page',FileType::class, array('label' => 'Cover page (JPG file)'))
             ->add('illustrations')
-            ->add('pdf', FileType::class, array('label' => 'Libro (PDF file)'))
+            ->add('pdf', FileType::class, array('label' => 'Book (PDF file)'))
             ->add('release_date')
             ->add('synopsis')
             ->add('title')
