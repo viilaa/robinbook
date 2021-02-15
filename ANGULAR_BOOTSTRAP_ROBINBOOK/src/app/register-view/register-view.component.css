@@ -1,0 +1,15 @@
+.container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.p-float-label {
+    margin-top: 15%;
+}
+
+.submit-container {
+    margin-top: 10%;
+    margin-bottom: 20%;
+}
