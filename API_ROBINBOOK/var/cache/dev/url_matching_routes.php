@@ -27,12 +27,15 @@ return [
                     .')'
                     .'|new(*:73)'
                 .')'
-                .'|/findBooks/([^/]++)(*:100)'
+                .'|/find(?'
+                    .'|Books/([^/]++)(*:103)'
+                    .'|Genres/([^/]++)(*:126)'
+                .')'
                 .'|/genre/([^/]++)(?'
-                    .'|(*:126)'
+                    .'|(*:153)'
                 .')'
                 .'|/users/([^/]++)(?'
-                    .'|(*:153)'
+                    .'|(*:180)'
                 .')'
             .')/?$}sDu',
     ],
@@ -44,13 +47,14 @@ return [
             [['_route' => 'delete_book', '_controller' => 'App\\Controller\\BookController::delete'], ['id'], ['DELETE' => 0], null, false, true, null],
         ],
         73 => [[['_route' => 'add_new_pdf', '_controller' => 'App\\Controller\\BookController::newAction'], [], null, null, false, false, null]],
-        100 => [[['_route' => 'get_all_findBooks', '_controller' => 'App\\Controller\\BookController::findBySearch'], ['word'], ['GET' => 0], null, false, true, null]],
-        126 => [
+        103 => [[['_route' => 'get_all_findBooks', '_controller' => 'App\\Controller\\BookController::findBySearch'], ['word'], ['GET' => 0], null, false, true, null]],
+        126 => [[['_route' => 'get_all_findGenres', '_controller' => 'App\\Controller\\GenreController::findByGenre'], ['TypeGenre'], ['GET' => 0], null, false, true, null]],
+        153 => [
             [['_route' => 'get_one_genre', '_controller' => 'App\\Controller\\GenreController::get'], ['id'], ['GET' => 0], null, false, true, null],
             [['_route' => 'update_genre', '_controller' => 'App\\Controller\\GenreController::update'], ['id'], ['PUT' => 0], null, false, true, null],
             [['_route' => 'delete_genre', '_controller' => 'App\\Controller\\GenreController::delete'], ['id'], ['DELETE' => 0], null, false, true, null],
         ],
-        153 => [
+        180 => [
             [['_route' => 'get_one_users', '_controller' => 'App\\Controller\\UsersController::get'], ['id'], ['GET' => 0], null, false, true, null],
             [['_route' => 'update_users', '_controller' => 'App\\Controller\\UsersController::update'], ['id'], ['PUT' => 0], null, false, true, null],
             [['_route' => 'delete_users', '_controller' => 'App\\Controller\\UsersController::delete'], ['id'], ['DELETE' => 0], null, false, true, null],
