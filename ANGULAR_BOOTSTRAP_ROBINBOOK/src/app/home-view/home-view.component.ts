@@ -14,10 +14,10 @@ export class HomeViewComponent implements OnInit {
   responsiveOptions: any;
 
   constructor(/*private Books: BooksService,*/ private httpClient: HttpClient) {
-    this.httpClient.get('https://localhost:8000/books').subscribe(response => {
-      this.books = response;
-      console.log(this.books);
-    });
+    // this.httpClient.get('https://localhost:8000/books').subscribe(response => {
+    //   this.books = response;
+    //   console.log(this.books);
+    // });
 
     this.responsiveOptions = [
         {
