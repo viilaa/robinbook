@@ -16,4 +16,8 @@ export class BooksService {
       getBooksByGenre(),
       uploadBook(),
       publishBook()*/
+
+  getBooks(){
+    
+  }
 }

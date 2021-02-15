@@ -8,6 +8,8 @@ import { PasswordModule } from 'primeng/password';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputMaskModule } from 'primeng/inputmask';
 
+import { HttpClientModule } from '@angular/common/http';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeViewComponent } from './home-view/home-view.component';
@@ -21,6 +23,9 @@ import { AdminViewComponent } from './admin-view/admin-view.component';
 import { PageNotFoundViewComponent } from './page-not-found-view/page-not-found-view.component';
 import { ContactViewComponent } from './contact-view/contact-view.component';
 import { LayoutViewComponent } from './layout-view/layout-view.component';
+import { SiteHeaderComponent } from './_layout/site-header/site-header.component';
+import { SiteFooterComponent } from './_layout/site-footer/site-footer.component';
+import { SiteLayoutComponent } from './_layout/site-layout/site-layout.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +41,9 @@ import { LayoutViewComponent } from './layout-view/layout-view.component';
     PageNotFoundViewComponent,
     ContactViewComponent,
     LayoutViewComponent,
+    SiteHeaderComponent,
+    SiteFooterComponent,
+    SiteLayoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,7 +54,8 @@ import { LayoutViewComponent } from './layout-view/layout-view.component';
     InputTextModule,
     PasswordModule,
     CheckboxModule,
-    InputMaskModule
+    InputMaskModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
