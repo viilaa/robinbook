@@ -31,12 +31,13 @@ return [
                 .'|/find(?'
                     .'|Books/([^/]++)(*:103)'
                     .'|Genres/([^/]++)(*:126)'
+                    .'|bookRead/([^/]++)(*:151)'
                 .')'
                 .'|/genre/([^/]++)(?'
-                    .'|(*:153)'
+                    .'|(*:178)'
                 .')'
                 .'|/users/([^/]++)(?'
-                    .'|(*:180)'
+                    .'|(*:205)'
                 .')'
             .')/?$}sDu',
     ],
@@ -50,12 +51,13 @@ return [
         73 => [[['_route' => 'add_new_pdf', '_controller' => 'App\\Controller\\BookController::newAction'], [], null, null, false, false, null]],
         103 => [[['_route' => 'get_all_findBooks', '_controller' => 'App\\Controller\\BookController::findBySearch'], ['word'], ['GET' => 0], null, false, true, null]],
         126 => [[['_route' => 'get_all_findGenres', '_controller' => 'App\\Controller\\GenreController::findByGenre'], ['TypeGenre'], ['GET' => 0], null, false, true, null]],
-        153 => [
+        151 => [[['_route' => 'get_all_findbookRead', '_controller' => 'App\\Controller\\UsersController::findByRead'], ['BookRead'], ['GET' => 0], null, false, true, null]],
+        178 => [
             [['_route' => 'get_one_genre', '_controller' => 'App\\Controller\\GenreController::get'], ['id'], ['GET' => 0], null, false, true, null],
             [['_route' => 'update_genre', '_controller' => 'App\\Controller\\GenreController::update'], ['id'], ['PUT' => 0], null, false, true, null],
             [['_route' => 'delete_genre', '_controller' => 'App\\Controller\\GenreController::delete'], ['id'], ['DELETE' => 0], null, false, true, null],
         ],
-        180 => [
+        205 => [
             [['_route' => 'get_one_users', '_controller' => 'App\\Controller\\UsersController::get'], ['id'], ['GET' => 0], null, false, true, null],
             [['_route' => 'update_users', '_controller' => 'App\\Controller\\UsersController::update'], ['id'], ['PUT' => 0], null, false, true, null],
             [['_route' => 'delete_users', '_controller' => 'App\\Controller\\UsersController::delete'], ['id'], ['DELETE' => 0], null, false, true, null],

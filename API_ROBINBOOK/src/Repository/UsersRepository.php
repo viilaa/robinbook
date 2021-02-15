@@ -51,6 +51,18 @@ class UsersRepository extends ServiceEntityRepository
         return $Users;
     }
 
+    public function findByRead($BookRead)
+    {
+        return  $this->getEntityManager()
+        ->createQuery(
+            'SELECT b 
+            FROM App\Entity\book b 
+            INNER JOIN App\Entity\users u
+            ON b.id=u.id'
+        );
+   
+    }
+
     // /**
     //  * @return Users[] Returns an array of Users objects
     //  */

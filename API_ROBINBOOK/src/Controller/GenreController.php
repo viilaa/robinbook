@@ -108,7 +108,7 @@ class GenreController extends AbstractController
         foreach ($relations as $rel) {
             array_push($relation,[ 
                  'id'=> $rel->getId(),
-                'title'=>$rel->getTitle() 
+                'cover_page'=>$rel->getCoverPage(),
                 ]);
         }
         array_push($data,[ 
