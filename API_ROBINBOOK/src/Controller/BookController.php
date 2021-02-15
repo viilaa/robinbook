@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Book; 
 use App\Repository\BookRepository; 
+use App\Form\BookType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
