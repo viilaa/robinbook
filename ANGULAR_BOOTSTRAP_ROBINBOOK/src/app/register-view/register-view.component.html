@@ -1,5 +1,5 @@
 <h2 style="margin-left:3%; color:white;">Register Form</h2>
-<div class=" container ">
+<div class="container">
     <form>
         <h3>User information</h3>
         <span class="p-float-label ">
@@ -15,15 +15,16 @@
             <label for="float-input ">SECOND SURNAME</label>
         </span>
         <span class="p-float-label ">
-            <input type="text " name="date_birth" pInputText required/>
             <p-inputMask formControlName="date_birth" mask="99/99/9999"></p-inputMask>
-            <label for="float-input ">BIRTHDAY</label>
+            <label for="float-inputMask">BIRTHDAY</label>
         </span>
         <span class="p-float-label ">
             <input type="text " name="id_card" pInputText required/>
             <label for="float-input ">ID CARD</label>
         </span>
-        <hr style="margin: 0 2%; background-color: white;">
+
+        <hr style="background-color: white; margin-left: -7%;">
+
         <h3>Login Information</h3>
         <span class="p-float-label ">
             <input type="email " name="email" pInputText required/>
@@ -37,16 +38,18 @@
             <input type="password " name="confirm_password" pPassword required/>
             <label for="float-input ">CONFIRM PASSWORD</label>
         </span>
-        <hr>
-        <h3>Choose your role</h3>
-        <span class="p-float-label ">
-            <div class="flex">
-                <p-checkbox name="role" value="reader" label="Writer"></p-checkbox>
-                <p-checkbox name="role" value="writer" label="Reader"></p-checkbox>
-            </div>
-        </span>
 
-        <div class="submit-container ">
+        <hr style="background-color: white; margin-left: -7%;">
+
+        <h3>Choose your role</h3>
+        <p>
+            <p-checkbox name="role" value="reader" label="Writer">Writer</p-checkbox>
+        </p>
+        <p>
+            <p-checkbox name="role" value="writer" label="Reader">Reader</p-checkbox>
+        </p>
+
+        <div class="submit-container " style="margin-top: 3%;">
             <button pripple=" " type="button " class="p-button p-component p-ripple ">
                 <span class="p-button-label ">REGISTER</span>
                 <span class="p-ink "></span>
