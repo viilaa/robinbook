@@ -2,106 +2,104 @@
 
 namespace App\Security;
 
-use App\Entity\User;
+use App\Entity\Users;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
-use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
-use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Symfony\Component\Security\Csrf\CsrfToken;
-use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
-use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
-use Symfony\Component\Security\Guard\PasswordAuthenticatedInterface;
-use Symfony\Component\Security\Http\Util\TargetPathTrait;
+use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 
-class LoginAuthenticator extends AbstractFormLoginAuthenticator implements PasswordAuthenticatedInterface
-{
-    use TargetPathTrait;
 
-    public const LOGIN_ROUTE = 'app_login';
 
-    private $entityManager;
-    private $urlGenerator;
-    private $csrfTokenManager;
-    private $passwordEncoder;
+class LoginAuthenticator extends AbstractFormLoginAuthenticator
+ {
+    private $em;
 
-    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(EntityManagerInterface $em)
     {
-        $this->entityManager = $entityManager;
-        $this->urlGenerator = $urlGenerator;
-        $this->csrfTokenManager = $csrfTokenManager;
-        $this->passwordEncoder = $passwordEncoder;
+        $this->em = $em;
     }
 
+    /**
+     * Called on every request to decide if this authenticator should be
+     * used for the request. Returning `false` will cause this authenticator
+     * to be skipped.
+     */
     public function supports(Request $request)
     {
-        return self::LOGIN_ROUTE === $request->attributes->get('_route')
-            && $request->isMethod('POST');
+        return $request->headers->has('X-AUTH-TOKEN');
     }
 
+    /**
+     * Called on every request. Return whatever credentials you want to
+     * be passed to getUser() as $credentials.
+     */
     public function getCredentials(Request $request)
     {
-        $credentials = [
-            'email' => $request->request->get('email'),
-            'password' => $request->request->get('password'),
-            'csrf_token' => $request->request->get('_csrf_token'),
-        ];
-        $request->getSession()->set(
-            Security::LAST_USERNAME,
-            $credentials['email']
-        );
-
-        return $credentials;
+        return $request->headers->get('X-AUTH-TOKEN');
     }
 
-    public function getUser($credentials, UserProviderInterface $userProvider)
+    public function getUsers($credentials, UserProviderInterface $userProvider)
     {
-        $token = new CsrfToken('authenticate', $credentials['csrf_token']);
-        if (!$this->csrfTokenManager->isTokenValid($token)) {
-            throw new InvalidCsrfTokenException();
+        if (null === $credentials) {
+            // The token header was empty, authentication fails with HTTP Status
+            // Code 401 "Unauthorized"
+            return null;
         }
 
-        $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
-
-        if (!$user) {
-            // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('Email could not be found.');
-        }
-
-        return $user;
+        // The "username" in this case is the apiToken, see the key `property`
+        // of `your_db_provider` in `security.yaml`.
+        // If this returns a user, checkCredentials() is called next:
+        return $userProvider->loadUserByUsername($credentials);
     }
 
     public function checkCredentials($credentials, UserInterface $user)
     {
-        return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
+        // Check credentials - e.g. make sure the password is valid.
+        // In case of an API token, no credential check is needed.
+
+        // Return `true` to cause authentication success
+        return true;
+    }
+
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
+    {
+        // on success, let the request continue
+        return null;
+    }
+
+    public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
+    {
+        $data = [
+            // you may want to customize or obfuscate the message first
+            'message' => strtr($exception->getMessageKey(), $exception->getMessageData())
+
+            // or to translate this message
+            // $this->translator->trans($exception->getMessageKey(), $exception->getMessageData())
+        ];
+
+        return new JsonResponse($data, Response::HTTP_UNAUTHORIZED);
     }
 
     /**
-     * Used to upgrade (rehash) the user's password automatically over time.
+     * Called when authentication is needed, but it's not sent
      */
-    public function getPassword($credentials): ?string
+    public function start(Request $request, AuthenticationException $authException = null)
     {
-        return $credentials['password'];
+        $data = [
+            // you might translate this message
+            'message' => 'Authentication Required'
+        ];
+
+        return new JsonResponse($data, Response::HTTP_UNAUTHORIZED);
     }
 
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey)
+    public function supportsRememberMe()
     {
-        if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
-            return new RedirectResponse($targetPath);
-        }
-
-        return new RedirectResponse($this->urlGenerator->generate('prueba'));
-        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__); 
-    }
-
-    protected function getLoginUrl()
-    {
-        return $this->urlGenerator->generate(self::LOGIN_ROUTE);
+        return false;
     }
 }

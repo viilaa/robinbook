@@ -6,11 +6,14 @@ use App\Repository\UsersRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+
+
 
 /**
  * @ORM\Entity(repositoryClass=UsersRepository::class)
  */
-class Users
+class Users implements UsersInterface
 {
     /**
      * @ORM\Id
@@ -210,5 +213,22 @@ class Users
         $this->date_of_birth = $date_of_birth;
 
         return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getSalt()
+    {
+        // not needed when using the "bcrypt" algorithm in security.yaml
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 }
