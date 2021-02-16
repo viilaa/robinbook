@@ -97,6 +97,7 @@ class BookController extends AbstractController
         empty($data['illustrations']) ? true : $book->setIllustrations ($data['illustrations']);
         empty($data['pdf']) ? true : $book->setPdf($data['pdf']);
         empty($data['release_date']) ? true : $book->setReleaseDate($data['release_date']);
+        empty($data['synopsis']) ? true : $book->setSynopsis($data['synopsis']);
         empty($data['title']) ? true : $book->setTitle($data['title']);
 
         $updatedbook = $this->BookRepository->updatebook($book);
@@ -118,40 +119,41 @@ class BookController extends AbstractController
     }
 
     /**
-     * @Route("/book/new", name="add_new_pdf")
+     * @Route("/book/new", name="add_new_pdf", methods={"POST"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request): JsonResponse
     {
-        $newFile = new File();
+        $newFile = new Book();
         $form = $this->createForm(BookType::class, $newFile);
         $form->handleRequest($request);
+        $response=[$form->isSubmitted()];
 
-        if($form->isValid())
+        if($form->isSubmitted() && $form->isValid())
         {
             // La variable $file guardará el PDF subido
             /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
             $Pdf = $newFile->getPdf();
-            $CoverPage = $newFile->getCoverPage();
+           /*  $CoverPage = $newFile->getCoverPage(); */
 
             // Generar un nombre único para el archivo antes de guardarlo
             $PdfName = md5(uniqid()).'.'.$Pdf->guessExtension();
-            $CoverPageName = md5(uniqid()).'.'.$CoverPage->guessExtension();
+          /*   $CoverPageName = md5(uniqid()).'.'.$CoverPage->guessExtension(); */
 
             // Mover el archivo al directorio donde se guardan los pdfs
             $PdfDir = $this->getParameter('kernel.project_dir').'/../pdf';
             $Pdf->move($PdfDir, $PdfName);
-            $CoverPageDir = $this->getParameter('kernel.project_dir').'/../coverPage';
-            $CoverPage->move($CoverPageDir, $CoverPageName);
+           /*  $CoverPageDir = $this->getParameter('kernel.project_dir').'/../coverPage';
+            $CoverPage->move($CoverPageDir, $CoverPageName); */
 
              // Actualizar la propiedad pdf para guardar el nombre de archivo PDF
             // en lugar de sus contenidos
             $newFile->setPdf($PdfName);
-            $newFile->setCoverPage($CoverPageName);
+           /*  $newFile->setCoverPage($CoverPageName); */
+            $response=['fichero envido'];
 
-            // ... persist la variable $usuario o cualquier otra tarea
-
-            return $this->redirect($this->generateUrl('app_product_list'));
-        }
+            
+        } // ... persist la variable $usuario o cualquier otra tarea
+            return new JsonResponse($response, Response::HTTP_OK);
     } 
     /**
      * @Route("/findBooks/{word}", name="get_all_findBooks", methods={"GET"})
