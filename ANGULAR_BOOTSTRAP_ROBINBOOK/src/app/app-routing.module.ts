@@ -15,18 +15,18 @@ import { SiteLayoutComponent } from './_layout/site-layout/site-layout.component
 const routes: Routes = [
   { path: 'login', component: LoginViewComponent },
   { path: 'register', component: RegisterViewComponent },
-  { path: '**', component: PageNotFoundViewComponent },
   { path: '', component: SiteLayoutComponent,
-    children: [
-      { path: '', component: HomeViewComponent, pathMatch: 'full' },
-      { path: 'genres', component: GenresViewComponent },
-      { path: 'new&popular', component: NewandpopularViewComponent },
-      { path: 'mybookshelf', component: MybookshelfViewComponent },
-      { path: 'publish', component: PublishViewComponent },
-      { path: 'admin', component: AdminViewComponent },
-      { path: 'contact', component: ContactViewComponent },
-    ]
-  },
+  children: [
+    { path: '', component: HomeViewComponent, pathMatch: 'full' },
+    { path: 'genres', component: GenresViewComponent },
+    { path: 'newpopular', component: NewandpopularViewComponent },
+    { path: 'mybookshelf', component: MybookshelfViewComponent },
+    { path: 'publish', component: PublishViewComponent },
+    { path: 'admin', component: AdminViewComponent },
+    { path: 'contact', component: ContactViewComponent },
+  ]
+},
+{ path: '**', component: PageNotFoundViewComponent },
   // { path: 'home', component: HomeViewComponent },
   // { path: 'genres', component: GenresViewComponent },
   // { path: 'new&popular', component: NewandpopularViewComponent },
