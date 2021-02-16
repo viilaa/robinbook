@@ -68,7 +68,7 @@ class UserController extends AbstractController
             return new JsonResponse($data, Response::HTTP_OK);
     }
     /**
-     * @Route("/prueba", name="prueba", methods={"GET"})
+     * @Route("/users/", name="get_all_users", methods={"GET"})
      */
     public function getAll(): JsonResponse
 
