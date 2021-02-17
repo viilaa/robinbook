@@ -30,7 +30,7 @@ class BookRepository extends ServiceEntityRepository
              ->setSynopsis($data['synopsis'])
              ->setAgeClassification($data['age_classification'])
              ->setIllustrations($data['illustrations'])
-             ->setPdf($data['pdf'])
+             ->setPdf('https://robinimg.s3.us-east-2.amazonaws.com/pdfs_libros/'. $data['pdf'])
              ->setReleaseDate(\DateTime::createFromFormat('Y-m-d', $data['release_date']))
              ->setCoverPage('https://robinimg.s3.us-east-2.amazonaws.com/'. $data['cover_page']);
                 
