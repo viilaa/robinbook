@@ -32,12 +32,12 @@ class BookRepository extends ServiceEntityRepository
              ->setIllustrations($data['illustrations'])
              ->setPdf($data['pdf'])
              ->setReleaseDate(\DateTime::createFromFormat('Y-m-d', $data['release_date']))
-             ->setCoverPage($data['cover_page']);
+             ->setCoverPage('https://robinimg.s3.us-east-2.amazonaws.com/'. $data['cover_page']);
                 
 
         $this->manager->persist($newBook);
         $this->manager->flush();
-
+       
     }  
 
     public function updateBook(Book $Book):Book
