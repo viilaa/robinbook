@@ -44,7 +44,7 @@ class UsersRepository extends ServiceEntityRepository
       /**
      * Used to upgrade (rehash) the user's password automatically over time.($this->passwordEncoder->encodePassword($user,)$this->passwordEncoder=$passwordEncoder;UserPasswordEncoderInterface  $passwordEncoder
      */
-    public function upgradePassword(UserInterface $user, string $newEncodedPassword): void
+    /* public function upgradePassword(UserInterface $user, string $newEncodedPassword): void
     {
         if (!$user instanceof User) {
             throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($user)));
@@ -53,7 +53,7 @@ class UsersRepository extends ServiceEntityRepository
         $user->setPassword($newEncodedPassword);
         $this->_em->persist($user);
         $this->_em->flush();
-    }
+    } */
 
     public function updateUsers(Users $Users):Users
     

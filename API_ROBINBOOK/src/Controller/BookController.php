@@ -28,13 +28,13 @@ class BookController extends AbstractController
     {
         $data=json_decode($request->getContent(), true);
 
-        $age_classification = $data['age_classification'];
+        /* $age_classification = $data['age_classification'];
         $cover_page = $data['cover_page'];
         $illustrations = $data['illustrations'];
         $pdf = $data['pdf'];
         $release_date = $data['release_date'];
         $synopsis = $data['synopsis'];
-        $title = $data['title'];
+        $title = $data['title']; */
 
         
         $this ->BookRepository->savebook($data);

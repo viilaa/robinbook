@@ -109,14 +109,16 @@ class UsersController extends AbstractController
     {
         $users = $this->UsersRepository->findOneBy(['id' => $id]);
         $data = json_decode($request->getContent(), true);
+        
 
         empty($data['name']) ? true : $users->setName ($data['name']);
-        empty($data['surname1']) ? true : $users->setSurname($data['surname1']);
+        empty($data['surname1']) ? true : $users->setSurname1($data['surname1']);
         empty($data['surname2']) ? true : $users->setSurname2($data['surname2']);
         empty($data['date_of_birth']) ? true : $users->setDateOfBirth($data['date_of_birth']);
         empty($data['dni']) ? true : $users->setDni($data['dni']);
         empty($data['email']) ? true : $users->setEmail($data['email']);
         empty($data['release_date']) ? true : $users->setReleaseDate($data['release_date']);
+        /* $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT); */
         empty($data['password']) ? true : $pet->setPassword($data['password']);
         empty($data['rol']) ? true : $users->setRol($data['rol']);
         
