@@ -7,6 +7,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
 
+
 /**
  * @method Users|null find($id, $lockMode = null, $lockVersion = null)
  * @method Users|null findOneBy(array $criteria, array $orderBy = null)
@@ -19,12 +20,13 @@ class UsersRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Users::class);
         $this->manager= $manager;
+        
     }
     public function saveUsers($data)    
 
     {
          $newUsers = new Users();
-
+   
         $newUsers
             ->setName($data['name'])
             ->setSurname1($data['surname1'])
@@ -33,14 +35,14 @@ class UsersRepository extends ServiceEntityRepository
             ->setDateOfBirth(\DateTime::createFromFormat('Y-m-d', $data['date_of_birth']))
             ->setEmail($data['email'])
             ->setReleaseDate(\DateTime::createFromFormat('Y-m-d', $data['release_date']))
-            ->setPassword($data['password']);
+            ->setPassword( $data['password']);
 
         $this->manager->persist($newUsers);
         $this->manager->flush();
 
     }  
       /**
-     * Used to upgrade (rehash) the user's password automatically over time.
+     * Used to upgrade (rehash) the user's password automatically over time.($this->passwordEncoder->encodePassword($user,)$this->passwordEncoder=$passwordEncoder;UserPasswordEncoderInterface  $passwordEncoder
      */
     public function upgradePassword(UserInterface $user, string $newEncodedPassword): void
     {

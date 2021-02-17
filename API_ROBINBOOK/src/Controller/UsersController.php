@@ -10,6 +10,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+
 
 class UsersController extends AbstractController
 {   
@@ -24,12 +27,12 @@ class UsersController extends AbstractController
         /**
      * @Route("/users", name="add_users",methods={"POST"})
      */
-    public function add(Request $request): JsonResponse
+    public function add(Request $request,UserPasswordEncoderInterface $encoder, UserInterface $user): JsonResponse
 
     {
         $data=json_decode($request->getContent(), true);
 
-        $name = $data['name'];
+        /* $name = $data['name'];
         $surname1 = $data['surname1'];
         $surname2 = $data['surname2'];
         $date_of_birth = $data['date_of_birth'];
@@ -37,9 +40,15 @@ class UsersController extends AbstractController
         $email = $data['email'];
         $release_date = $data['release_date'];
         $password = $data['password'];
-        $rol = $data['rol'];
+        $rol = $data['rol'];  
 
-        
+        $data['password']=$passwordEncoder->encodePassword($user, $data['password']);*/
+       /*  $user = new Users(); */
+        $plainPassword = $data['password'];
+        $encoded = $encoder->encodePassword($user, $plainPassword);
+
+        $user->setPassword($encoded);
+    
         $this ->UsersRepository->saveusers($data);
         return new JsonResponse(['status'=>'users created'], Response::HTTP_CREATED);
 
