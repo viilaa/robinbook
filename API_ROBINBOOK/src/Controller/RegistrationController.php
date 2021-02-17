@@ -1,7 +1,6 @@
 <?php
-
+/* Esto no hace falta  */
 namespace App\Controller;
-
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
