@@ -26,7 +26,7 @@ class GenreRepository extends ServiceEntityRepository
          $newGenre = new Genre();
 
         $newGenre
-                ->setTypeGenre = ($type_genre);
+             ->setTypeGenre($data['type_genre']);
 
         $this->manager->persist($newGenre);
         $this->manager->flush();

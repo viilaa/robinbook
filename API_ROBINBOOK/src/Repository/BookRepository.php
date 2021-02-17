@@ -26,7 +26,14 @@ class BookRepository extends ServiceEntityRepository
          $newBook = new Book();
 
         $newBook
-                ->setTypeBook = ($type_Book);
+             ->setTitle($data['title'])
+             ->setSynopsis($data['synopsis'])
+             ->setAgeClassification($data['age_classification'])
+             ->setIllustrations($data['illustrations'])
+             ->setPdf($data['pdf'])
+             ->setReleaseDate(\DateTime::createFromFormat('Y-m-d', $data['release_date']))
+             ->setCoverPage($data['cover_page']);
+                
 
         $this->manager->persist($newBook);
         $this->manager->flush();

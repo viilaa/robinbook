@@ -26,16 +26,14 @@ class UsersRepository extends ServiceEntityRepository
          $newUsers = new Users();
 
         $newUsers
-            ->setId = ($id)
-            ->setName =($name)
-            ->setSurname1 = ($surname1)
-            ->setSurname2 = ($surname2)
-            ->setDni = ($dni)
-            ->setDateOfBirth = ($date_of_brith)
-            ->setEmail = ($email)
-            ->setRealeseDate = ($realese_date)
-            ->setPassword = ($password)
-            ->setTypeUsers = ($type_Users);
+            ->setName($data['name'])
+            ->setSurname1($data['surname1'])
+            ->setSurname2($data['surname2'])
+            ->setDni($data['dni'])
+            ->setDateOfBirth(\DateTime::createFromFormat('Y-m-d', $data['date_of_birth']))
+            ->setEmail($data['email'])
+            ->setReleaseDate(\DateTime::createFromFormat('Y-m-d', $data['release_date']))
+            ->setPassword($data['password']);
 
         $this->manager->persist($newUsers);
         $this->manager->flush();

@@ -30,7 +30,7 @@ class UsersController extends AbstractController
         $data=json_decode($request->getContent(), true);
 
         $name = $data['name'];
-        $surname = $data['surname'];
+        $surname1 = $data['surname1'];
         $surname2 = $data['surname2'];
         $date_of_birth = $data['date_of_birth'];
         $dni = $data['dni'];
