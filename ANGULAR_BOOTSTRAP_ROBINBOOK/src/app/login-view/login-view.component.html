@@ -10,20 +10,20 @@
     <div class="container">
         <div class="container-form">
             <form action="" style="margin-bottom: 4%; margin-top: 4%;">
-                <h1>LOGIN</h1>
+                <h1>LOG IN</h1>
                 <span class="p-float-label">
-            <input type="email" name="email" pInputText required/>
-            <label for="float-input ">EMAIL</label>
-        </span>
+                    <input type="email" name="email" pInputText required style="width: 100%;"/>
+                    <label for="float-input ">EMAIL</label>
+                </span>
                 <span class="p-float-label ">
-            <input type="password" name="password" pPassword required style="max-width:max-content;"/>
-            <label for="float-input">PASSWORD</label>
-        </span>
+                    <input type="password" name="password" pPassword required style="width: 100%;"/>
+                    <label for="float-input">PASSWORD</label>
+                </span>
                 <div class="submit-container ">
-                    <button pripple="" type="button" class="p-button p-component p-ripple" (click)="handleClick()">
-                <span class="p-button-label">ACCESS</span>
-                <span class="p-ink "></span>
-            </button>
+                    <button pripple="" type="button" class="p-button p-component p-ripple" (click)="handleClick()" style="width: 100%;">
+                        <span class="p-button-label">LOG IN</span>
+                        <span class="p-ink "></span>
+                    </button>
                 </div>
                 <span style="margin-top: 7%;">Do you not have an account yet? </span><a href="/register"> Create one here.</a>
             </form>

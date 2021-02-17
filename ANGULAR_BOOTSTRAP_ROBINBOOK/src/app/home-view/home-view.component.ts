@@ -12,6 +12,7 @@ export class HomeViewComponent implements OnInit {
 
   books= <any>[];
   responsiveOptions: any;
+  url="";
 
   constructor(/*private Books: BooksService,*/ private httpClient: HttpClient) {
     this.httpClient.get('https://localhost:8000/books').subscribe(response => {
@@ -43,6 +44,10 @@ export class HomeViewComponent implements OnInit {
     // this.BooksService.nameFunctionHere().then(books => {
     //   this.books/*(Variable declarada)*/= books /*(Argumento dentro del "then")*/;
     // });
+  }
+
+  callImg(_url: string){
+
   }
 
 }

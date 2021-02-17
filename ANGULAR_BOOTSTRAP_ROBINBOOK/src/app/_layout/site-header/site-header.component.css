@@ -11,3 +11,13 @@
     user-select: none;
     cursor: default;
 }
+
+.search-bar input {
+    background-color: #141414;
+    border: 0;
+}
+
+.search-bar button {
+    background-color: #00830C;
+    border: 0;
+}
