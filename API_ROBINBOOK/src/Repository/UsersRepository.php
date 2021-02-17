@@ -58,7 +58,8 @@ class UsersRepository extends ServiceEntityRepository
     public function updateUsers(Users $Users):Users
     
     {
-        $this->manager>persist($Users);
+
+        $this->manager->persist($Users);
         $this->manager->flush();
 
         return $Users;

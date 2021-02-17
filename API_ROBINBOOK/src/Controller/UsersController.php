@@ -119,13 +119,13 @@ class UsersController extends AbstractController
         empty($data['email']) ? true : $users->setEmail($data['email']);
         empty($data['release_date']) ? true : $users->setReleaseDate($data['release_date']);
         /* $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT); */
-        empty($data['password']) ? true : $pet->setPassword($data['password']);
+        empty($data['password']) ? true : $users->setPassword($data['password']= password_hash($data['password'], PASSWORD_DEFAULT));
         empty($data['rol']) ? true : $users->setRol($data['rol']);
         
 
         $updatedusers = $this->UsersRepository->updateusers($users);
 
-        return new JsonRespponse(['status' => 'users updated!'], Response::HTTP_OK);
+        return new JsonResponse(['status' => 'users updated!'], Response::HTTP_OK);
     }
 
     /**
