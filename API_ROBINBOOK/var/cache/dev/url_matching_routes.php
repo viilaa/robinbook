@@ -10,8 +10,11 @@ return [
     [ // $staticRoutes
         '/book' => [[['_route' => 'add_book', '_controller' => 'App\\Controller\\BookController::add'], null, ['POST' => 0], null, false, false, null]],
         '/books' => [[['_route' => 'get_all_book', '_controller' => 'App\\Controller\\BookController::getAll'], null, ['GET' => 0], null, false, false, null]],
+        '/contact' => [[['_route' => 'add_Contact', '_controller' => 'App\\Controller\\ContactController::add'], null, ['POST' => 0], null, false, false, null]],
+        '/contacts' => [[['_route' => 'get_all_Contact', '_controller' => 'App\\Controller\\ContactController::getAll'], null, ['GET' => 0], null, true, false, null]],
         '/Genre' => [[['_route' => 'add_Genre', '_controller' => 'App\\Controller\\GenreController::add'], null, ['POST' => 0], null, false, false, null]],
         '/genre' => [[['_route' => 'get_all_genre', '_controller' => 'App\\Controller\\GenreController::getAll'], null, ['GET' => 0], null, false, false, null]],
+        '/register' => [[['_route' => 'app_register', '_controller' => 'App\\Controller\\RegistrationController::register'], null, null, null, false, false, null]],
         '/login' => [[['_route' => 'login', '_controller' => 'App\\Controller\\SecurityController::login'], null, ['POST' => 0], null, false, false, null]],
         '/users' => [
             [['_route' => 'add_users', '_controller' => 'App\\Controller\\UsersController::add'], null, ['POST' => 0], null, false, false, null],
@@ -32,11 +35,14 @@ return [
                     .'|Genres/([^/]++)(*:126)'
                     .'|bookRead/([^/]++)(*:151)'
                 .')'
+                .'|/contact/([^/]++)(?'
+                    .'|(*:180)'
+                .')'
                 .'|/genre/([^/]++)(?'
-                    .'|(*:178)'
+                    .'|(*:207)'
                 .')'
                 .'|/users/([^/]++)(?'
-                    .'|(*:205)'
+                    .'|(*:234)'
                 .')'
             .')/?$}sDu',
     ],
@@ -51,12 +57,17 @@ return [
         103 => [[['_route' => 'get_all_findBooks', '_controller' => 'App\\Controller\\BookController::findBySearch'], ['word'], ['GET' => 0], null, false, true, null]],
         126 => [[['_route' => 'get_all_findGenres', '_controller' => 'App\\Controller\\GenreController::findByGenre'], ['TypeGenre'], ['GET' => 0], null, false, true, null]],
         151 => [[['_route' => 'get_all_findbookRead', '_controller' => 'App\\Controller\\UsersController::findByRead'], ['BookRead'], ['GET' => 0], null, false, true, null]],
-        178 => [
+        180 => [
+            [['_route' => 'get_one_Contact', '_controller' => 'App\\Controller\\ContactController::get'], ['id'], ['GET' => 0], null, false, true, null],
+            [['_route' => 'update_Contact', '_controller' => 'App\\Controller\\ContactController::update'], ['id'], ['PUT' => 0], null, false, true, null],
+            [['_route' => 'delete_Contact', '_controller' => 'App\\Controller\\ContactController::delete'], ['id'], ['DELETE' => 0], null, false, true, null],
+        ],
+        207 => [
             [['_route' => 'get_one_genre', '_controller' => 'App\\Controller\\GenreController::get'], ['id'], ['GET' => 0], null, false, true, null],
             [['_route' => 'update_genre', '_controller' => 'App\\Controller\\GenreController::update'], ['id'], ['PUT' => 0], null, false, true, null],
             [['_route' => 'delete_genre', '_controller' => 'App\\Controller\\GenreController::delete'], ['id'], ['DELETE' => 0], null, false, true, null],
         ],
-        205 => [
+        234 => [
             [['_route' => 'get_one_users', '_controller' => 'App\\Controller\\UsersController::get'], ['id'], ['GET' => 0], null, false, true, null],
             [['_route' => 'update_users', '_controller' => 'App\\Controller\\UsersController::update'], ['id'], ['PUT' => 0], null, false, true, null],
             [['_route' => 'delete_users', '_controller' => 'App\\Controller\\UsersController::delete'], ['id'], ['DELETE' => 0], null, false, true, null],

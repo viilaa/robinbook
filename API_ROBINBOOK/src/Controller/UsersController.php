@@ -117,9 +117,8 @@ class UsersController extends AbstractController
         empty($data['date_of_birth']) ? true : $users->setDateOfBirth($data['date_of_birth']);
         empty($data['dni']) ? true : $users->setDni($data['dni']);
         empty($data['email']) ? true : $users->setEmail($data['email']);
-        empty($data['release_date']) ? true : $users->setReleaseDate($data['release_date']);
-        /* $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT); */
-        empty($data['password']) ? true : $users->setPassword($data['password']= password_hash($data['password'], PASSWORD_DEFAULT));
+        empty($data['release_date']) ? true : $users->setReleaseDate($data['release_date']); 
+        empty($data['password']) ? true : $users->setPassword($data['password'] = password_hash($data['password'], PASSWORD_DEFAULT));
         empty($data['rol']) ? true : $users->setRol($data['rol']);
         
 

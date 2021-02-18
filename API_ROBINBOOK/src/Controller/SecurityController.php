@@ -15,11 +15,22 @@ class SecurityController extends AbstractController
      */
     public function login(Request $request)
     {
-        $user = $this->getUser();
+        $data=json_decode($request->getContent(), true);;
+        $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
 
-        return $this->json([
-            'username' => $user->getEmail(),
-            'password' => $user->getPassword(),
-        ]);
+        $userss = $this->UsersRepository->findAll();
+        $data =[];
+
+        /* foreach ($userss as $users) {
+            if (password_verify($users->getPassword(), $data['password']) {
+                new JsonResponse(['status'=>'Logged Succesfull'], Response::HTTP_OK);
+            } else {
+                return new JsonResponse(['status'=>'Login error'], Response::HTTP_OK);
+            }
+            
+                
+            ];
+        } */
+        
     }
 }
