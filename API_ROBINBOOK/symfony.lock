@@ -106,7 +106,7 @@
         "version": "v4.10.4"
     },
     "php": {
-        "version": "7.4"
+        "version": "8.0"
     },
     "psr/cache": {
         "version": "1.0.1"
