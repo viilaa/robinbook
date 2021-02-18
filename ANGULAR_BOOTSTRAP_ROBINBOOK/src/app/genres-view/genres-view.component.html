@@ -1,1 +1,92 @@
-<p>genres-view works!</p>
+<div class="background">
+    <div class="row-fluid">
+        <p-carousel [value]="booksAdventure" [numVisible]="7" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptions">
+            <ng-template pTemplate="header">
+                <h2 style="margin-left:3%; color:white;">Adventure</h2>
+            </ng-template>
+            <ng-template let-book pTemplate="item">
+                <div class="container-portadas">
+                    <a href="#" class="linkImg"><img src="{{book.cover_page}}" alt=""></a>
+                </div>
+            </ng-template>
+        </p-carousel>
+    </div>
+
+    <div class="row-fluid">
+        <p-carousel [value]="booksScienceFiction" [numVisible]="7" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptions">
+            <ng-template pTemplate="header">
+                <h2 style="margin-left:3%; color:white;">Science-Fiction</h2>
+            </ng-template>
+            <ng-template let-book pTemplate="item">
+                <div class="container-portadas">
+                    <a href="#" class="linkImg"><img src="{{book.cover_page}}" alt=""></a>
+                </div>
+            </ng-template>
+        </p-carousel>
+    </div>
+
+    <div class="row-fluid">
+        <p-carousel [value]="booksFantasy" [numVisible]="7" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptions">
+            <ng-template pTemplate="header">
+                <h2 style="margin-left:3%; color:white;">Fantasy</h2>
+            </ng-template>
+            <ng-template let-book pTemplate="item">
+                <div class="container-portadas">
+                    <a href="#" class="linkImg"><img src="{{book.cover_page}}" alt=""></a>
+                </div>
+            </ng-template>
+        </p-carousel>
+    </div>
+
+    <div class="row-fluid">
+        <p-carousel [value]="booksErotic" [numVisible]="7" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptions">
+            <ng-template pTemplate="header">
+                <h2 style="margin-left:3%; color:white;">Erotic</h2>
+            </ng-template>
+            <ng-template let-book pTemplate="item">
+                <div class="container-portadas">
+                    <a href="#" class="linkImg"><img src="{{book.cover_page}}" alt=""></a>
+                </div>
+            </ng-template>
+        </p-carousel>
+    </div>
+
+    <div class="row-fluid">
+        <p-carousel [value]="booksRomance" [numVisible]="7" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptions">
+            <ng-template pTemplate="header">
+                <h2 style="margin-left:3%; color:white;">Romance</h2>
+            </ng-template>
+            <ng-template let-book pTemplate="item">
+                <div class="container-portadas">
+                    <a href="#" class="linkImg"><img src="{{book.cover_page}}" alt=""></a>
+                </div>
+            </ng-template>
+        </p-carousel>
+    </div>
+
+    <div class="row-fluid">
+        <p-carousel [value]="booksPolice" [numVisible]="7" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptions">
+            <ng-template pTemplate="header">
+                <h2 style="margin-left:3%; color:white;">Police</h2>
+            </ng-template>
+            <ng-template let-book pTemplate="item">
+                <div class="container-portadas">
+                    <a href="#" class="linkImg"><img src="{{book.cover_page}}" alt=""></a>
+                </div>
+            </ng-template>
+        </p-carousel>
+    </div>
+
+    <div class="row-fluid">
+        <p-carousel [value]="booksTerror" [numVisible]="7" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptions">
+            <ng-template pTemplate="header">
+                <h2 style="margin-left:3%; color:white;">Terror</h2>
+            </ng-template>
+            <ng-template let-book pTemplate="item">
+                <div class="container-portadas">
+                    <a href="#" class="linkImg"><img src="{{book.cover_page}}" alt=""></a>
+                </div>
+            </ng-template>
+        </p-carousel>
+    </div>
+</div>

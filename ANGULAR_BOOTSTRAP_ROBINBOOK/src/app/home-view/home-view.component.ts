@@ -12,11 +12,11 @@ export class HomeViewComponent implements OnInit {
 
   books= <any>[];
   responsiveOptions: any;
-  url="";
 
   constructor(/*private Books: BooksService,*/ private httpClient: HttpClient) {
     this.httpClient.get('https://localhost:8000/books').subscribe(response => {
       this.books = response;
+      // this.books.cover_page= IMG_BASE_URL + this.books.cover_page;
       console.log(this.books);
     });
 
@@ -40,14 +40,6 @@ export class HomeViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    /* EJEMPLO DE LA PAGINA WEB DE PRIMENG, LLAMAR A UNA FUNCION DEL SERVICE Y TRABAJAR CON LO QUE NOS DEVUELVE */
-    // this.BooksService.nameFunctionHere().then(books => {
-    //   this.books/*(Variable declarada)*/= books /*(Argumento dentro del "then")*/;
-    // });
-  }
-
-  callImg(_url: string){
-
   }
 
 }

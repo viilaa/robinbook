@@ -21,3 +21,7 @@
     background-color: #00830C;
     border: 0;
 }
+
+.dropdown-item:hover {
+    background-color: transparent;
+}
