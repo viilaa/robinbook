@@ -29,6 +29,16 @@ class User implements UserInterface
     private $roles = [];
 
     /**
+     * @ORM\Column(type="string", length=9, nullable=true)
+     */
+    private $dni;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $email;
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $name;
@@ -41,22 +51,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $surname2;
-
-    /**
-     * @ORM\Column(type="string", length=9, nullable=true)
-     */
-    private $dni;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $email;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $date_of_birth;
+    private $password;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -64,9 +59,14 @@ class User implements UserInterface
     private $release_date;
 
     /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $date_of_birth;
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $password;
+    private $surname2;
 
     public function getId(): ?int
     {
@@ -116,7 +116,7 @@ class User implements UserInterface
      */
     public function getPassword(): ?string
     {
-        return null;
+        return $this->password;
     }
 
     /**
@@ -136,42 +136,6 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(?string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    public function getSurname1(): ?string
-    {
-        return $this->surname1;
-    }
-
-    public function setSurname1(?string $surname1): self
-    {
-        $this->surname1 = $surname1;
-
-        return $this;
-    }
-
-    public function getSurname2(): ?string
-    {
-        return $this->surname2;
-    }
-
-    public function setSurname2(?string $surname2): self
-    {
-        $this->surname2 = $surname2;
-
-        return $this;
     }
 
     public function getDni(): ?string
@@ -198,14 +162,34 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getDateOfBirth(): ?\DateTimeInterface
+    public function getName(): ?string
     {
-        return $this->date_of_birth;
+        return $this->name;
     }
 
-    public function setDateOfBirth(?\DateTimeInterface $date_of_birth): self
+    public function setName(?string $name): self
     {
-        $this->date_of_birth = $date_of_birth;
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getSurname1(): ?string
+    {
+        return $this->surname1;
+    }
+
+    public function setSurname1(?string $surname1): self
+    {
+        $this->surname1 = $surname1;
+
+        return $this;
+    }
+
+    public function setPassword(?string $password): self
+    {
+        $this->password = $password;
+        
 
         return $this;
     }
@@ -222,9 +206,26 @@ class User implements UserInterface
         return $this;
     }
 
-    public function setPassword(?string $password): self
+    public function getDateOfBirth(): ?\DateTimeInterface
     {
-        $this->password = $password;
+        return $this->date_of_birth;
+    }
+
+    public function setDateOfBirth(?\DateTimeInterface $date_of_birth): self
+    {
+        $this->date_of_birth = $date_of_birth;
+
+        return $this;
+    }
+
+    public function getSurname2(): ?string
+    {
+        return $this->surname2;
+    }
+
+    public function setSurname2(?string $surname2): self
+    {
+        $this->surname2 = $surname2;
 
         return $this;
     }

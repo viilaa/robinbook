@@ -25,7 +25,7 @@ class UsersController extends AbstractController
         $this->UsersRepository = $UsersRepository; 
     }
         /**
-     * @Route("/users", name="add_users",methods={"POST"})
+     * @Route("/aux/users", name="add_users",methods={"POST"})
      */
     public function add(Request $request/* ,UserPasswordEncoderInterface $encoder, UserInterface $user */): JsonResponse
 
@@ -55,7 +55,7 @@ class UsersController extends AbstractController
 
     }
     /**
-     * @Route("/users/{id}", name="get_one_users", methods={"GET"})
+     * @Route("/aux/users/{id}", name="get_one_users", methods={"GET"})
      */
     public function get($id): JsonResponse
 
@@ -78,7 +78,7 @@ class UsersController extends AbstractController
             return new JsonResponse($data, Response::HTTP_OK);
     }
     /**
-     * @Route("/users/", name="get_all_users", methods={"GET"})
+     * @Route("/aux/users/", name="get_all_users", methods={"GET"})
      */
     public function getAll(): JsonResponse
 
@@ -103,7 +103,7 @@ class UsersController extends AbstractController
         return new JsonResponse($data, Response::HTTP_OK);
     }
     /**
-     * @Route("/users/{id}", name="update_users", methods={"PUT"})
+     * @Route("/aux/users/{id}", name="update_users", methods={"PUT"})
      */
     public function update($id, Request $request): JsonResponse
     {
@@ -128,7 +128,7 @@ class UsersController extends AbstractController
     }
 
     /**
-     * @Route("/users/{id}", name="delete_users", methods={"DELETE"})
+     * @Route("/aux/users/{id}", name="delete_users", methods={"DELETE"})
      */
     public function delete($id): JsonResponse
     

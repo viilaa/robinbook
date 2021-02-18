@@ -5,6 +5,8 @@ namespace App\Repository;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManagerInterface;
+
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,9 +16,75 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class UserRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry,EntityManagerInterface $manager)
     {
         parent::__construct($registry, User::class);
+        $this->manager= $manager;
+        
+    }
+    public function saveUser($data)    
+
+    {
+         $newUser = new User();
+   
+        $newUser
+            ->setUsername($data['username'])
+            ->setName($data['name'])
+            ->setSurname1($data['surname1'])
+            ->setSurname2($data['surname2'])
+            ->setDni($data['dni'])
+            ->setDateOfBirth(\DateTime::createFromFormat('Y-m-d', $data['date_of_birth']))
+            ->setEmail($data['email'])
+            ->setReleaseDate(\DateTime::createFromFormat('Y-m-d', $data['release_date']))
+            ->setPassword( $data['password']);
+
+        $this->manager->persist($newUser);
+        $this->manager->flush();
+
+    }  
+      /**
+     * Used to upgrade (rehash) the user's password automatically over time.($this->passwordEncoder->encodePassword($user,)$this->passwordEncoder=$passwordEncoder;UserPasswordEncoderInterface  $passwordEncoder
+     */
+    /* public function upgradePassword(UserInterface $user, string $newEncodedPassword): void
+    {
+        if (!$user instanceof User) {
+            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($user)));
+        }
+
+        $user->setPassword($newEncodedPassword);
+        $this->_em->persist($user);
+        $this->_em->flush();
+    } */
+
+    public function updateUser(User $User):User
+    
+    {
+
+        $this->manager->persist($User);
+        $this->manager->flush();
+
+        return $User;
+    } 
+
+    public function removeUser(User $User):User
+    
+    {
+        $this->manager->remove($User);
+        $this->manager->flush();
+
+        return $User;
+    }
+
+    public function findByRead($BookRead)
+    {
+        return  $this->getEntityManager()
+        ->createQuery(
+            'SELECT b 
+            FROM App\Entity\book b 
+            INNER JOIN App\Entity\user u
+            ON b.id=u.id'
+        );
+   
     }
 
     // /**
