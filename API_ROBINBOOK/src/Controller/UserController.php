@@ -96,7 +96,7 @@ class UserController extends AbstractController
         $user = $this->UserRepository->findOneBy(['id' => $id]);
         $data = json_decode($request->getContent(), true);
         
-        empty($data['username']) ? true : $user->setName ($data['username']);
+        empty($data['username']) ? true : $user->setUsername ($data['username']);
         empty($data['name']) ? true : $user->setName ($data['name']);
         empty($data['surname1']) ? true : $user->setSurname1($data['surname1']);
         empty($data['surname2']) ? true : $user->setSurname2($data['surname2']);
