@@ -19,6 +19,8 @@ return [
         '/users' => [
             [['_route' => 'add_user', '_controller' => 'App\\Controller\\UserController::add'], null, ['POST' => 0], null, false, false, null],
             [['_route' => 'get_all_user', '_controller' => 'App\\Controller\\UserController::getAll'], null, ['GET' => 0], null, true, false, null],
+        ],
+        '/aux/users' => [
             [['_route' => 'add_users', '_controller' => 'App\\Controller\\UsersController::add'], null, ['POST' => 0], null, false, false, null],
             [['_route' => 'get_all_users', '_controller' => 'App\\Controller\\UsersController::getAll'], null, ['GET' => 0], null, true, false, null],
         ],
@@ -45,6 +47,9 @@ return [
                 .')'
                 .'|/users/([^/]++)(?'
                     .'|(*:234)'
+                .')'
+                .'|/aux/users/([^/]++)(?'
+                    .'|(*:265)'
                 .')'
             .')/?$}sDu',
     ],
@@ -73,6 +78,8 @@ return [
             [['_route' => 'get_one_user', '_controller' => 'App\\Controller\\UserController::get'], ['id'], ['GET' => 0], null, false, true, null],
             [['_route' => 'update_user', '_controller' => 'App\\Controller\\UserController::update'], ['id'], ['PUT' => 0], null, false, true, null],
             [['_route' => 'delete_user', '_controller' => 'App\\Controller\\UserController::delete'], ['id'], ['DELETE' => 0], null, false, true, null],
+        ],
+        265 => [
             [['_route' => 'get_one_users', '_controller' => 'App\\Controller\\UsersController::get'], ['id'], ['GET' => 0], null, false, true, null],
             [['_route' => 'update_users', '_controller' => 'App\\Controller\\UsersController::update'], ['id'], ['PUT' => 0], null, false, true, null],
             [['_route' => 'delete_users', '_controller' => 'App\\Controller\\UsersController::delete'], ['id'], ['DELETE' => 0], null, false, true, null],

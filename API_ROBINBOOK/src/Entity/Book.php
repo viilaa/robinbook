@@ -55,9 +55,9 @@ class Book
     private $title;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Users::class, mappedBy="book")
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="book")
      */
-    private $users;
+    private $user;
 
     /**
      * @ORM\ManyToMany(targetEntity=Genre::class, inversedBy="books")

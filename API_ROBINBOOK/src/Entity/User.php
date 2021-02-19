@@ -68,6 +68,11 @@ class User implements UserInterface
      */
     private $surname2;
 
+     /**
+     * @ORM\ManyToMany(targetEntity=Book::class, inversedBy="user")
+     */
+    private $book;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -226,6 +231,18 @@ class User implements UserInterface
     public function setSurname2(?string $surname2): self
     {
         $this->surname2 = $surname2;
+
+        return $this;
+    }
+
+    public function getBook(): ?string
+    {
+        return $this->book;
+    }
+
+    public function setBook(string $book): self
+    {
+        $this->book = $book;
 
         return $this;
     }
