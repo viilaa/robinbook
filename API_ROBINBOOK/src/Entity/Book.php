@@ -54,11 +54,7 @@ class Book
      */
     private $title;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="book")
-     */
-    private $user;
-
+   
     /**
      * @ORM\ManyToMany(targetEntity=Genre::class, inversedBy="books")
      */
@@ -68,6 +64,11 @@ class Book
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $public_date;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="book")
+     */
+    private $users;
   
 
     public function __construct()
@@ -165,32 +166,7 @@ class Book
         return $this;
     }
 
-    /**
-     * @return Collection|Users[]
-     */
-    public function getUsers(): Collection
-    {
-        return $this->users;
-    }
-
-    public function addUser(Users $user): self
-    {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
-            $user->addBook($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUser(Users $user): self
-    {
-        if ($this->users->removeElement($user)) {
-            $user->removeBook($this);
-        }
-
-        return $this;
-    }
+   
 
     /**
      * @return Collection|Genre[]
@@ -236,6 +212,33 @@ class Book
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addBook($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeBook($this);
+        }
 
         return $this;
     }

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -68,10 +70,17 @@ class User implements UserInterface
      */
     private $surname2;
 
-     /**
-     * @ORM\ManyToMany(targetEntity=Book::class, inversedBy="user")
+    /**
+     * @ORM\ManyToMany(targetEntity=Book::class, inversedBy="users")
      */
     private $book;
+
+    public function __construct()
+    {
+        $this->book = new ArrayCollection();
+    }
+
+   
 
     public function getId(): ?int
     {
@@ -235,15 +244,29 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getBook(): ?string
+    /**
+     * @return Collection|Book[]
+     */
+    public function getBook(): Collection
     {
         return $this->book;
     }
 
-    public function setBook(string $book): self
+    public function addBook(Book $book): self
     {
-        $this->book = $book;
+        if (!$this->book->contains($book)) {
+            $this->book[] = $book;
+        }
 
         return $this;
     }
+
+    public function removeBook(Book $book): self
+    {
+        $this->book->removeElement($book);
+
+        return $this;
+    }
+
+   
 }
