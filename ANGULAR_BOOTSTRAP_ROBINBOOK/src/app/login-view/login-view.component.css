@@ -21,6 +21,7 @@ h1 {
     background-color: rgba(0, 0, 0, .75);
     color: #fff;
     padding: 7% 13%;
+    border-radius: 9px;
 }
 
 .p-float-label {

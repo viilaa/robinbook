@@ -7,6 +7,9 @@ import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputMaskModule } from 'primeng/inputmask';
+import { DialogModule } from 'primeng/dialog';
+import { FormsModule } from '@angular/forms';
+import { DropdownModule } from 'primeng/dropdown';
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -56,6 +59,9 @@ import { SiteLayoutComponent } from './_layout/site-layout/site-layout.component
     CheckboxModule,
     InputMaskModule,
     HttpClientModule,
+    DialogModule,
+    FormsModule,
+    DropdownModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -53,16 +53,6 @@
 
 /* Tamaño de la imagen al pasar el ratón */
 
-.container-portadas:focus-within .linkImg,
-.container-portadas:hover .linkImg {
-    transform: translateX(-25%);
-}
-
-.linkImg:focus~.linkImg,
-.linkImg:hover~.linkImg {
-    transform: translateX(25%);
-}
-
 .container-portadas .linkImg:focus,
 .container-portadas .linkImg:hover {
     -moz-transform: scale(1.1);

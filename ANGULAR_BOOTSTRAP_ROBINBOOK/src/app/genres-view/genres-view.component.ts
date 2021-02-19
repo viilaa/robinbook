@@ -8,6 +8,9 @@ import { HttpClient } from '@angular/common/http';
 })
 export class GenresViewComponent implements OnInit {
 
+  genres= <any>[];
+  selectedGenre:any;
+
   booksAdventure = <any>[];
   booksScienceFiction = <any>[];
   booksFantasy = <any>[];
@@ -18,6 +21,17 @@ export class GenresViewComponent implements OnInit {
   responsiveOptions: any;
 
   constructor(private httpClient: HttpClient) { 
+    this.genres = [
+      { name: 'Genres'},
+      { name: 'Adventure'},
+      { name: 'Science-Fiction'},
+      { name: 'Fantasy'},
+      { name: 'Erotic'},
+      { name: 'Romance'},
+      { name: 'Police'},
+      { name: 'Terror'}
+    ];
+
     this.httpClient.get('https://localhost:8000/findGenres/1').subscribe(response => {
       this.booksAdventure = response;
       // this.books.cover_page= IMG_BASE_URL + this.books.cover_page;

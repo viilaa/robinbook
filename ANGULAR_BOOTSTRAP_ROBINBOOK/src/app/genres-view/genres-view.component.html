@@ -1,6 +1,24 @@
 <div class="background">
     <div class="row-fluid">
-        <p-carousel [value]="booksAdventure" [numVisible]="7" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptions">
+        <div class="dropdown">
+            <span style="margin-left:3%; color:white; font-size: 2.5em;">Novels</span>
+            <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" style="background-color: #050505; font-size: 2.5ex; color: white; margin-bottom: 1.5%; margin-left: 1.5%; border: 1px solid white; opacity: .95;">
+                <span class="caret">Genres</span>
+            </button>
+            <ul class="dropdown-menu" style="background-color:#050505; opacity: .8; border: 1px solid white; padding: 1% 1%;">
+                <li><a href="#" style="color: white; font-size: 1.5em; padding: 0 0.5%;">Adventure</a></li>
+                <li><a href="#" style="color: white; font-size: 1.5em; padding: 0 0.5%;">Sci-Fi</a></li>
+                <li><a href="#" style="color: white; font-size: 1.5em; padding: 0 0.5%;">Fantasy</a></li>
+                <li><a href="#" style="color: white; font-size: 1.5em; padding: 0 0.5%;">Erotic</a></li>
+                <li><a href="#" style="color: white; font-size: 1.5em; padding: 0 0.5%;">Romance</a></li>
+                <li><a href="#" style="color: white; font-size: 1.5em; padding: 0 0.5%;">Police</a></li>
+                <li><a href="#" style="color: white; font-size: 1.5em; padding: 0 0.5%;">Terror</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row-fluid">
+        <p-carousel [value]="booksAdventure" [numVisible]="6" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptions">
             <ng-template pTemplate="header">
                 <h2 style="margin-left:3%; color:white;">Adventure</h2>
             </ng-template>
@@ -13,7 +31,7 @@
     </div>
 
     <div class="row-fluid">
-        <p-carousel [value]="booksScienceFiction" [numVisible]="7" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptions">
+        <p-carousel [value]="booksScienceFiction" [numVisible]="6" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptions">
             <ng-template pTemplate="header">
                 <h2 style="margin-left:3%; color:white;">Science-Fiction</h2>
             </ng-template>
@@ -26,7 +44,7 @@
     </div>
 
     <div class="row-fluid">
-        <p-carousel [value]="booksFantasy" [numVisible]="7" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptions">
+        <p-carousel [value]="booksFantasy" [numVisible]="6" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptions">
             <ng-template pTemplate="header">
                 <h2 style="margin-left:3%; color:white;">Fantasy</h2>
             </ng-template>
@@ -39,7 +57,7 @@
     </div>
 
     <div class="row-fluid">
-        <p-carousel [value]="booksErotic" [numVisible]="7" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptions">
+        <p-carousel [value]="booksErotic" [numVisible]="6" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptions">
             <ng-template pTemplate="header">
                 <h2 style="margin-left:3%; color:white;">Erotic</h2>
             </ng-template>
@@ -52,7 +70,7 @@
     </div>
 
     <div class="row-fluid">
-        <p-carousel [value]="booksRomance" [numVisible]="7" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptions">
+        <p-carousel [value]="booksRomance" [numVisible]="6" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptions">
             <ng-template pTemplate="header">
                 <h2 style="margin-left:3%; color:white;">Romance</h2>
             </ng-template>
@@ -65,7 +83,7 @@
     </div>
 
     <div class="row-fluid">
-        <p-carousel [value]="booksPolice" [numVisible]="7" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptions">
+        <p-carousel [value]="booksPolice" [numVisible]="6" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptions">
             <ng-template pTemplate="header">
                 <h2 style="margin-left:3%; color:white;">Police</h2>
             </ng-template>
@@ -78,7 +96,7 @@
     </div>
 
     <div class="row-fluid">
-        <p-carousel [value]="booksTerror" [numVisible]="7" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptions">
+        <p-carousel [value]="booksTerror" [numVisible]="6" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptions">
             <ng-template pTemplate="header">
                 <h2 style="margin-left:3%; color:white;">Terror</h2>
             </ng-template>
