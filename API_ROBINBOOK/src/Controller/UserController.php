@@ -139,7 +139,7 @@ class UserController extends AbstractController
         $relation=[];
         foreach ($relations as $rel) {
             array_push($relation,[ 
-                 'id'=> $rel->getId(),
+                'id'=> $rel->getId(),
                 'cover_page'=>$rel->getCoverPage(),
                 ]);
         }

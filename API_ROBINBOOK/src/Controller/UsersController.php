@@ -140,30 +140,4 @@ class UsersController extends AbstractController
         return new JsonResponse(['status'=> 'users delete'], Response::HTTP_OK);
     }
 
-      /**
-     * @Route("/findbookRead/{BookRead}", name="get_all_findbookRead", methods={"GET"})
-     */
-    public function findByRead($BookRead): JsonResponse
-
-    {
-        $users = $this->getDoctrine()->getRepository(Users::class)->find($BookRead);
-        $data =[];
-
-        $relations = $users->getBook();
-        $relation=[];
-        foreach ($relations as $rel) {
-            array_push($relation,[ 
-                 'id'=> $rel->getId(),
-                'cover_page'=>$rel->getCoverPage(),
-                ]);
-        }
-        array_push($data,[ 
-            'id'=> $users->getId(),
-            'name'=>$users->getName(),
-            'books'=>$relation
-        ]);
-
-        return new JsonResponse($relation, Response::HTTP_OK);
-    }
-
 }

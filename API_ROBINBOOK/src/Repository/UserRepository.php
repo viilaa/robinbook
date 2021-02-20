@@ -81,8 +81,10 @@ class UserRepository extends ServiceEntityRepository
         ->createQuery(
             'SELECT b 
             FROM App\Entity\book b 
-            INNER JOIN App\Entity\user u
-            ON b.id=u.id'
+            INNER JOIN  user_book c
+            ON b.id=c.id
+            INNER JOIN App\Entity\user u 
+            ON c.id=u.id'
         );
    
     }
