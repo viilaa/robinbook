@@ -143,6 +143,7 @@ class UserController extends AbstractController
                 'cover_page'=>$rel->getCoverPage(),
                 ]);
         }
+        
         array_push($data,[ 
             'id'=> $user->getId(),
             'name'=>$user->getName(),
