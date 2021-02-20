@@ -16,6 +16,6 @@ if (!\class_exists(App_KernelDevDebugContainer::class, false)) {
 
 return new \ContainerPOKhGRE\App_KernelDevDebugContainer([
     'container.build_hash' => 'POKhGRE',
-    'container.build_id' => '385e616c',
-    'container.build_time' => 1613844557,
+    'container.build_id' => 'e1d3243a',
+    'container.build_time' => 1613847825,
 ], __DIR__.\DIRECTORY_SEPARATOR.'ContainerPOKhGRE');
