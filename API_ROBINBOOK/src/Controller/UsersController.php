@@ -139,5 +139,4 @@ class UsersController extends AbstractController
 
         return new JsonResponse(['status'=> 'users delete'], Response::HTTP_OK);
     }
-
 }
