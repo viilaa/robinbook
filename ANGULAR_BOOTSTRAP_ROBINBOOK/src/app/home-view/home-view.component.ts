@@ -12,6 +12,9 @@ export class HomeViewComponent implements OnInit {
 
   books= <any>[];
   responsiveOptions: any;
+  bookDetails = <any>[];
+
+  displayBasic: boolean = false;
 
   constructor(/*private Books: BooksService,*/ private httpClient: HttpClient) {
     this.httpClient.get('https://localhost:8000/books').subscribe(response => {
@@ -40,6 +43,16 @@ export class HomeViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  showDetailsBook(_bookID: any) {
+    this.displayBasic = true;
+    console.log(_bookID);
+    this.httpClient.get('https://localhost:8000/book/' + _bookID).subscribe(response => {
+      this.bookDetails = response;
+      // this.books.cover_page= IMG_BASE_URL + this.books.cover_page;
+      console.log(this.bookDetails);
+    });
   }
 
 }

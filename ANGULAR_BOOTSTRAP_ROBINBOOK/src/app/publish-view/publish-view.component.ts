@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PublishViewComponent implements OnInit {
 
-  constructor() { }
+  newBook = { name: "", firstSurname: "", secondSurname: "", birthday: "01/01/1998", idCard: "", email: "", password: "", role: "" };
+
+  constructor(private httpClient: HttpClient) { }
 
   ngOnInit(): void {
   }

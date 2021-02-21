@@ -10,6 +10,8 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { DialogModule } from 'primeng/dialog';
 import { FormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DataViewModule } from 'primeng/dataview';
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -25,10 +27,10 @@ import { PublishViewComponent } from './publish-view/publish-view.component';
 import { AdminViewComponent } from './admin-view/admin-view.component';
 import { PageNotFoundViewComponent } from './page-not-found-view/page-not-found-view.component';
 import { ContactViewComponent } from './contact-view/contact-view.component';
-import { LayoutViewComponent } from './layout-view/layout-view.component';
 import { SiteHeaderComponent } from './_layout/site-header/site-header.component';
 import { SiteFooterComponent } from './_layout/site-footer/site-footer.component';
 import { SiteLayoutComponent } from './_layout/site-layout/site-layout.component';
+import { SearchResultsViewComponent } from './search-results-view/search-results-view.component';
 
 @NgModule({
   declarations: [
@@ -43,10 +45,10 @@ import { SiteLayoutComponent } from './_layout/site-layout/site-layout.component
     AdminViewComponent,
     PageNotFoundViewComponent,
     ContactViewComponent,
-    LayoutViewComponent,
     SiteHeaderComponent,
     SiteFooterComponent,
     SiteLayoutComponent,
+    SearchResultsViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,7 +63,9 @@ import { SiteLayoutComponent } from './_layout/site-layout/site-layout.component
     HttpClientModule,
     DialogModule,
     FormsModule,
-    DropdownModule
+    DropdownModule,
+    BrowserAnimationsModule,
+    DataViewModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +9,7 @@ export class AppComponent {
   title = 'RobinBook';
   isLoggin = true;
 
-  constructor(private Route:ActivatedRoute){}
+  constructor(){}
 
   handleLogin = () =>{
     this.isLoggin = !this.isLoggin;

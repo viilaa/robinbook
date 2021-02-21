@@ -1,0 +1,21 @@
+<div class="background">
+    <p-dataView #dv [value]="results" [rows]="9" layout="grid" style="background-color: #141414 !important;">
+        <ng-template pTemplate="header" style="background-color: #141414 !important;">
+            <h2 style="margin-left:3%; color:white;">Results of '{{word}}'</h2>
+        </ng-template>
+        <ng-template let-book pTemplate="gridItem" style="background-color: #141414 !important;">
+            <div class="container-portadas">
+                <a href="#" class="linkImg">
+                    <img src="https://robinimg.s3.us-east-2.amazonaws.com/{{book.cover_page}}" alt="">
+                </a>
+            </div>
+            <div class="buttons" style="display: flex; flex-direction: row; align-items: flex-end; justify-content: center;">
+                <p-button type="button" styleClass="p-button-secondary p-button-rounded p-mr-2" icon="pi pi-play"></p-button>
+                <p-button type="button" styleClass="p-button-secondary p-button-rounded p-mr-2" icon="pi pi-plus-circle"></p-button>
+                <p-button type="button" styleClass="p-button-secondary p-button-rounded p-mr-2" icon="pi pi-thumbs-up"></p-button>
+                <p-button type="button" styleClass="p-button-secondary p-button-rounded p-mr-2" icon="pi pi-thumbs-down"></p-button>
+                <p-button type="button" styleClass="p-button-secondary p-button-rounded" icon="pi pi-info-circle "></p-button>
+            </div>
+        </ng-template>
+    </p-dataView>
+</div>

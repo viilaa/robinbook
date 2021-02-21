@@ -11,6 +11,7 @@ import { AdminViewComponent } from './admin-view/admin-view.component';
 import { PageNotFoundViewComponent } from './page-not-found-view/page-not-found-view.component';
 import { ContactViewComponent } from './contact-view/contact-view.component';
 import { SiteLayoutComponent } from './_layout/site-layout/site-layout.component';
+import { SearchResultsViewComponent } from './search-results-view/search-results-view.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginViewComponent },
@@ -24,6 +25,7 @@ const routes: Routes = [
     { path: 'publish', component: PublishViewComponent },
     { path: 'admin', component: AdminViewComponent },
     { path: 'contact', component: ContactViewComponent },
+    { path: 'results/:word', component: SearchResultsViewComponent },
   ]
 },
 { path: '**', component: PageNotFoundViewComponent },

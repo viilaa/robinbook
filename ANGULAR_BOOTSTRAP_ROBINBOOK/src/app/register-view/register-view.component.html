@@ -6,23 +6,19 @@
     <form>
         <h3>User information</h3>
         <span class="p-float-label ">
-            <input type="text " name="name" pInputText required/>
+            <input type="text " name="name" pInputText required (change)="setName($event)"/>
             <label for="float-input ">NAME</label>
         </span>
         <span class="p-float-label ">
-            <input type="text " name="surname1" pInputText required/>
+            <input type="text " name="surname1" pInputText required (change)="setFirstSurname($event)"/>
             <label for="float-input ">FIRST SURNAME</label>
         </span>
         <span class="p-float-label ">
-            <input type="text " name="surname2" pInputText required/>
+            <input type="text " name="surname2" pInputText required (change)="setSecondSurname($event)"/>
             <label for="float-input ">SECOND SURNAME</label>
         </span>
         <span class="p-float-label ">
-            <p-inputMask formControlName="date_birth" mask="99/99/9999"></p-inputMask>
-            <label for="float-inputMask">BIRTHDAY</label>
-        </span>
-        <span class="p-float-label ">
-            <input type="text " name="id_card" pInputText required/>
+            <input type="text " name="id_card" pInputText required (change)="setIdCard($event)"/>
             <label for="float-input ">ID CARD</label>
         </span>
 
@@ -30,16 +26,12 @@
 
         <h3>Login Information</h3>
         <span class="p-float-label ">
-            <input type="email " name="email" pInputText required/>
+            <input type="email " name="email" pInputText required (change)="setEmail($event)"/>
             <label for="float-input ">EMAIL</label>
         </span>
         <span class="p-float-label ">
-            <input type="password " name="password" pPassword required/>
+            <input type="password " name="password" pPassword required (change)="setPassword($event)"/>
             <label for="float-input ">PASSWORD</label>
-        </span>
-        <span class="p-float-label ">
-            <input type="password " name="confirm_password" pPassword required/>
-            <label for="float-input ">CONFIRM PASSWORD</label>
         </span>
 
         <hr style="background-color: white; margin-left: -7%;">
@@ -53,7 +45,7 @@
         </p>
 
         <div class="submit-container " style="margin-top: 3%;">
-            <button pripple=" " type="button " class="p-button p-component p-ripple" style=" background-color: #00830C; border-color: transparent;">
+            <button pripple=" " type="button" (click)="registerNewUser(newUser)" class="p-button p-component p-ripple" style="background-color: #00830C; border-color: transparent;">
                 <span class="p-button-label ">REGISTER</span>
                 <span class="p-ink "></span>
             </button>
