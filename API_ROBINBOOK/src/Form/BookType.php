@@ -14,21 +14,19 @@ class BookType extends AbstractType
     {
         $builder
             ->add('age_classification')
-            ->add('cover_page',FileType::class, array('label' => 'Cover page (JPG file)'))
+            ->add('cover_page',FileType::class,['label' => 'Cover page (JPG file)'])
             ->add('illustrations')
-            ->add('pdf', FileType::class, array('label' => 'Book (PDF file)'))
+            ->add('pdf', FileType::class,['label' => 'Book (PDF file)'])
             ->add('release_date')
             ->add('synopsis')
             ->add('title')
-            ->add('public_date')
-            ->add('users')
-            ->add('Genre');
+            /* ->add('public_date') */;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'App\Entity\Book','methods'=>'POST'
-        ));
+        $resolver->setDefaults([
+            'data_class' => Book::class,
+        ]);
     }
 }

@@ -44,7 +44,6 @@ class ContactController extends AbstractController
         $Contact = $this->ContactRepository->findOneBy(['id'=>$id]);
             $data[] = [
 
-                'id'=>$Contact->getId(),
                 'name'=>$Contact->getName(),
                 'surname1'=>$Contact->getSurname1(),
                 'surname2'=>$Contact->getSurname2(),

@@ -28,15 +28,6 @@ class BookController extends AbstractController
     {
         $data=json_decode($request->getContent(), true);
 
-        /* $age_classification = $data['age_classification'];
-        $cover_page = $data['cover_page'];
-        $illustrations = $data['illustrations'];
-        $pdf = $data['pdf'];
-        $release_date = $data['release_date'];
-        $synopsis = $data['synopsis'];
-        $title = $data['title']; */
-
-        
         $this ->BookRepository->savebook($data);
         return new JsonResponse(['status'=>'book created'], Response::HTTP_CREATED);
 
@@ -125,7 +116,7 @@ class BookController extends AbstractController
     {
         $newFile = new Book();
         $form = $this->createForm(BookType::class, $newFile);
-        $form->handleRequest($request);
+        $form->handleRequest($request); 
         $response=[$form->isSubmitted()];
 
         if($form->isSubmitted() && $form->isValid())
@@ -149,7 +140,7 @@ class BookController extends AbstractController
             // en lugar de sus contenidos
             $newFile->setPdf($PdfName);
            /*  $newFile->setCoverPage($CoverPageName); */
-            $response=['fichero envido'];
+            $response=['fichero enviado'];
 
             
         } // ... persist la variable $usuario o cualquier otra tarea
