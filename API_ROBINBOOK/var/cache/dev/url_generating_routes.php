@@ -9,7 +9,7 @@ return [
     'get_all_book' => [[], ['_controller' => 'App\\Controller\\BookController::getAll'], [], [['text', '/books']], [], []],
     'update_book' => [['id'], ['_controller' => 'App\\Controller\\BookController::update'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/book']], [], []],
     'delete_book' => [['id'], ['_controller' => 'App\\Controller\\BookController::delete'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/book']], [], []],
-    'add_new_pdf' => [[], ['_controller' => 'App\\Controller\\BookController::newAction'], [], [['text', '/book/new']], [], []],
+    'add_book_new' => [[], ['_controller' => 'App\\Controller\\BookController::newAction'], [], [['text', '/book/new']], [], []],
     'get_all_findBooks' => [['word'], ['_controller' => 'App\\Controller\\BookController::findBySearch'], [], [['variable', '/', '[^/]++', 'word', true], ['text', '/findBooks']], [], []],
     'add_Contact' => [[], ['_controller' => 'App\\Controller\\ContactController::add'], [], [['text', '/contact']], [], []],
     'get_one_Contact' => [['id'], ['_controller' => 'App\\Controller\\ContactController::get'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/contact']], [], []],

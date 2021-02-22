@@ -113,19 +113,22 @@ class BookController extends AbstractController
     }
 
     /**
-     * @Route("/book/new", name="add_new_pdf", methods={"POST"})
+     * @Route("/book/new", name="add_book_new", methods={"POST"})
      */
     public function newAction(Request $request,SluggerInterface $slugger): JsonResponse
     {
         $newBook = new Book();
         $form = $this->createForm(BookType::class, $newBook );
         $form->handleRequest($request); 
-        $respuesta = $form->isSubmitted();
+        
+        $respuesta = $form->isSubmitted(). "-" . $form->isValid();
 
         if($form->isSubmitted())
         {
             $brochureFile = $form->get('upload')->getData(); 
-            if ($brochureFile) {
+
+            if ($brochureFile) 
+            {
                 $originalFilename = pathinfo($brochureFile->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFilename = $slugger->slug($originalFilename);
                 $newFilename = $safeFilename.'-'.uniqid().'.'.$brochureFile->guessExtension();
@@ -135,7 +138,7 @@ class BookController extends AbstractController
                         $this->getParameter('brochures_directory'),
                         $newFilename
                     );
-                    $respuesta = "Fichero subido con éxito";
+                    $respuesta = "Fichero subido con exito";
                 } catch (FileException $e) {
                     // ... handle exception if something happens during file upload
                     $respuesta = $e->getMessage();;

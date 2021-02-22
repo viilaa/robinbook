@@ -822,7 +822,7 @@ return [[
 
 0 => 'N;',
 1 => [],
-2 => 1614006740,
+2 => 1614023620,
 3 => static function () {
     return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
         $o = [
@@ -970,7 +970,7 @@ return [[
                     '/book/new',
                 ],
                 'name' => [
-                    'add_new_pdf',
+                    'add_book_new',
                 ],
                 'methods' => [
                     [

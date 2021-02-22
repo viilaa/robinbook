@@ -52,7 +52,7 @@ return [
             [['_route' => 'update_book', '_controller' => 'App\\Controller\\BookController::update'], ['id'], ['PUT' => 0], null, false, true, null],
             [['_route' => 'delete_book', '_controller' => 'App\\Controller\\BookController::delete'], ['id'], ['DELETE' => 0], null, false, true, null],
         ],
-        73 => [[['_route' => 'add_new_pdf', '_controller' => 'App\\Controller\\BookController::newAction'], [], ['POST' => 0], null, false, false, null]],
+        73 => [[['_route' => 'add_book_new', '_controller' => 'App\\Controller\\BookController::newAction'], [], ['POST' => 0], null, false, false, null]],
         103 => [[['_route' => 'get_all_findBooks', '_controller' => 'App\\Controller\\BookController::findBySearch'], ['word'], ['GET' => 0], null, false, true, null]],
         126 => [[['_route' => 'get_all_findGenres', '_controller' => 'App\\Controller\\GenreController::findByGenre'], ['TypeGenre'], ['GET' => 0], null, false, true, null]],
         151 => [[['_route' => 'get_all_findbookRead', '_controller' => 'App\\Controller\\UserController::findByRead'], ['BookRead'], ['GET' => 0], null, false, true, null]],
