@@ -115,32 +115,28 @@ return [[
 '%5B%5BC%5DApp%5CController%5CGenreController%23findByGenre%5D%5B1%5D' => 2,
 '%5BApp%5CController%5CGenreController%24GenreRepository%5D%5B1%5D' => 1,
 '%5B%5BC%5DApp%5CController%5CGenreController%24GenreRepository%5D%5B1%5D' => 2,
-'%5BApp%5CController%5CRegistrationController%5D%5B1%5D' => 1,
-'%5B%5BC%5DApp%5CController%5CRegistrationController%5D%5B1%5D' => 2,
-'%5BApp%5CController%5CRegistrationController%23register%5D%5B1%5D' => 1,
-'%5B%5BC%5DApp%5CController%5CRegistrationController%23register%5D%5B1%5D' => 2,
 '%5BApp%5CController%5CSecurityController%5D%5B1%5D' => 1,
 '%5B%5BC%5DApp%5CController%5CSecurityController%5D%5B1%5D' => 2,
 '%5BApp%5CController%5CSecurityController%23login%5D%5B1%5D' => 21,
 '%5B%5BC%5DApp%5CController%5CSecurityController%23login%5D%5B1%5D' => 2,
-'%5BApp%5CController%5CUsersController%5D%5B1%5D' => 1,
-'%5B%5BC%5DApp%5CController%5CUsersController%5D%5B1%5D' => 2,
-'%5BApp%5CController%5CUsersController%23__construct%5D%5B1%5D' => 1,
-'%5B%5BC%5DApp%5CController%5CUsersController%23__construct%5D%5B1%5D' => 2,
-'%5BApp%5CController%5CUsersController%23add%5D%5B1%5D' => 22,
-'%5B%5BC%5DApp%5CController%5CUsersController%23add%5D%5B1%5D' => 2,
-'%5BApp%5CController%5CUsersController%23get%5D%5B1%5D' => 23,
-'%5B%5BC%5DApp%5CController%5CUsersController%23get%5D%5B1%5D' => 2,
-'%5BApp%5CController%5CUsersController%23getAll%5D%5B1%5D' => 24,
-'%5B%5BC%5DApp%5CController%5CUsersController%23getAll%5D%5B1%5D' => 2,
-'%5BApp%5CController%5CUsersController%23update%5D%5B1%5D' => 25,
-'%5B%5BC%5DApp%5CController%5CUsersController%23update%5D%5B1%5D' => 2,
-'%5BApp%5CController%5CUsersController%23delete%5D%5B1%5D' => 26,
-'%5B%5BC%5DApp%5CController%5CUsersController%23delete%5D%5B1%5D' => 2,
-'%5BApp%5CController%5CUsersController%23findByRead%5D%5B1%5D' => 27,
-'%5B%5BC%5DApp%5CController%5CUsersController%23findByRead%5D%5B1%5D' => 2,
-'%5BApp%5CController%5CUsersController%24UsersRepository%5D%5B1%5D' => 1,
-'%5B%5BC%5DApp%5CController%5CUsersController%24UsersRepository%5D%5B1%5D' => 2,
+'%5BApp%5CController%5CUserController%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CController%5CUserController%5D%5B1%5D' => 2,
+'%5BApp%5CController%5CUserController%23__construct%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CController%5CUserController%23__construct%5D%5B1%5D' => 2,
+'%5BApp%5CController%5CUserController%23add%5D%5B1%5D' => 22,
+'%5B%5BC%5DApp%5CController%5CUserController%23add%5D%5B1%5D' => 2,
+'%5BApp%5CController%5CUserController%23get%5D%5B1%5D' => 23,
+'%5B%5BC%5DApp%5CController%5CUserController%23get%5D%5B1%5D' => 2,
+'%5BApp%5CController%5CUserController%23getAll%5D%5B1%5D' => 24,
+'%5B%5BC%5DApp%5CController%5CUserController%23getAll%5D%5B1%5D' => 2,
+'%5BApp%5CController%5CUserController%23update%5D%5B1%5D' => 25,
+'%5B%5BC%5DApp%5CController%5CUserController%23update%5D%5B1%5D' => 2,
+'%5BApp%5CController%5CUserController%23delete%5D%5B1%5D' => 26,
+'%5B%5BC%5DApp%5CController%5CUserController%23delete%5D%5B1%5D' => 2,
+'%5BApp%5CController%5CUserController%23findByRead%5D%5B1%5D' => 27,
+'%5B%5BC%5DApp%5CController%5CUserController%23findByRead%5D%5B1%5D' => 2,
+'%5BApp%5CController%5CUserController%24UserRepository%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CController%5CUserController%24UserRepository%5D%5B1%5D' => 2,
 '%5BApp%5CEntity%5CBook%5D%5B1%5D' => 28,
 '%5B%5BC%5DApp%5CEntity%5CBook%5D%5B1%5D' => 2,
 '%5BApp%5CEntity%5CBook%23__construct%5D%5B1%5D' => 1,
@@ -175,12 +171,6 @@ return [[
 '%5B%5BC%5DApp%5CEntity%5CBook%23getTitle%5D%5B1%5D' => 2,
 '%5BApp%5CEntity%5CBook%23setTitle%5D%5B1%5D' => 1,
 '%5B%5BC%5DApp%5CEntity%5CBook%23setTitle%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CBook%23getUsers%5D%5B1%5D' => 1,
-'%5B%5BC%5DApp%5CEntity%5CBook%23getUsers%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CBook%23addUser%5D%5B1%5D' => 1,
-'%5B%5BC%5DApp%5CEntity%5CBook%23addUser%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CBook%23removeUser%5D%5B1%5D' => 1,
-'%5B%5BC%5DApp%5CEntity%5CBook%23removeUser%5D%5B1%5D' => 2,
 '%5BApp%5CEntity%5CBook%23getGenre%5D%5B1%5D' => 1,
 '%5B%5BC%5DApp%5CEntity%5CBook%23getGenre%5D%5B1%5D' => 2,
 '%5BApp%5CEntity%5CBook%23addGenre%5D%5B1%5D' => 1,
@@ -195,6 +185,12 @@ return [[
 '%5B%5BC%5DApp%5CEntity%5CBook%23getPassword%5D%5B1%5D' => 2,
 '%5BApp%5CEntity%5CBook%23setPassword%5D%5B1%5D' => 1,
 '%5B%5BC%5DApp%5CEntity%5CBook%23setPassword%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CBook%23getUsers%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CEntity%5CBook%23getUsers%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CBook%23addUser%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CEntity%5CBook%23addUser%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CBook%23removeUser%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CEntity%5CBook%23removeUser%5D%5B1%5D' => 2,
 '%5BApp%5CEntity%5CBook%24id%5D%5B1%5D' => 29,
 '%5B%5BC%5DApp%5CEntity%5CBook%24id%5D%5B1%5D' => 2,
 '%5BApp%5CEntity%5CBook%24age_classification%5D%5B1%5D' => 30,
@@ -211,12 +207,12 @@ return [[
 '%5B%5BC%5DApp%5CEntity%5CBook%24synopsis%5D%5B1%5D' => 2,
 '%5BApp%5CEntity%5CBook%24title%5D%5B1%5D' => 30,
 '%5B%5BC%5DApp%5CEntity%5CBook%24title%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CBook%24users%5D%5B1%5D' => 32,
-'%5B%5BC%5DApp%5CEntity%5CBook%24users%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CBook%24Genre%5D%5B1%5D' => 33,
+'%5BApp%5CEntity%5CBook%24Genre%5D%5B1%5D' => 32,
 '%5B%5BC%5DApp%5CEntity%5CBook%24Genre%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CBook%24public_date%5D%5B1%5D' => 34,
+'%5BApp%5CEntity%5CBook%24public_date%5D%5B1%5D' => 33,
 '%5B%5BC%5DApp%5CEntity%5CBook%24public_date%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CBook%24users%5D%5B1%5D' => 34,
+'%5B%5BC%5DApp%5CEntity%5CBook%24users%5D%5B1%5D' => 2,
 '%5BApp%5CEntity%5CContact%5D%5B1%5D' => 35,
 '%5B%5BC%5DApp%5CEntity%5CContact%5D%5B1%5D' => 2,
 '%5BApp%5CEntity%5CContact%23getId%5D%5B1%5D' => 1,
@@ -243,15 +239,15 @@ return [[
 '%5B%5BC%5DApp%5CEntity%5CContact%23setMessage%5D%5B1%5D' => 2,
 '%5BApp%5CEntity%5CContact%24id%5D%5B1%5D' => 29,
 '%5B%5BC%5DApp%5CEntity%5CContact%24id%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CContact%24Name%5D%5B1%5D' => 34,
+'%5BApp%5CEntity%5CContact%24Name%5D%5B1%5D' => 33,
 '%5B%5BC%5DApp%5CEntity%5CContact%24Name%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CContact%24Surname1%5D%5B1%5D' => 34,
+'%5BApp%5CEntity%5CContact%24Surname1%5D%5B1%5D' => 33,
 '%5B%5BC%5DApp%5CEntity%5CContact%24Surname1%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CContact%24Surname2%5D%5B1%5D' => 34,
+'%5BApp%5CEntity%5CContact%24Surname2%5D%5B1%5D' => 33,
 '%5B%5BC%5DApp%5CEntity%5CContact%24Surname2%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CContact%24Email%5D%5B1%5D' => 34,
+'%5BApp%5CEntity%5CContact%24Email%5D%5B1%5D' => 33,
 '%5B%5BC%5DApp%5CEntity%5CContact%24Email%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CContact%24Message%5D%5B1%5D' => 34,
+'%5BApp%5CEntity%5CContact%24Message%5D%5B1%5D' => 33,
 '%5B%5BC%5DApp%5CEntity%5CContact%24Message%5D%5B1%5D' => 2,
 '%5BApp%5CEntity%5CGenre%5D%5B1%5D' => 36,
 '%5B%5BC%5DApp%5CEntity%5CGenre%5D%5B1%5D' => 2,
@@ -275,86 +271,86 @@ return [[
 '%5B%5BC%5DApp%5CEntity%5CGenre%24type_genre%5D%5B1%5D' => 2,
 '%5BApp%5CEntity%5CGenre%24books%5D%5B1%5D' => 37,
 '%5B%5BC%5DApp%5CEntity%5CGenre%24books%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CRegister%5D%5B1%5D' => 38,
-'%5B%5BC%5DApp%5CEntity%5CRegister%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CRegister%23getId%5D%5B1%5D' => 1,
-'%5B%5BC%5DApp%5CEntity%5CRegister%23getId%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CRegister%24id%5D%5B1%5D' => 29,
-'%5B%5BC%5DApp%5CEntity%5CRegister%24id%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CUsers%5D%5B1%5D' => 39,
-'%5B%5BC%5DApp%5CEntity%5CUsers%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CUsers%23__construct%5D%5B1%5D' => 1,
-'%5B%5BC%5DApp%5CEntity%5CUsers%23__construct%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CUsers%23getId%5D%5B1%5D' => 1,
-'%5B%5BC%5DApp%5CEntity%5CUsers%23getId%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CUsers%23getDni%5D%5B1%5D' => 1,
-'%5B%5BC%5DApp%5CEntity%5CUsers%23getDni%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CUsers%23setDni%5D%5B1%5D' => 1,
-'%5B%5BC%5DApp%5CEntity%5CUsers%23setDni%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CUsers%23getEmail%5D%5B1%5D' => 1,
-'%5B%5BC%5DApp%5CEntity%5CUsers%23getEmail%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CUsers%23setEmail%5D%5B1%5D' => 1,
-'%5B%5BC%5DApp%5CEntity%5CUsers%23setEmail%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CUsers%23getName%5D%5B1%5D' => 1,
-'%5B%5BC%5DApp%5CEntity%5CUsers%23getName%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CUsers%23setName%5D%5B1%5D' => 1,
-'%5B%5BC%5DApp%5CEntity%5CUsers%23setName%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CUsers%23getSurname1%5D%5B1%5D' => 1,
-'%5B%5BC%5DApp%5CEntity%5CUsers%23getSurname1%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CUsers%23setSurname1%5D%5B1%5D' => 1,
-'%5B%5BC%5DApp%5CEntity%5CUsers%23setSurname1%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CUsers%23getSurname2%5D%5B1%5D' => 1,
-'%5B%5BC%5DApp%5CEntity%5CUsers%23getSurname2%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CUsers%23setSurname2%5D%5B1%5D' => 1,
-'%5B%5BC%5DApp%5CEntity%5CUsers%23setSurname2%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CUsers%23getReleaseDate%5D%5B1%5D' => 1,
-'%5B%5BC%5DApp%5CEntity%5CUsers%23getReleaseDate%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CUsers%23setReleaseDate%5D%5B1%5D' => 1,
-'%5B%5BC%5DApp%5CEntity%5CUsers%23setReleaseDate%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CUsers%23getRol%5D%5B1%5D' => 1,
-'%5B%5BC%5DApp%5CEntity%5CUsers%23getRol%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CUsers%23setRol%5D%5B1%5D' => 1,
-'%5B%5BC%5DApp%5CEntity%5CUsers%23setRol%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CUsers%23getBook%5D%5B1%5D' => 1,
-'%5B%5BC%5DApp%5CEntity%5CUsers%23getBook%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CUsers%23addBook%5D%5B1%5D' => 1,
-'%5B%5BC%5DApp%5CEntity%5CUsers%23addBook%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CUsers%23removeBook%5D%5B1%5D' => 1,
-'%5B%5BC%5DApp%5CEntity%5CUsers%23removeBook%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CUsers%23getPassword%5D%5B1%5D' => 1,
-'%5B%5BC%5DApp%5CEntity%5CUsers%23getPassword%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CUsers%23setPassword%5D%5B1%5D' => 1,
-'%5B%5BC%5DApp%5CEntity%5CUsers%23setPassword%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CUsers%23getDateOfBirth%5D%5B1%5D' => 1,
-'%5B%5BC%5DApp%5CEntity%5CUsers%23getDateOfBirth%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CUsers%23setDateOfBirth%5D%5B1%5D' => 1,
-'%5B%5BC%5DApp%5CEntity%5CUsers%23setDateOfBirth%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CUsers%23getSalt%5D%5B1%5D' => 1,
-'%5B%5BC%5DApp%5CEntity%5CUsers%23getSalt%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CUsers%23eraseCredentials%5D%5B1%5D' => 1,
-'%5B%5BC%5DApp%5CEntity%5CUsers%23eraseCredentials%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CUsers%24id%5D%5B1%5D' => 29,
-'%5B%5BC%5DApp%5CEntity%5CUsers%24id%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CUsers%24dni%5D%5B1%5D' => 30,
-'%5B%5BC%5DApp%5CEntity%5CUsers%24dni%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CUsers%24email%5D%5B1%5D' => 30,
-'%5B%5BC%5DApp%5CEntity%5CUsers%24email%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CUsers%24name%5D%5B1%5D' => 30,
-'%5B%5BC%5DApp%5CEntity%5CUsers%24name%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CUsers%24surname1%5D%5B1%5D' => 30,
-'%5B%5BC%5DApp%5CEntity%5CUsers%24surname1%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CUsers%24surname2%5D%5B1%5D' => 30,
-'%5B%5BC%5DApp%5CEntity%5CUsers%24surname2%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CUsers%24realese_date%5D%5B1%5D' => 40,
-'%5B%5BC%5DApp%5CEntity%5CUsers%24realese_date%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CUsers%24rol%5D%5B1%5D' => 34,
-'%5B%5BC%5DApp%5CEntity%5CUsers%24rol%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CUsers%24book%5D%5B1%5D' => 41,
-'%5B%5BC%5DApp%5CEntity%5CUsers%24book%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CUsers%24password%5D%5B1%5D' => 30,
-'%5B%5BC%5DApp%5CEntity%5CUsers%24password%5D%5B1%5D' => 2,
-'%5BApp%5CEntity%5CUsers%24date_of_birth%5D%5B1%5D' => 31,
-'%5B%5BC%5DApp%5CEntity%5CUsers%24date_of_birth%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%5D%5B1%5D' => 38,
+'%5B%5BC%5DApp%5CEntity%5CUser%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%23__construct%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CEntity%5CUser%23__construct%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%23getId%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CEntity%5CUser%23getId%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%23getUsername%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CEntity%5CUser%23getUsername%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%23setUsername%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CEntity%5CUser%23setUsername%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%23getRoles%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CEntity%5CUser%23getRoles%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%23setRoles%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CEntity%5CUser%23setRoles%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%23getPassword%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CEntity%5CUser%23getPassword%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%23getSalt%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CEntity%5CUser%23getSalt%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%23eraseCredentials%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CEntity%5CUser%23eraseCredentials%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%23getDni%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CEntity%5CUser%23getDni%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%23setDni%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CEntity%5CUser%23setDni%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%23getEmail%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CEntity%5CUser%23getEmail%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%23setEmail%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CEntity%5CUser%23setEmail%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%23getName%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CEntity%5CUser%23getName%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%23setName%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CEntity%5CUser%23setName%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%23getSurname1%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CEntity%5CUser%23getSurname1%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%23setSurname1%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CEntity%5CUser%23setSurname1%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%23setPassword%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CEntity%5CUser%23setPassword%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%23getReleaseDate%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CEntity%5CUser%23getReleaseDate%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%23setReleaseDate%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CEntity%5CUser%23setReleaseDate%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%23getDateOfBirth%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CEntity%5CUser%23getDateOfBirth%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%23setDateOfBirth%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CEntity%5CUser%23setDateOfBirth%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%23getSurname2%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CEntity%5CUser%23getSurname2%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%23setSurname2%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CEntity%5CUser%23setSurname2%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%23getBook%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CEntity%5CUser%23getBook%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%23addBook%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CEntity%5CUser%23addBook%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%23removeBook%5D%5B1%5D' => 1,
+'%5B%5BC%5DApp%5CEntity%5CUser%23removeBook%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%24id%5D%5B1%5D' => 29,
+'%5B%5BC%5DApp%5CEntity%5CUser%24id%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%24username%5D%5B1%5D' => 39,
+'%5B%5BC%5DApp%5CEntity%5CUser%24username%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%24roles%5D%5B1%5D' => 40,
+'%5B%5BC%5DApp%5CEntity%5CUser%24roles%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%24dni%5D%5B1%5D' => 41,
+'%5B%5BC%5DApp%5CEntity%5CUser%24dni%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%24email%5D%5B1%5D' => 33,
+'%5B%5BC%5DApp%5CEntity%5CUser%24email%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%24name%5D%5B1%5D' => 33,
+'%5B%5BC%5DApp%5CEntity%5CUser%24name%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%24surname1%5D%5B1%5D' => 33,
+'%5B%5BC%5DApp%5CEntity%5CUser%24surname1%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%24password%5D%5B1%5D' => 33,
+'%5B%5BC%5DApp%5CEntity%5CUser%24password%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%24release_date%5D%5B1%5D' => 42,
+'%5B%5BC%5DApp%5CEntity%5CUser%24release_date%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%24date_of_birth%5D%5B1%5D' => 42,
+'%5B%5BC%5DApp%5CEntity%5CUser%24date_of_birth%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%24surname2%5D%5B1%5D' => 33,
+'%5B%5BC%5DApp%5CEntity%5CUser%24surname2%5D%5B1%5D' => 2,
+'%5BApp%5CEntity%5CUser%24book%5D%5B1%5D' => 43,
+'%5B%5BC%5DApp%5CEntity%5CUser%24book%5D%5B1%5D' => 2,
 '%5BDoctrine%5CBundle%5CDoctrineBundle%5CController%5CProfilerController%5D%5B1%5D' => 1,
 '%5B%5BC%5DDoctrine%5CBundle%5CDoctrineBundle%5CController%5CProfilerController%5D%5B1%5D' => 2,
 '%5BDoctrine%5CBundle%5CDoctrineBundle%5CController%5CProfilerController%23setContainer%5D%5B1%5D' => 1,
@@ -826,7 +822,7 @@ return [[
 
 0 => 'N;',
 1 => [],
-2 => 1613672437,
+2 => 1614006740,
 3 => static function () {
     return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
         $o = [
@@ -1352,7 +1348,7 @@ return [[
                     '/users',
                 ],
                 'name' => [
-                    'add_users',
+                    'add_user',
                 ],
                 'methods' => [
                     [
@@ -1379,7 +1375,7 @@ return [[
                     '/users/{id}',
                 ],
                 'name' => [
-                    'get_one_users',
+                    'get_one_user',
                 ],
                 'methods' => [
                     [
@@ -1406,7 +1402,7 @@ return [[
                     '/users/',
                 ],
                 'name' => [
-                    'get_all_users',
+                    'get_all_user',
                 ],
                 'methods' => [
                     [
@@ -1433,7 +1429,7 @@ return [[
                     '/users/{id}',
                 ],
                 'name' => [
-                    'update_users',
+                    'update_user',
                 ],
                 'methods' => [
                     [
@@ -1460,7 +1456,7 @@ return [[
                     '/users/{id}',
                 ],
                 'name' => [
-                    'delete_users',
+                    'delete_user',
                 ],
                 'methods' => [
                     [
@@ -1591,28 +1587,6 @@ return [[
         [
             'stdClass' => [
                 'targetEntity' => [
-                    'App\\Entity\\Users',
-                ],
-                'mappedBy' => [
-                    'book',
-                ],
-            ],
-        ],
-        [
-            $o[0],
-        ],
-        []
-    );
-},
-33 => static function () {
-    return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
-        $o = [
-            clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['Doctrine\\ORM\\Mapping\\ManyToMany'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\ManyToMany')),
-        ],
-        null,
-        [
-            'stdClass' => [
-                'targetEntity' => [
                     'App\\Entity\\Genre',
                 ],
                 'inversedBy' => [
@@ -1626,7 +1600,7 @@ return [[
         []
     );
 },
-34 => static function () {
+33 => static function () {
     return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
         $o = [
             clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['Doctrine\\ORM\\Mapping\\Column'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Column')),
@@ -1639,6 +1613,28 @@ return [[
                 ],
                 'nullable' => [
                     true,
+                ],
+            ],
+        ],
+        [
+            $o[0],
+        ],
+        []
+    );
+},
+34 => static function () {
+    return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+        $o = [
+            clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['Doctrine\\ORM\\Mapping\\ManyToMany'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\ManyToMany')),
+        ],
+        null,
+        [
+            'stdClass' => [
+                'targetEntity' => [
+                    'App\\Entity\\User',
+                ],
+                'mappedBy' => [
+                    'book',
                 ],
             ],
         ],
@@ -1717,7 +1713,7 @@ return [[
         [
             'stdClass' => [
                 'repositoryClass' => [
-                    'App\\Repository\\RegisterRepository',
+                    'App\\Repository\\UserRepository',
                 ],
             ],
         ],
@@ -1730,13 +1726,16 @@ return [[
 39 => static function () {
     return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
         $o = [
-            clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['Doctrine\\ORM\\Mapping\\Entity'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Entity')),
+            clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['Doctrine\\ORM\\Mapping\\Column'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Column')),
         ],
         null,
         [
             'stdClass' => [
-                'repositoryClass' => [
-                    'App\\Repository\\UsersRepository',
+                'length' => [
+                    180,
+                ],
+                'unique' => [
+                    true,
                 ],
             ],
         ],
@@ -1755,7 +1754,7 @@ return [[
         [
             'stdClass' => [
                 'type' => [
-                    'datetime',
+                    'json',
                 ],
             ],
         ],
@@ -1766,6 +1765,50 @@ return [[
     );
 },
 41 => static function () {
+    return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+        $o = [
+            clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['Doctrine\\ORM\\Mapping\\Column'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Column')),
+        ],
+        null,
+        [
+            'stdClass' => [
+                'length' => [
+                    9,
+                ],
+                'nullable' => [
+                    true,
+                ],
+            ],
+        ],
+        [
+            $o[0],
+        ],
+        []
+    );
+},
+42 => static function () {
+    return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+        $o = [
+            clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['Doctrine\\ORM\\Mapping\\Column'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Column')),
+        ],
+        null,
+        [
+            'stdClass' => [
+                'type' => [
+                    'datetime',
+                ],
+                'nullable' => [
+                    true,
+                ],
+            ],
+        ],
+        [
+            $o[0],
+        ],
+        []
+    );
+},
+43 => static function () {
     return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
         $o = [
             clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['Doctrine\\ORM\\Mapping\\ManyToMany'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\ManyToMany')),

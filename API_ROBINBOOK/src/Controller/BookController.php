@@ -11,6 +11,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class BookController extends AbstractController
 {       
@@ -112,40 +115,43 @@ class BookController extends AbstractController
     /**
      * @Route("/book/new", name="add_new_pdf", methods={"POST"})
      */
-    public function newAction(Request $request): JsonResponse
+    public function newAction(Request $request,SluggerInterface $slugger): JsonResponse
     {
-        $newFile = new Book();
-        $form = $this->createForm(BookType::class, $newFile);
+        $newBook = new Book();
+        $form = $this->createForm(BookType::class, $newBook );
         $form->handleRequest($request); 
-        $response=[$form->isSubmitted()];
+        $respuesta = $form->isSubmitted();
 
-        if($form->isSubmitted() && $form->isValid())
+        if($form->isSubmitted())
         {
-            // La variable $file guardará el PDF subido
-            /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
-            $Pdf = $newFile->getPdf();
-           /*  $CoverPage = $newFile->getCoverPage(); */
+            $brochureFile = $form->get('upload')->getData(); 
+            if ($brochureFile) {
+                $originalFilename = pathinfo($brochureFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$brochureFile->guessExtension();
 
-            // Generar un nombre único para el archivo antes de guardarlo
-            $PdfName = md5(uniqid()).'.'.$Pdf->guessExtension();
-          /*   $CoverPageName = md5(uniqid()).'.'.$CoverPage->guessExtension(); */
+                try {
+                    $brochureFile->move(
+                        $this->getParameter('brochures_directory'),
+                        $newFilename
+                    );
+                    $respuesta = "Fichero subido con éxito";
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                    $respuesta = $e->getMessage();;
+                }
 
-            // Mover el archivo al directorio donde se guardan los pdfs
-            $PdfDir = $this->getParameter('kernel.project_dir').'/../pdf';
-            $Pdf->move($PdfDir, $PdfName);
-           /*  $CoverPageDir = $this->getParameter('kernel.project_dir').'/../coverPage';
-            $CoverPage->move($CoverPageDir, $CoverPageName); */
+                $newBook->setPdf($newFilename);
+            }  
+        
+            return new JsonResponse([$respuesta], Response::HTTP_OK);
+        } 
+        return new JsonResponse([$respuesta], Response::HTTP_OK);
+    }
+    
 
-             // Actualizar la propiedad pdf para guardar el nombre de archivo PDF
-            // en lugar de sus contenidos
-            $newFile->setPdf($PdfName);
-           /*  $newFile->setCoverPage($CoverPageName); */
-            $response=['fichero enviado'];
 
-            
-        } // ... persist la variable $usuario o cualquier otra tarea
-            return new JsonResponse($response, Response::HTTP_OK);
-    } 
+       
     /**
      * @Route("/findBooks/{word}", name="get_all_findBooks", methods={"GET"})
      */

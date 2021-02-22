@@ -44,8 +44,7 @@
     </parameter>
     <parameter key="kernel.charset">UTF-8</parameter>
     <parameter key="kernel.container_class">App_KernelDevDebugContainer</parameter>
-    <parameter key="locale">en</parameter>
-    <parameter key="dir">C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK</parameter>
+    <parameter key="brochures_directory">C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK/public/uploads/brochures</parameter>
     <parameter key="event_dispatcher.event_aliases" type="collection">
       <parameter key="Symfony\Component\Console\Event\ConsoleCommandEvent">console.command</parameter>
       <parameter key="Symfony\Component\Console\Event\ConsoleErrorEvent">console.error</parameter>
@@ -91,6 +90,8 @@
     <parameter key="form.type_extension.csrf.enabled">true</parameter>
     <parameter key="form.type_extension.csrf.field_name">_token</parameter>
     <parameter key="validator.translation_domain">validators</parameter>
+    <parameter key="translator.logging">false</parameter>
+    <parameter key="translator.default_path">C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK/translations</parameter>
     <parameter key="data_collector.templates" type="collection"/>
     <parameter key="debug.error_handler.throw_at">-1</parameter>
     <parameter key="debug.container.dump">C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\var\cache\dev/App_KernelDevDebugContainer.xml</parameter>
@@ -441,12 +442,25 @@
       <argument type="service" id="service_container"/>
       <argument type="service" id=".service_locator.XXv1IfR"/>
     </service>
+    <service id="locale_aware_listener" class="Symfony\Component\HttpKernel\EventListener\LocaleAwareListener">
+      <tag name="kernel.event_subscriber"/>
+      <tag name="container.hot_path"/>
+      <tag name="container.hot_path"/>
+      <argument type="iterator">
+        <argument type="service" id="slugger"/>
+        <argument type="service" id="translator.default"/>
+      </argument>
+      <argument type="service" id="request_stack"/>
+    </service>
     <service id="container.env_var_processor" class="Symfony\Component\DependencyInjection\EnvVarProcessor">
       <tag name="container.env_var_processor"/>
       <argument type="service" id="service_container"/>
       <argument type="tagged_iterator" tag="container.env_var_loader"/>
     </service>
-    <service id="slugger" class="stdClass"/>
+    <service id="slugger" class="Symfony\Component\String\Slugger\AsciiSlugger">
+      <tag name="kernel.locale_aware"/>
+      <argument>en</argument>
+    </service>
     <service id="container.getenv" class="Closure">
       <tag name="routing.expression_language_function" function="env"/>
       <argument type="collection">
@@ -640,6 +654,48 @@
         <argument>router:match</argument>
       </call>
     </service>
+    <service id="console.command.translation_debug" class="Symfony\Bundle\FrameworkBundle\Command\TranslationDebugCommand">
+      <tag name="console.command" command="debug:translation"/>
+      <tag name="container.no_preload"/>
+      <argument type="service" id="translator.default"/>
+      <argument type="service" id="translation.reader"/>
+      <argument type="service" id="translation.extractor"/>
+      <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK/translations</argument>
+      <argument>null</argument>
+      <argument type="collection">
+        <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations</argument>
+        <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations</argument>
+      </argument>
+      <argument type="collection"/>
+      <call method="setName">
+        <argument>debug:translation</argument>
+      </call>
+    </service>
+    <service id="console.command.translation_update" class="Symfony\Bundle\FrameworkBundle\Command\TranslationUpdateCommand">
+      <tag name="console.command" command="translation:update"/>
+      <tag name="container.no_preload"/>
+      <argument type="service" id="translation.writer"/>
+      <argument type="service" id="translation.reader"/>
+      <argument type="service" id="translation.extractor"/>
+      <argument>en</argument>
+      <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK/translations</argument>
+      <argument>null</argument>
+      <argument type="collection">
+        <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations</argument>
+        <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations</argument>
+      </argument>
+      <argument type="collection"/>
+      <call method="setName">
+        <argument>translation:update</argument>
+      </call>
+    </service>
+    <service id="console.command.xliff_lint" class="Symfony\Component\Translation\Command\XliffLintCommand">
+      <tag name="console.command" command="lint:xliff"/>
+      <tag name="container.no_preload"/>
+      <call method="setName">
+        <argument>lint:xliff</argument>
+      </call>
+    </service>
     <service id="console.command.yaml_lint" class="Symfony\Bundle\FrameworkBundle\Command\YamlLintCommand">
       <tag name="console.command" command="lint:yaml"/>
       <tag name="container.no_preload"/>
@@ -669,6 +725,7 @@
         <argument>Symfony\Component\Form\Extension\HttpFoundation\Type\FormTypeHttpFoundationExtension</argument>
         <argument>Symfony\Component\Form\Extension\Validator\Type\RepeatedTypeValidatorExtension</argument>
         <argument>Symfony\Component\Form\Extension\Validator\Type\SubmitTypeValidatorExtension</argument>
+        <argument>Symfony\Component\Form\Extension\Validator\Type\UploadValidatorExtension</argument>
         <argument>Symfony\Component\Form\Extension\Csrf\Type\FormTypeCsrfExtension</argument>
       </argument>
       <argument type="collection">
@@ -933,6 +990,7 @@
         <argument key="cache.security_expression_language" type="service" id="cache.security_expression_language" on-invalid="ignore_uninitialized"/>
       </argument>
     </service>
+    <service id="identity_translator" class="Symfony\Component\Translation\IdentityTranslator"/>
     <service id=".cache_connection.GD_MSZC" class="Symfony\Component\Cache\Adapter\AbstractAdapter">
       <argument>redis://localhost</argument>
       <argument type="collection">
@@ -1038,6 +1096,7 @@
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
           <argument type="service" id="form.type_extension.form.http_foundation"/>
+          <argument type="service" id="form.type_extension.upload.validator"/>
           <argument type="service" id="form.type_extension.csrf"/>
         </argument>
         <argument key="Symfony\Component\Form\Extension\Core\Type\RepeatedType" type="iterator">
@@ -1071,15 +1130,15 @@
     <service id="form.type.file" class="Symfony\Component\Form\Extension\Core\Type\FileType" public="true">
       <tag name="form.type"/>
       <tag name="container.private" package="symfony/framework-bundle" version="5.2"/>
-      <argument>null</argument>
+      <argument type="service" id="translator.default" on-invalid="ignore"/>
     </service>
     <service id="form.type.color" class="Symfony\Component\Form\Extension\Core\Type\ColorType">
       <tag name="form.type"/>
-      <argument>null</argument>
+      <argument type="service" id="translator.default" on-invalid="ignore"/>
     </service>
     <service id="form.type_extension.form.transformation_failure_handling" class="Symfony\Component\Form\Extension\Core\Type\TransformationFailureExtension">
       <tag name="form.type_extension" extended-type="Symfony\Component\Form\Extension\Core\Type\FormType"/>
-      <argument>null</argument>
+      <argument type="service" id="translator.default" on-invalid="ignore"/>
     </service>
     <service id="form.type_extension.form.http_foundation" class="Symfony\Component\Form\Extension\HttpFoundation\Type\FormTypeHttpFoundationExtension">
       <tag name="form.type_extension"/>
@@ -1097,14 +1156,496 @@
     <service id="form.type_extension.submit.validator" class="Symfony\Component\Form\Extension\Validator\Type\SubmitTypeValidatorExtension">
       <tag name="form.type_extension" extended-type="Symfony\Component\Form\Extension\Core\Type\SubmitType"/>
     </service>
+    <service id="form.type_extension.upload.validator" class="Symfony\Component\Form\Extension\Validator\Type\UploadValidatorExtension">
+      <tag name="form.type_extension"/>
+      <argument type="service" id="translator.default"/>
+      <argument>validators</argument>
+    </service>
     <service id="form.type_extension.csrf" class="Symfony\Component\Form\Extension\Csrf\Type\FormTypeCsrfExtension">
       <tag name="form.type_extension"/>
       <argument type="service" id="security.csrf.token_manager"/>
       <argument>true</argument>
       <argument>_token</argument>
-      <argument>null</argument>
+      <argument type="service" id="translator.default" on-invalid="null"/>
       <argument>validators</argument>
       <argument type="service" id="form.server_params"/>
+    </service>
+    <service id="translator.default" class="Symfony\Bundle\FrameworkBundle\Translation\Translator">
+      <tag name="kernel.locale_aware"/>
+      <argument type="service" id=".service_locator.O24_MAy"/>
+      <argument type="service" id="translator.formatter.default"/>
+      <argument>en</argument>
+      <argument type="collection">
+        <argument key="translation.loader.php" type="collection">
+          <argument>php</argument>
+        </argument>
+        <argument key="translation.loader.yml" type="collection">
+          <argument>yaml</argument>
+          <argument>yml</argument>
+        </argument>
+        <argument key="translation.loader.xliff" type="collection">
+          <argument>xlf</argument>
+          <argument>xliff</argument>
+        </argument>
+        <argument key="translation.loader.po" type="collection">
+          <argument>po</argument>
+        </argument>
+        <argument key="translation.loader.mo" type="collection">
+          <argument>mo</argument>
+        </argument>
+        <argument key="translation.loader.qt" type="collection">
+          <argument>ts</argument>
+        </argument>
+        <argument key="translation.loader.csv" type="collection">
+          <argument>csv</argument>
+        </argument>
+        <argument key="translation.loader.res" type="collection">
+          <argument>res</argument>
+        </argument>
+        <argument key="translation.loader.dat" type="collection">
+          <argument>dat</argument>
+        </argument>
+        <argument key="translation.loader.ini" type="collection">
+          <argument>ini</argument>
+        </argument>
+        <argument key="translation.loader.json" type="collection">
+          <argument>json</argument>
+        </argument>
+      </argument>
+      <argument type="collection">
+        <argument key="cache_dir">C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\var\cache\dev/translations</argument>
+        <argument key="debug">true</argument>
+        <argument key="resource_files" type="collection">
+          <argument key="af" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.af.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.af.xlf</argument>
+          </argument>
+          <argument key="ar" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.ar.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.ar.xlf</argument>
+          </argument>
+          <argument key="az" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.az.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.az.xlf</argument>
+          </argument>
+          <argument key="be" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.be.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.be.xlf</argument>
+          </argument>
+          <argument key="bg" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.bg.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.bg.xlf</argument>
+          </argument>
+          <argument key="bs" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.bs.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.bs.xlf</argument>
+          </argument>
+          <argument key="ca" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.ca.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.ca.xlf</argument>
+          </argument>
+          <argument key="cs" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.cs.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.cs.xlf</argument>
+          </argument>
+          <argument key="da" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.da.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.da.xlf</argument>
+          </argument>
+          <argument key="de" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.de.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.de.xlf</argument>
+          </argument>
+          <argument key="el" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.el.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.el.xlf</argument>
+          </argument>
+          <argument key="en" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.en.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.en.xlf</argument>
+          </argument>
+          <argument key="es" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.es.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.es.xlf</argument>
+          </argument>
+          <argument key="et" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.et.xlf</argument>
+          </argument>
+          <argument key="eu" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.eu.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.eu.xlf</argument>
+          </argument>
+          <argument key="fa" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.fa.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.fa.xlf</argument>
+          </argument>
+          <argument key="fi" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.fi.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.fi.xlf</argument>
+          </argument>
+          <argument key="fr" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.fr.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.fr.xlf</argument>
+          </argument>
+          <argument key="gl" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.gl.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.gl.xlf</argument>
+          </argument>
+          <argument key="he" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.he.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.he.xlf</argument>
+          </argument>
+          <argument key="hr" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.hr.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.hr.xlf</argument>
+          </argument>
+          <argument key="hu" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.hu.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.hu.xlf</argument>
+          </argument>
+          <argument key="hy" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.hy.xlf</argument>
+          </argument>
+          <argument key="id" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.id.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.id.xlf</argument>
+          </argument>
+          <argument key="it" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.it.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.it.xlf</argument>
+          </argument>
+          <argument key="ja" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.ja.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.ja.xlf</argument>
+          </argument>
+          <argument key="lb" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.lb.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.lb.xlf</argument>
+          </argument>
+          <argument key="lt" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.lt.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.lt.xlf</argument>
+          </argument>
+          <argument key="lv" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.lv.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.lv.xlf</argument>
+          </argument>
+          <argument key="mn" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.mn.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.mn.xlf</argument>
+          </argument>
+          <argument key="nb" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.nb.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.nb.xlf</argument>
+          </argument>
+          <argument key="nl" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.nl.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.nl.xlf</argument>
+          </argument>
+          <argument key="nn" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.nn.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.nn.xlf</argument>
+          </argument>
+          <argument key="no" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.no.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.no.xlf</argument>
+          </argument>
+          <argument key="pl" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.pl.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.pl.xlf</argument>
+          </argument>
+          <argument key="pt" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.pt.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.pt.xlf</argument>
+          </argument>
+          <argument key="pt_BR" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.pt_BR.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.pt_BR.xlf</argument>
+          </argument>
+          <argument key="ro" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.ro.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.ro.xlf</argument>
+          </argument>
+          <argument key="ru" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.ru.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.ru.xlf</argument>
+          </argument>
+          <argument key="sk" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.sk.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.sk.xlf</argument>
+          </argument>
+          <argument key="sl" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.sl.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.sl.xlf</argument>
+          </argument>
+          <argument key="sq" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.sq.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.sq.xlf</argument>
+          </argument>
+          <argument key="sr_Cyrl" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.sr_Cyrl.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.sr_Cyrl.xlf</argument>
+          </argument>
+          <argument key="sr_Latn" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.sr_Latn.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.sr_Latn.xlf</argument>
+          </argument>
+          <argument key="sv" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.sv.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.sv.xlf</argument>
+          </argument>
+          <argument key="th" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.th.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.th.xlf</argument>
+          </argument>
+          <argument key="tl" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.tl.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.tl.xlf</argument>
+          </argument>
+          <argument key="tr" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.tr.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.tr.xlf</argument>
+          </argument>
+          <argument key="uk" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.uk.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.uk.xlf</argument>
+          </argument>
+          <argument key="vi" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.vi.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.vi.xlf</argument>
+          </argument>
+          <argument key="zh_CN" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.zh_CN.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.zh_CN.xlf</argument>
+          </argument>
+          <argument key="zh_TW" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations\validators.zh_TW.xlf</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations\security.zh_TW.xlf</argument>
+          </argument>
+        </argument>
+        <argument key="scanned_directories" type="collection">
+          <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations</argument>
+          <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations</argument>
+          <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK/translations</argument>
+          <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\framework-bundle/translations</argument>
+          <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\maker-bundle\src/translations</argument>
+          <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\doctrine\doctrine-bundle/translations</argument>
+          <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\doctrine\doctrine-migrations-bundle/translations</argument>
+          <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\nelmio\cors-bundle/translations</argument>
+          <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-bundle/translations</argument>
+        </argument>
+        <argument key="cache_vary" type="collection">
+          <argument key="scanned_directories" type="collection">
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\form/Resources/translations</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-core/Resources/translations</argument>
+            <argument>translations</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\framework-bundle/translations</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\maker-bundle\src/translations</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\doctrine\doctrine-bundle/translations</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\doctrine\doctrine-migrations-bundle/translations</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\nelmio\cors-bundle/translations</argument>
+            <argument>C:\Curso daw\2DAW\PI-new\robinbook\API_ROBINBOOK\vendor\symfony\security-bundle/translations</argument>
+          </argument>
+        </argument>
+      </argument>
+      <argument type="collection"/>
+      <call method="setConfigCacheFactory">
+        <argument type="service" id="config_cache_factory"/>
+      </call>
+      <call method="setFallbackLocales">
+        <argument type="collection">
+          <argument>en</argument>
+        </argument>
+      </call>
+    </service>
+    <service id="translator.logging" class="Symfony\Component\Translation\LoggingTranslator">
+      <tag name="monolog.logger" channel="translation"/>
+      <argument type="service" id="translator.logging.inner"/>
+      <argument type="service" id="logger"/>
+    </service>
+    <service id="translator.formatter.default" class="Symfony\Component\Translation\Formatter\MessageFormatter">
+      <argument type="service" id="identity_translator"/>
+    </service>
+    <service id="translation.loader.php" class="Symfony\Component\Translation\Loader\PhpFileLoader">
+      <tag name="translation.loader" alias="php"/>
+    </service>
+    <service id="translation.loader.yml" class="Symfony\Component\Translation\Loader\YamlFileLoader">
+      <tag name="translation.loader" alias="yaml" legacy-alias="yml"/>
+    </service>
+    <service id="translation.loader.xliff" class="Symfony\Component\Translation\Loader\XliffFileLoader">
+      <tag name="translation.loader" alias="xlf" legacy-alias="xliff"/>
+    </service>
+    <service id="translation.loader.po" class="Symfony\Component\Translation\Loader\PoFileLoader">
+      <tag name="translation.loader" alias="po"/>
+    </service>
+    <service id="translation.loader.mo" class="Symfony\Component\Translation\Loader\MoFileLoader">
+      <tag name="translation.loader" alias="mo"/>
+    </service>
+    <service id="translation.loader.qt" class="Symfony\Component\Translation\Loader\QtFileLoader">
+      <tag name="translation.loader" alias="ts"/>
+    </service>
+    <service id="translation.loader.csv" class="Symfony\Component\Translation\Loader\CsvFileLoader">
+      <tag name="translation.loader" alias="csv"/>
+    </service>
+    <service id="translation.loader.res" class="Symfony\Component\Translation\Loader\IcuResFileLoader">
+      <tag name="translation.loader" alias="res"/>
+    </service>
+    <service id="translation.loader.dat" class="Symfony\Component\Translation\Loader\IcuDatFileLoader">
+      <tag name="translation.loader" alias="dat"/>
+    </service>
+    <service id="translation.loader.ini" class="Symfony\Component\Translation\Loader\IniFileLoader">
+      <tag name="translation.loader" alias="ini"/>
+    </service>
+    <service id="translation.loader.json" class="Symfony\Component\Translation\Loader\JsonFileLoader">
+      <tag name="translation.loader" alias="json"/>
+    </service>
+    <service id="translation.dumper.php" class="Symfony\Component\Translation\Dumper\PhpFileDumper">
+      <tag name="translation.dumper" alias="php"/>
+    </service>
+    <service id="translation.dumper.xliff" class="Symfony\Component\Translation\Dumper\XliffFileDumper">
+      <tag name="translation.dumper" alias="xlf"/>
+    </service>
+    <service id="translation.dumper.po" class="Symfony\Component\Translation\Dumper\PoFileDumper">
+      <tag name="translation.dumper" alias="po"/>
+    </service>
+    <service id="translation.dumper.mo" class="Symfony\Component\Translation\Dumper\MoFileDumper">
+      <tag name="translation.dumper" alias="mo"/>
+    </service>
+    <service id="translation.dumper.yml" class="Symfony\Component\Translation\Dumper\YamlFileDumper">
+      <tag name="translation.dumper" alias="yml"/>
+    </service>
+    <service id="translation.dumper.yaml" class="Symfony\Component\Translation\Dumper\YamlFileDumper">
+      <tag name="translation.dumper" alias="yaml"/>
+      <argument>yaml</argument>
+    </service>
+    <service id="translation.dumper.qt" class="Symfony\Component\Translation\Dumper\QtFileDumper">
+      <tag name="translation.dumper" alias="ts"/>
+    </service>
+    <service id="translation.dumper.csv" class="Symfony\Component\Translation\Dumper\CsvFileDumper">
+      <tag name="translation.dumper" alias="csv"/>
+    </service>
+    <service id="translation.dumper.ini" class="Symfony\Component\Translation\Dumper\IniFileDumper">
+      <tag name="translation.dumper" alias="ini"/>
+    </service>
+    <service id="translation.dumper.json" class="Symfony\Component\Translation\Dumper\JsonFileDumper">
+      <tag name="translation.dumper" alias="json"/>
+    </service>
+    <service id="translation.dumper.res" class="Symfony\Component\Translation\Dumper\IcuResFileDumper">
+      <tag name="translation.dumper" alias="res"/>
+    </service>
+    <service id="translation.extractor.php" class="Symfony\Component\Translation\Extractor\PhpExtractor">
+      <tag name="translation.extractor" alias="php"/>
+    </service>
+    <service id="translation.reader" class="Symfony\Component\Translation\Reader\TranslationReader">
+      <call method="addLoader">
+        <argument>php</argument>
+        <argument type="service" id="translation.loader.php"/>
+      </call>
+      <call method="addLoader">
+        <argument>yaml</argument>
+        <argument type="service" id="translation.loader.yml"/>
+      </call>
+      <call method="addLoader">
+        <argument>yml</argument>
+        <argument type="service" id="translation.loader.yml"/>
+      </call>
+      <call method="addLoader">
+        <argument>xlf</argument>
+        <argument type="service" id="translation.loader.xliff"/>
+      </call>
+      <call method="addLoader">
+        <argument>xliff</argument>
+        <argument type="service" id="translation.loader.xliff"/>
+      </call>
+      <call method="addLoader">
+        <argument>po</argument>
+        <argument type="service" id="translation.loader.po"/>
+      </call>
+      <call method="addLoader">
+        <argument>mo</argument>
+        <argument type="service" id="translation.loader.mo"/>
+      </call>
+      <call method="addLoader">
+        <argument>ts</argument>
+        <argument type="service" id="translation.loader.qt"/>
+      </call>
+      <call method="addLoader">
+        <argument>csv</argument>
+        <argument type="service" id="translation.loader.csv"/>
+      </call>
+      <call method="addLoader">
+        <argument>res</argument>
+        <argument type="service" id="translation.loader.res"/>
+      </call>
+      <call method="addLoader">
+        <argument>dat</argument>
+        <argument type="service" id="translation.loader.dat"/>
+      </call>
+      <call method="addLoader">
+        <argument>ini</argument>
+        <argument type="service" id="translation.loader.ini"/>
+      </call>
+      <call method="addLoader">
+        <argument>json</argument>
+        <argument type="service" id="translation.loader.json"/>
+      </call>
+    </service>
+    <service id="translation.extractor" class="Symfony\Component\Translation\Extractor\ChainExtractor">
+      <call method="addExtractor">
+        <argument>php</argument>
+        <argument type="service" id="translation.extractor.php"/>
+      </call>
+    </service>
+    <service id="translation.writer" class="Symfony\Component\Translation\Writer\TranslationWriter">
+      <call method="addDumper">
+        <argument>php</argument>
+        <argument type="service" id="translation.dumper.php"/>
+      </call>
+      <call method="addDumper">
+        <argument>xlf</argument>
+        <argument type="service" id="translation.dumper.xliff"/>
+      </call>
+      <call method="addDumper">
+        <argument>po</argument>
+        <argument type="service" id="translation.dumper.po"/>
+      </call>
+      <call method="addDumper">
+        <argument>mo</argument>
+        <argument type="service" id="translation.dumper.mo"/>
+      </call>
+      <call method="addDumper">
+        <argument>yml</argument>
+        <argument type="service" id="translation.dumper.yml"/>
+      </call>
+      <call method="addDumper">
+        <argument>yaml</argument>
+        <argument type="service" id="translation.dumper.yaml"/>
+      </call>
+      <call method="addDumper">
+        <argument>ts</argument>
+        <argument type="service" id="translation.dumper.qt"/>
+      </call>
+      <call method="addDumper">
+        <argument>csv</argument>
+        <argument type="service" id="translation.dumper.csv"/>
+      </call>
+      <call method="addDumper">
+        <argument>ini</argument>
+        <argument type="service" id="translation.dumper.ini"/>
+      </call>
+      <call method="addDumper">
+        <argument>json</argument>
+        <argument type="service" id="translation.dumper.json"/>
+      </call>
+      <call method="addDumper">
+        <argument>res</argument>
+        <argument type="service" id="translation.dumper.res"/>
+      </call>
+    </service>
+    <service id="translation.warmer" class="Symfony\Bundle\FrameworkBundle\CacheWarmer\TranslationsCacheWarmer">
+      <tag name="container.service_subscriber" id="translator"/>
+      <tag name="kernel.cache_warmer"/>
+      <argument type="service" id=".service_locator.J4b.DPX.translation.warmer"/>
     </service>
     <service id="debug.debug_handlers_listener" class="Symfony\Component\HttpKernel\EventListener\DebugHandlersListener">
       <tag name="kernel.event_subscriber"/>
@@ -1245,6 +1786,22 @@
           <argument>removeCspHeader</argument>
         </argument>
         <argument>-128</argument>
+      </call>
+      <call method="addListener">
+        <argument>kernel.request</argument>
+        <argument type="collection">
+          <argument type="service" id="locale_aware_listener"/>
+          <argument>onKernelRequest</argument>
+        </argument>
+        <argument>15</argument>
+      </call>
+      <call method="addListener">
+        <argument>kernel.finish_request</argument>
+        <argument type="collection">
+          <argument type="service" id="locale_aware_listener"/>
+          <argument>onKernelFinishRequest</argument>
+        </argument>
+        <argument>-15</argument>
       </call>
       <call method="addListener">
         <argument>console.error</argument>
@@ -2610,7 +3167,7 @@
       <argument type="service" id="debug.event_dispatcher" on-invalid="null"/>
       <argument type="service" id="property_accessor" on-invalid="null"/>
       <call method="setTranslator">
-        <argument type="service" id="translator" on-invalid="ignore"/>
+        <argument type="service" id="translator.default" on-invalid="ignore"/>
       </call>
     </service>
     <service id="security.authentication.listener.remote_user" class="Symfony\Component\Security\Http\Firewall\RemoteUserAuthenticationListener" abstract="true">
@@ -2876,6 +3433,9 @@
       <argument type="service" id="logger" on-invalid="null"/>
       <argument type="service" id="debug.event_dispatcher" on-invalid="null"/>
       <argument type="service" id="property_accessor" on-invalid="null"/>
+      <call method="setTranslator">
+        <argument type="service" id="translator.default" on-invalid="ignore"/>
+      </call>
       <call method="setSessionAuthenticationStrategy">
         <argument type="service" id="security.authentication.session_strategy"/>
       </call>
@@ -3270,15 +3830,23 @@
         <argument key="loader" type="service" id=".errored..service_locator.KfbR3DY.Symfony\Component\Config\Loader\LoaderInterface"/>
       </argument>
     </service>
-    <service id=".service_locator.YxNo8ZP" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.fZXk27d" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="slugger" type="service" id="slugger"/>
+      </argument>
+    </service>
+    <service id=".service_locator.aGlEtXy" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="App\Controller\BookController::newAction" type="service" id=".service_locator.fZXk27d"/>
         <argument key="App\Kernel::loadRoutes" type="service" id=".service_locator.KfbR3DY"/>
         <argument key="App\Kernel::registerContainerConfiguration" type="service" id=".service_locator.KfbR3DY"/>
         <argument key="App\Kernel::terminate" type="service" id=".service_locator.KfwZsne"/>
         <argument key="kernel::loadRoutes" type="service" id=".service_locator.KfbR3DY"/>
         <argument key="kernel::registerContainerConfiguration" type="service" id=".service_locator.KfbR3DY"/>
         <argument key="kernel::terminate" type="service" id=".service_locator.KfwZsne"/>
+        <argument key="App\Controller\BookController:newAction" type="service" id=".service_locator.fZXk27d"/>
         <argument key="kernel:loadRoutes" type="service" id=".service_locator.KfbR3DY"/>
         <argument key="kernel:registerContainerConfiguration" type="service" id=".service_locator.KfbR3DY"/>
         <argument key="kernel:terminate" type="service" id=".service_locator.KfwZsne"/>
@@ -3373,6 +3941,22 @@
       <argument type="collection"/>
     </service>
     <service id="logger" class="Symfony\Component\HttpKernel\Log\Logger"/>
+    <service id=".service_locator.O24_MAy" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="translation.loader.csv" type="service" id="translation.loader.csv"/>
+        <argument key="translation.loader.dat" type="service" id="translation.loader.dat"/>
+        <argument key="translation.loader.ini" type="service" id="translation.loader.ini"/>
+        <argument key="translation.loader.json" type="service" id="translation.loader.json"/>
+        <argument key="translation.loader.mo" type="service" id="translation.loader.mo"/>
+        <argument key="translation.loader.php" type="service" id="translation.loader.php"/>
+        <argument key="translation.loader.po" type="service" id="translation.loader.po"/>
+        <argument key="translation.loader.qt" type="service" id="translation.loader.qt"/>
+        <argument key="translation.loader.res" type="service" id="translation.loader.res"/>
+        <argument key="translation.loader.xliff" type="service" id="translation.loader.xliff"/>
+        <argument key="translation.loader.yml" type="service" id="translation.loader.yml"/>
+      </argument>
+    </service>
     <service id=".service_locator.5nX7ca3" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -3417,6 +4001,18 @@
       <argument>App\Controller\UserController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.5nX7ca3" method="withContext"/>
+    </service>
+    <service id=".service_locator.J4b.DPX" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="translator" type="service" id="translator.default"/>
+      </argument>
+    </service>
+    <service id=".service_locator.J4b.DPX.translation.warmer" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="translation.warmer"/>
+      <argument>translation.warmer</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.J4b.DPX" method="withContext"/>
     </service>
     <service id=".service_locator.WOytlHA" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
@@ -3511,18 +4107,18 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.YxNo8ZP"/>
+      <argument type="service" id=".service_locator.aGlEtXy"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.YxNo8ZP"/>
+      <argument type="service" id=".service_locator.aGlEtXy"/>
     </service>
     <service id=".errored..service_locator.KfwZsne.Symfony\Component\HttpFoundation\Response" class="Symfony\Component\HttpFoundation\Response"/>
     <service id=".errored..service_locator.KfbR3DY.Symfony\Component\Config\Loader\LoaderInterface" class="Symfony\Component\Config\Loader\LoaderInterface"/>
     <service id="console.command_loader" class="Symfony\Component\Console\CommandLoader\ContainerCommandLoader" public="true">
       <tag name="container.no_preload"/>
-      <argument type="service" id=".service_locator.qTWg0fi"/>
+      <argument type="service" id=".service_locator.pXFrjtF"/>
       <argument type="collection">
         <argument key="about">console.command.about</argument>
         <argument key="assets:install">console.command.assets_install</argument>
@@ -3540,6 +4136,9 @@
         <argument key="debug:event-dispatcher">console.command.event_dispatcher_debug</argument>
         <argument key="debug:router">console.command.router_debug</argument>
         <argument key="router:match">console.command.router_match</argument>
+        <argument key="debug:translation">console.command.translation_debug</argument>
+        <argument key="translation:update">console.command.translation_update</argument>
+        <argument key="lint:xliff">console.command.xliff_lint</argument>
         <argument key="lint:yaml">console.command.yaml_lint</argument>
         <argument key="debug:form">console.command.form_debug</argument>
         <argument key="secrets:set">console.command.secrets_set</argument>
@@ -3607,7 +4206,7 @@
         <argument key="make:migration">maker.auto_command.make_migration</argument>
       </argument>
     </service>
-    <service id=".service_locator.qTWg0fi" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.pXFrjtF" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="Doctrine\DBAL\Tools\Console\Command\RunSqlCommand" type="service" id="Doctrine\DBAL\Tools\Console\Command\RunSqlCommand"/>
@@ -3634,6 +4233,9 @@
         <argument key="console.command.secrets_list" type="service" id="console.command.secrets_list"/>
         <argument key="console.command.secrets_remove" type="service" id="console.command.secrets_remove"/>
         <argument key="console.command.secrets_set" type="service" id="console.command.secrets_set"/>
+        <argument key="console.command.translation_debug" type="service" id="console.command.translation_debug"/>
+        <argument key="console.command.translation_update" type="service" id="console.command.translation_update"/>
+        <argument key="console.command.xliff_lint" type="service" id="console.command.xliff_lint"/>
         <argument key="console.command.yaml_lint" type="service" id="console.command.yaml_lint"/>
         <argument key="doctrine.cache_clear_metadata_command" type="service" id="doctrine.cache_clear_metadata_command"/>
         <argument key="doctrine.cache_clear_query_cache_command" type="service" id="doctrine.cache_clear_query_cache_command"/>
@@ -3720,6 +4322,7 @@
     <service id="Symfony\Component\Cache\Adapter\AdapterInterface" alias="cache.app"/>
     <service id="Symfony\Contracts\Cache\CacheInterface" alias="cache.app"/>
     <service id="Symfony\Contracts\Cache\TagAwareCacheInterface" alias="cache.app.taggable"/>
+    <service id="Symfony\Contracts\Translation\TranslatorInterface" alias="translator.default"/>
     <service id="cache.default_redis_provider" alias=".cache_connection.GD_MSZC"/>
     <service id="cache.default_memcached_provider" alias=".cache_connection.JKE6keX"/>
     <service id="cache.default_pdo_provider" alias="doctrine.dbal.default_connection"/>
@@ -3738,6 +4341,11 @@
     <service id="Symfony\Component\Form\FormFactoryInterface" alias="form.factory"/>
     <service id="form.property_accessor" alias="property_accessor"/>
     <service id="form.choice_list_factory" alias="form.choice_list_factory.cached"/>
+    <service id="Symfony\Component\Translation\Reader\TranslationReaderInterface" alias="translation.reader"/>
+    <service id="Symfony\Component\Translation\Extractor\ExtractorInterface" alias="translation.extractor"/>
+    <service id="Symfony\Component\Translation\Writer\TranslationWriterInterface" alias="translation.writer"/>
+    <service id="translator" alias="translator.default" public="true"/>
+    <service id="translator.formatter" alias="translator.formatter.default"/>
     <service id="Symfony\Component\HttpKernel\Debug\FileLinkFormatter" alias="debug.file_link_formatter"/>
     <service id="Symfony\Component\Stopwatch\Stopwatch" alias="debug.stopwatch"/>
     <service id="router" alias="router.default" public="true"/>
@@ -3793,7 +4401,7 @@
     <service id="security.user_checker.main" alias="security.user_checker"/>
     <service id="Symfony\Component\Security\Core\User\UserCheckerInterface" alias="security.user_checker"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.Kbr2i2X" public="true"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.YxNo8ZP"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.aGlEtXy"/>
     <service id="Psr\Log\LoggerInterface" alias="logger"/>
     <service id="event_dispatcher" alias="debug.event_dispatcher" public="true"/>
     <service id="controller_resolver" alias="debug.controller_resolver"/>
