@@ -31,7 +31,7 @@ class BookRepository extends ServiceEntityRepository
              ->setAgeClassification($data['age_classification'])
              ->setIllustrations($data['illustrations'])
              ->setPdf($data['pdf'])
-             ->setReleaseDate(\DateTime::createFromFormat('Y-m-d', $data['release_date']))
+             ->setReleaseDate(\DateTime::createFromFormat('Y-m-d', $data['release_date'])) 
              ->setCoverPage($data['cover_page']);
                 
 
@@ -72,8 +72,6 @@ class BookRepository extends ServiceEntityRepository
        
         }
 
-   
-    
     // /**
     //  * @return Book[] Returns an array of Book objects
     //  */

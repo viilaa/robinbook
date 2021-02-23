@@ -23,9 +23,10 @@ class BookController extends AbstractController
     {
          $this->BookRepository = $BookRepository; 
     }
-        /**
+    /**
      * @Route("/book", name="add_book",methods={"POST"})
      */
+    
     public function add(Request $request): JsonResponse
 
     {
@@ -34,7 +35,7 @@ class BookController extends AbstractController
         $this ->BookRepository->savebook($data);
         return new JsonResponse(['status'=>'book created'], Response::HTTP_CREATED);
 
-    }
+    } 
     /**
      * @Route("/book/{id}", name="get_one_book", methods={"GET"})
      */
@@ -145,6 +146,11 @@ class BookController extends AbstractController
                 }
 
                 $newBook->setPdf($newFilename);
+             /*    $newBook->setReleaseDate(\DateTime::createFromFormat('Y-m-d', time()));  
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($newBook);
+                $entityManager->flush();*/
+
             }  
         
             return new JsonResponse([$respuesta], Response::HTTP_OK);
