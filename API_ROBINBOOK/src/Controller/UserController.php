@@ -152,5 +152,29 @@ class UserController extends AbstractController
 
         return new JsonResponse($relation, Response::HTTP_OK);
     }
+       /**
+     * @Route("/addBookByRead/{id}", name="get_all_addBookRead", methods={"POST"})
+     */
+    public function AddBookRead($id): JsonResponse
+
+    {
+        $user = $this->getDoctrine()->getRepository(User::class)->find($id);
+        $data =[];
+
+        $relations = $user->addBook($id);
+        $relation=[];
+        foreach ($relations as $rel) {
+            array_push($relation,[ 
+                'id'=> $rel->getId(),
+                'cover_page'=>$rel->getCoverPage(),
+                ]);
+        }
+        
+        array_push($data,[ 
+            'id'=> $book->getId(),
+        ]);
+
+        return new JsonResponse($relation, Response::HTTP_OK);
+    }
 
 }

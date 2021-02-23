@@ -86,6 +86,19 @@ class UserRepository extends ServiceEntityRepository
             INNER JOIN App\Entity\user u 
             ON c.id=u.id'
         );
+    }
+
+        public function AddBookRead($BookRead)
+    {
+        return  $this->getEntityManager()
+        ->createQuery(
+            'SELECT b 
+            FROM App\Entity\book b 
+            INNER JOIN  user_book c
+            ON b.id=c.id
+            INNER JOIN App\Entity\user u 
+            ON c.id=u.id'
+        );
    
     }
 

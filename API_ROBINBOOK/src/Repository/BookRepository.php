@@ -43,10 +43,15 @@ class BookRepository extends ServiceEntityRepository
     public function updateBook(Book $Book):Book
     
     {
-        $this->manager>persist($Book);
-        $this->manager->flush();
-
-        return $Book;
+        $respuesta = "";
+        $Book = $this->$BookRepository->findBy($id);
+        $User = $this->$UserRepository->findBy($id);
+        $Book->addBook($User);
+        
+        $manager->persist($Book);
+        $manager->flush();
+        return new JsonResponse($respuesta, Response::HTTP_OK);
+       
     } 
 
     public function removeBook(Book $Book):Book

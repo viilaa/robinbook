@@ -91,7 +91,7 @@ class BookController extends AbstractController
         empty($data['cover_page']) ? true : $book->setCoverPage($data['cover_page']);
         empty($data['illustrations']) ? true : $book->setIllustrations ($data['illustrations']);
         empty($data['pdf']) ? true : $book->setPdf($data['pdf']);
-        empty($data['release_date']) ? true : $book->setReleaseDate($data['release_date']);
+        /* empty($data['release_date']) ? true : $book->setReleaseDate($data['release_date']); */
         empty($data['synopsis']) ? true : $book->setSynopsis($data['synopsis']);
         empty($data['title']) ? true : $book->setTitle($data['title']);
 
@@ -184,5 +184,30 @@ class BookController extends AbstractController
 
         return new JsonResponse($data, Response::HTTP_OK);
     }
+    /**
+     * @Route("/saveMyShelf/{id}", name="get_all_MyShelf", methods={"POST"})
+     */
+
+    public function saveMyShelf($id): JsonResponse
+
+    {
+        $books = $this->BookRepository->saveMyShelf($id);
+        $data =[];
+
+        foreach ($books as $book) {
+            $data[] = [
+                'age_classification'=> $book->getAgeClassification(),
+                'cover_page'=>$book->getCoverPage(),
+                'illustrations'=>$book->getIllustrations(),
+                'pdf'=>$book->getPdf(),
+                'release_date'=>$book->getReleaseDate()->format('d-m-Y'),
+                'synopsis'=>$book->getSynopsis(),
+                'title'=>$book->getTitle(),
+            ];
+        }
+
+        return new JsonResponse($data, Response::HTTP_OK);
+    }
+   
    
 }
