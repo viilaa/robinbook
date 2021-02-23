@@ -1,0 +1,52 @@
+framework:
+    translator: { fallback: en }
+    secret: secret
+    router:
+        resource: "%kernel.project_dir%/config/routing.yml"
+        strict_requirements: "%kernel.debug%"
+    default_locale: en
+    session: ~
+    test: true
+    trusted_hosts: ~
+
+oneup_flysystem:
+    adapters:
+        local:
+            local:
+                location: "%kernel.project_dir%/cache"
+        memory:
+            memory: ~
+
+        async_aws_s3:
+            async_aws_s3:
+                client: 'test'
+                bucket: 'test'
+
+        custom:
+            custom:
+                service: 'test'
+
+        ftp:
+            ftp:
+                connectionOptions: 'test'
+
+        gitlab:
+            gitlab:
+                client: 'test'
+
+        sftp:
+            sftp:
+                connectionProvider: 'test'
+                root: 'test'
+
+    filesystems:
+        myfilesystem:
+            adapter: local
+
+        myfilesystem2:
+            adapter: local
+            visibility: public
+
+        myfilesystem3:
+            adapter: local
+            visibility: private
