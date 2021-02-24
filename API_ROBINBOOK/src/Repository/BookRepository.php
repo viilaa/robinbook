@@ -43,14 +43,10 @@ class BookRepository extends ServiceEntityRepository
     public function updateBook(Book $Book):Book
     
     {
-        $respuesta = "";
-        $Book = $this->$BookRepository->findBy($id);
-        $User = $this->$UserRepository->findBy($id);
-        $Book->addBook($User);
-        
-        $manager->persist($Book);
-        $manager->flush();
-        return new JsonResponse($respuesta, Response::HTTP_OK);
+        $this->manager->remove($Book);
+        $this->manager->flush();
+
+        return $Book;
        
     } 
 
@@ -77,32 +73,4 @@ class BookRepository extends ServiceEntityRepository
        
         }
 
-    // /**
-    //  * @return Book[] Returns an array of Book objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('b')
-            ->andWhere('b.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('b.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Book
-    {
-        return $this->createQueryBuilder('b')
-            ->andWhere('b.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

@@ -80,25 +80,50 @@ class BookController extends AbstractController
         return new JsonResponse($data, Response::HTTP_OK);
     }
     /**
-     * @Route("/book/{id}", name="update_book", methods={"PUT"})
+     * @Route("/book/{id}", name="update_book", methods={"POST"})
      */
-    public function update($id, Request $request): JsonResponse
+    public function update($id, Request $request,SluggerInterface $slugger): JsonResponse
     {
         $book = $this->BookRepository->findOneBy(['id' => $id]);
-        $data = json_decode($request->getContent(), true);
+        $form = $this->createForm(BookType::class, $book );
+        $form->handleRequest($request); 
+        
+         $respuesta ="";
 
-        empty($data['age_classification']) ? true : $book-> getAgeClassification($data['age_classification']);
-        empty($data['cover_page']) ? true : $book->setCoverPage($data['cover_page']);
-        empty($data['illustrations']) ? true : $book->setIllustrations ($data['illustrations']);
-        empty($data['pdf']) ? true : $book->setPdf($data['pdf']);
-        /* empty($data['release_date']) ? true : $book->setReleaseDate($data['release_date']); */
-        empty($data['synopsis']) ? true : $book->setSynopsis($data['synopsis']);
-        empty($data['title']) ? true : $book->setTitle($data['title']);
+        if($form->isSubmitted())
+        {
+            $brochureFile = $form->get('upload')->getData(); 
 
-        $updatedbook = $this->BookRepository->updatebook($book);
+            if ($brochureFile) 
+            {
+                $originalFilename = pathinfo($brochureFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$brochureFile->guessExtension();
 
-        return new JsonRespponse(['status' => 'book updated!'], Response::HTTP_OK);
-    }
+                try {
+                    $brochureFile->move(
+                        $this->getParameter('brochures_directory'),
+                        $newFilename
+                    );
+                    $respuesta = "Fichero subido con exito";
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                    $respuesta = $e->getMessage();;
+                }
+
+                $book->setPdf($newFilename);
+                $book->setReleaseDate(\DateTime::createFromFormat('Y-m-d',date('Y-m-d')));  
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($book);
+                $entityManager->flush();
+
+            }  
+        
+            return new JsonResponse([$respuesta], Response::HTTP_OK);
+        } 
+        return new JsonResponse([$respuesta], Response::HTTP_OK);
+
+    }  
 
     /**
      * @Route("/book/{id}", name="delete_book", methods={"DELETE"})
@@ -122,7 +147,7 @@ class BookController extends AbstractController
         $form = $this->createForm(BookType::class, $newBook );
         $form->handleRequest($request); 
         
-        $respuesta = $form->isSubmitted(). "-" . $form->isValid();
+        /* $respuesta = $form->isSubmitted(). "-" . $form->isValid(); */
 
         if($form->isSubmitted())
         {
@@ -146,10 +171,10 @@ class BookController extends AbstractController
                 }
 
                 $newBook->setPdf($newFilename);
-             /*    $newBook->setReleaseDate(\DateTime::createFromFormat('Y-m-d', time()));  
+                $newBook->setReleaseDate(\DateTime::createFromFormat('Y-m-d',date('Y-m-d')));  
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($newBook);
-                $entityManager->flush();*/
+                $entityManager->flush();
 
             }  
         
@@ -184,30 +209,5 @@ class BookController extends AbstractController
 
         return new JsonResponse($data, Response::HTTP_OK);
     }
-    /**
-     * @Route("/saveMyShelf/{id}", name="get_all_MyShelf", methods={"POST"})
-     */
-
-    public function saveMyShelf($id): JsonResponse
-
-    {
-        $books = $this->BookRepository->saveMyShelf($id);
-        $data =[];
-
-        foreach ($books as $book) {
-            $data[] = [
-                'age_classification'=> $book->getAgeClassification(),
-                'cover_page'=>$book->getCoverPage(),
-                'illustrations'=>$book->getIllustrations(),
-                'pdf'=>$book->getPdf(),
-                'release_date'=>$book->getReleaseDate()->format('d-m-Y'),
-                'synopsis'=>$book->getSynopsis(),
-                'title'=>$book->getTitle(),
-            ];
-        }
-
-        return new JsonResponse($data, Response::HTTP_OK);
-    }
-   
    
 }

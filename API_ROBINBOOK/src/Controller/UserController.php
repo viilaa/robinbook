@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
+use App\Entity\{User,Book};
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -157,24 +157,15 @@ class UserController extends AbstractController
      */
     public function AddBookRead($id): JsonResponse
 
-    {
-        $user = $this->getDoctrine()->getRepository(User::class)->find($id);
-        $data =[];
+    {   
+        $user = $this->getUser();
+        $book = $this->getDoctrine()->getRepository(Book::class)->find($id);
 
-        $relations = $user->addBook($id);
-        $relation=[];
-        foreach ($relations as $rel) {
-            array_push($relation,[ 
-                'id'=> $rel->getId(),
-                'cover_page'=>$rel->getCoverPage(),
-                ]);
-        }
-        
-        array_push($data,[ 
-            'id'=> $book->getId(),
-        ]);
+        $user->addBook($book);
+        $this->getDoctrine()->getManager()->persist($user);
+        $this->getDoctrine()->getManager()->flush();
 
-        return new JsonResponse($relation, Response::HTTP_OK);
+        return new JsonResponse([true], Response::HTTP_OK);
     }
 
 }

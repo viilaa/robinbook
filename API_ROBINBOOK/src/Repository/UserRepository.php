@@ -87,47 +87,4 @@ class UserRepository extends ServiceEntityRepository
             ON c.id=u.id'
         );
     }
-
-        public function AddBookRead($BookRead)
-    {
-        return  $this->getEntityManager()
-        ->createQuery(
-            'SELECT b 
-            FROM App\Entity\book b 
-            INNER JOIN  user_book c
-            ON b.id=c.id
-            INNER JOIN App\Entity\user u 
-            ON c.id=u.id'
-        );
-   
-    }
-
-    // /**
-    //  * @return User[] Returns an array of User objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?User
-    {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }
