@@ -2936,13 +2936,16 @@
     <service id="security.encoder_factory.generic" class="Symfony\Component\Security\Core\Encoder\EncoderFactory">
       <argument type="collection">
         <argument key="App\Entity\User" type="collection">
-          <argument key="class">Symfony\Component\Security\Core\Encoder\NativePasswordEncoder</argument>
-          <argument key="arguments" type="collection">
-            <argument>null</argument>
-            <argument>null</argument>
-            <argument>null</argument>
-            <argument>2y</argument>
-          </argument>
+          <argument key="algorithm">auto</argument>
+          <argument key="migrate_from" type="collection"/>
+          <argument key="hash_algorithm">sha512</argument>
+          <argument key="key_length">40</argument>
+          <argument key="ignore_case">false</argument>
+          <argument key="encode_as_base64">true</argument>
+          <argument key="iterations">5000</argument>
+          <argument key="cost">null</argument>
+          <argument key="memory_cost">null</argument>
+          <argument key="time_cost">null</argument>
         </argument>
       </argument>
     </service>
