@@ -80,9 +80,9 @@ class BookController extends AbstractController
         return new JsonResponse($data, Response::HTTP_OK);
     }
     /**
-     * @Route("/book/{id}", name="update_book", methods={"PUT"})
+     * @Route("/book/{id}", name="update_book", methods={"POST"})
      */
-    public function update($id, Request $request): JsonResponse
+    public function update($id, Request $request,SluggerInterface $slugger): JsonResponse
     {
         $book = $this->BookRepository->findOneBy(['id' => $id]);
         $form = $this->createForm(BookType::class, $book );
@@ -123,20 +123,7 @@ class BookController extends AbstractController
         } 
         return new JsonResponse([$respuesta], Response::HTTP_OK);
 
-       /*  $data = json_decode($request->getContent(), true);
-
-        empty($data['age_classification']) ? true : $book-> getAgeClassification($data['age_classification']);
-        empty($data['cover_page']) ? true : $book->setCoverPage($data['cover_page']);
-        empty($data['illustrations']) ? true : $book->setIllustrations ($data['illustrations']);
-        empty($data['pdf']) ? true : $book->setPdf($data['pdf']);
-        /* empty($data['release_date']) ? true : $book->setReleaseDate($data['release_date']); 
-        empty($data['synopsis']) ? true : $book->setSynopsis($data['synopsis']);
-        empty($data['title']) ? true : $book->setTitle($data['title']);
-
-        $updatedbook = $this->BookRepository->updatebook($book);
-
-        return new JsonRespponse(['status' => 'book updated!'], Response::HTTP_OK); */
-    }
+    }  
 
     /**
      * @Route("/book/{id}", name="delete_book", methods={"DELETE"})

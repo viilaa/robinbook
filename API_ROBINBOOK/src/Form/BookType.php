@@ -20,7 +20,6 @@ class BookType extends AbstractType
             ->add('pdf')
             ->add('synopsis')
             ->add('title')
-            /* ->add('release_date', DateType::class, ['widget'=>'single_text']) */
             ->add('upload',FileType::class,
             ['label' => 'Brochure (PDF file)',
             'mapped' => false,
@@ -30,8 +29,7 @@ class BookType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Book::class,
-            'method'=> 'PUT'
+            'data_class' => Book::class
         ]);
     }
 }

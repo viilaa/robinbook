@@ -50,7 +50,7 @@ return [
         35 => [[['_route' => '_preview_error', '_controller' => 'error_controller::preview', '_format' => 'html'], ['code', '_format'], null, null, false, true, null]],
         62 => [
             [['_route' => 'get_one_book', '_controller' => 'App\\Controller\\BookController::get'], ['id'], ['GET' => 0], null, false, true, null],
-            [['_route' => 'update_book', '_controller' => 'App\\Controller\\BookController::update'], ['id'], ['PUT' => 0], null, false, true, null],
+            [['_route' => 'update_book', '_controller' => 'App\\Controller\\BookController::update'], ['id'], ['POST' => 0], null, false, true, null],
             [['_route' => 'delete_book', '_controller' => 'App\\Controller\\BookController::delete'], ['id'], ['DELETE' => 0], null, false, true, null],
         ],
         73 => [[['_route' => 'add_book_new', '_controller' => 'App\\Controller\\BookController::newAction'], [], ['POST' => 0], null, false, false, null]],
